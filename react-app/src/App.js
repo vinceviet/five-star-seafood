@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import User from './components/Users';
 import { authenticate } from './store/session';
 import Products from './components/Products';
+import Cart from './components/Cart';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,6 +31,9 @@ function App() {
       <Switch>
         <Route path='/products/:category' exact={true}>
           <Products />
+        </Route>
+        <Route path='/cart' exact={true}>
+          <Cart />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />

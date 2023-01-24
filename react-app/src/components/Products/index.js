@@ -6,20 +6,37 @@ import { getAllProducts } from '../../store/products'
 export default function Products() {
     const dispatch = useDispatch()
     const { category } = useParams()
+    const [loaded, setLoaded] = useState(false)
     const products = Object.values(useSelector((state) => state.products));
-    console.log("products", products)
-    console.log("categoryId", category)
-
 
     useEffect(() => {
-        dispatch(getAllProducts(category))
-    }, [dispatch])
+        dispatch(getAllProducts(category)).then(() => setLoaded(true));
+    }, [dispatch, category, loaded])
 
-    if(!products) return null;
+    if (!products) return null;
+
+    if (!loaded) {
+        return (
+            <div>
+                {products.map((product) =>
+                    <div>
+                        <div>{product.name}</div>
+                        <button>Add to Cart</button>
+                    </div>
+                )}
+            </div>
+        )
+    }
 
     return (
         <div>
-            {products.map((product) => <div>{product.name}</div>)}
+            {products.map((product) =>
+                <div>
+                    <div>{product.name}</div>
+                    <button>Add to Cart</button>
+                </div>
+            )}
         </div>
     )
+
 }

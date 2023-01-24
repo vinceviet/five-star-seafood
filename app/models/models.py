@@ -45,10 +45,16 @@ class User(db.Model, UserMixin):
     country = db.Column(db.String(40), default='United States')
     zip_code = db.Column(db.Integer)
 
-    cart = db.relationship('Cart', back_populates='user', cascade='all, delete-orphan')
-    order = db.relationship('Order', back_populates='user', cascade='all, delete-orphan')
-    review = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
-    wishlist = db.relationship('Wishlist', back_populates='user', cascade='all, delete-orphan')
+    address = db.relationship(
+        'UserAddress', back_populates='user', cascade='all, delete-orphan')
+    cart = db.relationship('Cart', back_populates='user',
+                           cascade='all, delete-orphan')
+    order = db.relationship('Order', back_populates='user',
+                            cascade='all, delete-orphan')
+    review = db.relationship(
+        'Review', back_populates='user', cascade='all, delete-orphan')
+    wishlist = db.relationship(
+        'Wishlist', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):
@@ -70,6 +76,24 @@ class User(db.Model, UserMixin):
         }
 
 
+class UserAddress(db.Model):
+    __tablename__ = 'user_addresses'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    phone = db.Column(db.String(15))
+    address = db.Column(db.String(40))
+    city = db.Column(db.String(40))
+    state = db.Column(db.String(40))
+    country = db.Column(db.String(40), default='United States')
+    zip_code = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+
+    user = db.relationship('User', back_populates='address')
+
+
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -87,7 +111,8 @@ class Product(db.Model):
     product_images = db.relationship(
         'ProductImage', back_populates='product', cascade='all, delete-orphan')
     category = db.relationship('Category', back_populates='product')
-    cart = db.relationship('Cart', secondary='cart_products', back_populates='product')
+    cart = db.relationship(
+        'Cart', secondary='cart_products', back_populates='product')
     review = db.relationship('Review', back_populates='product')
     wishlist = db.relationship('Wishlist', back_populates='product')
 
@@ -176,15 +201,12 @@ class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('products.id')), nullable=False)
-    product_quantity = db.Column(db.Integer, nullable=False)
-    price = db.Column(db.Float, nullable=False)
     total_price = db.Column(db.Float, nullable=False)
 
     user = db.relationship('User', back_populates='cart')
     order = db.relationship('Order', back_populates='cart')
-    product = db.relationship('Product', secondary='cart_products', back_populates='cart')
+    product = db.relationship(
+        'Product', secondary='cart_products', back_populates='cart')
 
     def to_dict(self):
         return {
@@ -196,6 +218,21 @@ class Cart(db.Model):
             'totalPrice': self.total_price,
             'orderId': self.order_id
         }
+
+
+class CartItem(db.Model):
+    __tablename__ = 'cart_items'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    product_quantity = db.Column(db.Integer, nullable=False)
+    total_item_price = db.Column(db.Float, nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+    cart_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('carts.id')), nullable=False)
 
 
 class Review(db.Model):
@@ -224,6 +261,7 @@ class Review(db.Model):
             'stars': self.stars
         }
 
+
 class Wishlist(db.Model):
     __tablename__ = 'wishlists'
 
@@ -238,7 +276,6 @@ class Wishlist(db.Model):
 
     user = db.relationship('User', back_populates='wishlist')
     product = db.relationship('Product', back_populates='wishlist')
-
 
     def to_dict(self):
         return {
