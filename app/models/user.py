@@ -10,6 +10,23 @@ def add_prefix_for_prod(attr):
         return attr
 
 
+cart_products = db.Table(
+    "cart_products",
+    db.Column(
+        "product_id",
+        db.Integer,
+        db.ForeignKey("products.id"),
+        primary_key=True
+    ),
+    db.Column(
+        "cart_id",
+        db.Integer,
+        db.ForeignKey("carts.id"),
+        primary_key=True
+    )
+)
+
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -27,6 +44,11 @@ class User(db.Model, UserMixin):
     state = db.Column(db.String(40))
     country = db.Column(db.String(40), default='United States')
     zip_code = db.Column(db.Integer)
+
+    cart = db.relationship('Cart', back_populates='user', cascade='all, delete-orphan')
+    order = db.relationship('Order', back_populates='user', cascade='all, delete-orphan')
+    review = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
+    wishlist = db.relationship('Wishlist', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):
@@ -61,6 +83,13 @@ class Product(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('categories.id')), nullable=False)
 
+    product_images = db.relationship(
+        'ProductImage', back_populates='product', cascade='all, delete-orphan')
+    category = db.relationship('Category', back_populates='product')
+    cart = db.relationship('Cart', secondary='cart_products', back_populates='product')
+    review = db.relationship('Review', back_populates='product')
+    wishlist = db.relationship('Wishlist', back_populates='product')
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -68,6 +97,45 @@ class Product(db.Model):
             'origin': self.origin,
             'price': self.price,
             'categoryId': self.category_id
+        }
+
+
+class ProductImage(db.Model):
+    __tablename__ = 'product_images'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    image_url = db.Column(db.Text, nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+
+    product = db.relationship('Product', back_populates='product_images')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'imageUrl': self.image_url,
+            'productId': self.product_id
+        }
+
+
+class Category(db.Model):
+    __tablename__ = 'categories'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(55), nullable=False)
+
+    product = db.relationship('Product', back_populates='category')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
         }
 
 
@@ -83,6 +151,9 @@ class Order(db.Model):
         add_prefix_for_prod('users.id')), nullable=False)
     cart_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('carts.id')), nullable=False)
+
+    user = db.relationship('User', back_populates='order')
+    cart = db.relationship('Cart', back_populates='order')
 
     def to_dict(self):
         return {
@@ -110,6 +181,10 @@ class Cart(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('orders.id')), nullable=False)
 
+    user = db.relationship('User', back_populates='cart')
+    order = db.relationship('Order', back_populates='cart')
+    product = db.relationship('Product', secondary='cart_products', back_populates='cart')
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -119,4 +194,54 @@ class Cart(db.Model):
             'price': self.price,
             'totalPrice': self.total_price,
             'orderId': self.order_id
+        }
+
+
+class Review(db.Model):
+    __tablename__ = 'reviews'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+    review = db.Column(db.Text, nullable=False)
+    stars = db.Column(db.Integer, nullable=False)
+
+    user = db.relationship('User', back_populates='review')
+    product = db.relationship('Product', back_populates='review')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'productId': self.product_id,
+            'review': self.review,
+            'stars': self.stars
+        }
+
+class Wishlist(db.Model):
+    __tablename__ = 'wishlists'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+
+    user = db.relationship('User', back_populates='wishlist')
+    product = db.relationship('Product', back_populates='wishlist')
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'productId': self.product_id
         }
