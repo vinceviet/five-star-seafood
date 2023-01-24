@@ -181,8 +181,6 @@ class Cart(db.Model):
     product_quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     total_price = db.Column(db.Float, nullable=False)
-    order_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('orders.id')), nullable=False)
 
     user = db.relationship('User', back_populates='cart')
     order = db.relationship('Order', back_populates='cart')
