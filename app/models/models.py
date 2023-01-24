@@ -77,8 +77,9 @@ class Product(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(55), nullable=False)
-    origin = db.Column(db.String(55), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(255), nullable=False)
+    origin = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('categories.id')), nullable=False)
@@ -129,6 +130,7 @@ class Category(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(55), nullable=False)
+    sub_category = db.Column(db.String(55), nullable=False)
 
     product = db.relationship('Product', back_populates='category')
 
@@ -136,6 +138,7 @@ class Category(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'subCategory': self. sub_category
         }
 
 
