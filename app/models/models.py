@@ -26,7 +26,6 @@ def add_prefix_for_prod(attr):
 #     )
 # )
 
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -65,7 +64,7 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'firstName': self.first_name,
-            'address': self.last_name,
+            'lastName': self.last_name,
             'email': self.email
         }
 
@@ -77,12 +76,12 @@ class UserAddress(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    phone = db.Column(db.String(15))
-    address = db.Column(db.String(40))
-    city = db.Column(db.String(40))
-    state = db.Column(db.String(40))
-    country = db.Column(db.String(40), default='United States')
-    zip_code = db.Column(db.Integer)
+    phone = db.Column(db.String(15), nullable=False)
+    address = db.Column(db.String(40), nullable=False)
+    city = db.Column(db.String(40), nullable=False)
+    state = db.Column(db.String(40), nullable=False)
+    country = db.Column(db.String(40), default='United States', nullable=False)
+    zip_code = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
@@ -112,6 +111,7 @@ class Product(db.Model):
     description = db.Column(db.String(255), nullable=False)
     origin = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
+    avg_star_rating = db.Column(db.Float)
     category_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('categories.id')), nullable=False)
 
@@ -120,7 +120,9 @@ class Product(db.Model):
     category = db.relationship('Category', back_populates='product')
     review = db.relationship('Review', back_populates='product')
     wishlist = db.relationship('Wishlist', back_populates='product')
-    cart_items = db.relationship('CartItem', back_populates='product')
+    # cart = db.relationship(
+    #     'Cart', secondary='cart_products', back_populates='product')
+    cart_item = db.relationship('CartItem', back_populates='product')
 
     def to_dict(self):
         return {
@@ -128,6 +130,7 @@ class Product(db.Model):
             'name': self.name,
             'origin': self.origin,
             'price': self.price,
+            'avgStarRating': self.avg_star_rating,
             'categoryId': self.category_id
         }
 
@@ -205,19 +208,28 @@ class Cart(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    # product_quantity = db.Column(db.Integer, nullable=False)
+    # total_item_price = db.Column(db.Float, nullable=False)
+    # product_id = db.Column(db.Integer, db.ForeignKey(
+    #     add_prefix_for_prod('products.id')), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), nullable=False)
-    total_price = db.Column(db.Float, nullable=False)
+        add_prefix_for_prod('users.id')), nullable=True)
+    total_price = db.Column(db.Float, default=0)
 
     user = db.relationship('User', back_populates='cart')
     order = db.relationship('Order', back_populates='cart')
-    cart_items = db.relationship(
+    # product = db.relationship(
+    #     'Product', secondary='cart_products', back_populates='cart')
+    cart_item = db.relationship(
         'CartItem', back_populates='cart')
 
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.user_id,
+            # 'productQuantity': self.product_quantity,
+            # 'totalItemPrice': self.total_item_price,
+            # 'productId': self.product_id,
             'totalPrice': self.total_price,
         }
 
@@ -228,16 +240,16 @@ class CartItem(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
+    # id = db.Column(db.Integer, primary_key=True)
     product_quantity = db.Column(db.Integer, nullable=False)
     total_item_price = db.Column(db.Float, nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('products.id')), nullable=False)
+        add_prefix_for_prod('products.id')), primary_key=True)
     cart_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('carts.id')), nullable=False)
+        add_prefix_for_prod('carts.id')), primary_key=True)
 
-    cart = db.relationship('Cart', back_populates='cart_items')
-    product = db.relationship('Product', back_populates='cart_items')
+    cart = db.relationship('Cart', back_populates='cart_item')
+    product = db.relationship('Product', back_populates='cart_item')
 
     def to_dict(self):
         return {

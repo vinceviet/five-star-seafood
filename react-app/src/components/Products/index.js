@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllProducts } from '../../store/products'
+import { getAllProducts } from '../../store/products';
+import { addItemToCart } from '../../store/cart';
 
 export default function Products() {
     const dispatch = useDispatch()
@@ -13,27 +14,33 @@ export default function Products() {
         dispatch(getAllProducts(category)).then(() => setLoaded(true));
     }, [dispatch, category, loaded])
 
-    if (!products) return null;
+    // if (!products) return null;
 
-    if (!loaded) {
-        return (
-            <div>
-                {products.map((product) =>
-                    <div>
-                        <div>{product.name}</div>
-                        <button>Add to Cart</button>
-                    </div>
-                )}
-            </div>
-        )
+    const handleAddItem = async (e, product) => {
+        e.preventDefault();
+        await dispatch(addItemToCart(product))
+        // setLoaded(false)
     }
+
+    // if (!loaded) {
+    //     return (
+    //         <div>
+    //             {products.map((product) =>
+    //                 <div>
+    //                     <div>{product.name}</div>
+    //                     <button>Add to Cart</button>
+    //                 </div>
+    //             )}
+    //         </div>
+    //     )
+    // }
 
     return (
         <div>
             {products.map((product) =>
                 <div>
                     <div>{product.name}</div>
-                    <button>Add to Cart</button>
+                    <button onClick={(e) => handleAddItem(e, product)}>Add to Cart</button>
                 </div>
             )}
         </div>
