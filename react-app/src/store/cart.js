@@ -25,7 +25,6 @@ export const addItemToCart = (product) => async(dispatch) => {
     });
     if(res.ok) {
         const data = await res.json();
-        console.log('dataaaaaaa', data)
         dispatch(addItem(data));
         return data;
     };
