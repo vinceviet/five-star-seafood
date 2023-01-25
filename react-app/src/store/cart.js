@@ -1,6 +1,7 @@
 const LOAD_CART = 'cart/LOAD_CART';
 const ADD_ITEM = 'cart/ADD_ITEM';
-// const REMOVE_ITEM = 'cart/REMOVE_ITEM';
+const MINUS_ONE = 'cart/MINUS_ONE';
+const REMOVE_ITEM = 'cart/REMOVE_ITEM';
 
 const loadCart = (cartItems) => ({
     type: LOAD_CART, cartItems
@@ -10,9 +11,9 @@ const addItem = (product) => ({
     type: ADD_ITEM, product
 });
 
-// const removeItem = (productId) => ({
-//     type: REMOVE_ITEM, productId
-// });
+const removeItem = (product) => ({
+    type: REMOVE_ITEM, product
+});
 
 export const loadCartItems = () => async (dispatch) => {
     const res = await fetch('/api/cart');
@@ -26,12 +27,8 @@ export const addItemToCart = (product) => async (dispatch) => {
 
     const res = await fetch(`/api/cart/addItem/${product.id}`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            product
-        })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({product})
     });
     if (res.ok) {
         const data = await res.json();
@@ -44,16 +41,25 @@ export const addOneToCart = (product) => async (dispatch) => {
 
     const res = await fetch(`/api/cart/${product.id}`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            product
-        })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({product})
     });
     if (res.ok) {
         const data = await res.json();
-        console.log('daaaataaa', data)
+        dispatch(addItem(data));
+        return null;
+    };
+};
+
+export const minusOneToCart = (product) => async (dispatch) => {
+
+    const res = await fetch(`/api/cart/${product.id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({product})
+    });
+    if (res.ok) {
+        const data = await res.json();
         dispatch(addItem(data));
         return null;
     };
@@ -72,7 +78,10 @@ export default function cart(state = initialState, action) {
             let newState = {...state};
             newState[action.product.id] = action.product
             return newState
-            // return { ...state, cartItems: action.product }
+        case REMOVE_ITEM:
+            newState = {...state};
+            delete newState[action.product.id]
+            return newState
         default:
             return state;
     }

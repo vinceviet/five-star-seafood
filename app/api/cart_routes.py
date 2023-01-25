@@ -67,5 +67,13 @@ def add_one_in_cart(id):
     cartItem = CartItem.query.get(id)
     cartItem.product_quantity += 1
     db.session.commit()
-    # cart_list = CartItem.query.all()
+    return cartItem.to_dict()
+
+@cart_routes.route('/<int:id>', methods=['PUT'])
+def minus_one_in_cart(id):
+    cartItem = CartItem.query.get(id)
+    cartItem.product_quantity -= 1
+    if cartItem.product_quantity == 0:
+        db.session.delete(cartItem)
+    db.session.commit()
     return cartItem.to_dict()

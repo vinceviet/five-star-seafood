@@ -9,16 +9,14 @@ export default function Cart() {
     console.log('caaaaaaaartItems COMPONENET', cartItems)
 
     useEffect(() => {
-        dispatch(loadCartItems()).then(() => setLoaded(true))
+        dispatch(loadCartItems())
     },[dispatch])
 
     if(!cartItems) return null;
-    let cartList = cartItems.cartItems ? cartItems.cartItems : cartItems.cartItems.cartItems;
 
     const handleAddItem = (e, item) => {
         e.preventDefault();
-        dispatch(addOneToCart(item)).then(() => dispatch(loadCartItems()).then(() => setLoaded(true)))
-        // setLoaded(true)
+        dispatch(addOneToCart(item)).then(() => dispatch(loadCartItems()))
     }
 
     // if(!loaded){
