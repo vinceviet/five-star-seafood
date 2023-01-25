@@ -5,9 +5,9 @@ import { getAllProducts } from '../../store/products';
 import { addItemToCart } from '../../store/cart';
 
 export default function Products() {
-    const dispatch = useDispatch()
-    const { category } = useParams()
-    const [loaded, setLoaded] = useState(false)
+    const dispatch = useDispatch();
+    const { category } = useParams();
+    const [loaded, setLoaded] = useState(false);
     const products = Object.values(useSelector((state) => state.products));
 
     useEffect(() => {
