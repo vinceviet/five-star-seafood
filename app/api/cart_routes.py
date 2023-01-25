@@ -20,7 +20,7 @@ def load_cart():
     # db.session.add(current_cart)
     # db.session.commit()
     cart_items = CartItem.query.all()
-    return {'cartItems' : [cart_items.to_dict() for cart_items in cart_items]}
+    return {'cartItems': [cart_items.to_dict() for cart_items in cart_items]}
 
 
 @cart_routes.route('/addItem/<int:id>', methods=['POST'])
@@ -30,23 +30,27 @@ def add_to_cart(id):
             Cart.user_id == current_user.id).first()
         if not current_cart:
             current_cart = Cart(user_id=current_user.id)
+            db.session.add(current_cart)
+            db.session.commit()
     else:
-        current_cart = Cart.query.filter(Cart.user_id == 0 ).first()
+        current_cart = Cart.query.filter(Cart.user_id == 0).first()
         if not current_cart:
-            current_cart = Cart(user_id = 0)
+            current_cart = Cart(user_id=0)
+            db.session.add(current_cart)
+            db.session.commit()
 
-    db.session.add(current_cart)
-    db.session.commit()
+    # db.session.add(current_cart)
+    # db.session.commit()
 
     product = Product.query.get(id)
-    add_item = CartItem.query.filter(CartItem.product_id == id).first()
+    add_item = CartItem.query.filter(CartItem.product_id == product.id).first()
 
     if not add_item:
         add_item = CartItem(
-            product_id=id,
+            product_id=product.id,
             product_quantity=1,
-            name = product.name,
-            description = product.description,
+            name=product.name,
+            description=product.description,
             total_item_price=product.price,
             cart_id=current_cart.id
         )
@@ -62,18 +66,28 @@ def add_to_cart(id):
         db.session.commit()
         return add_item.to_dict()
 
-@cart_routes.route('/<int:id>', methods=['POST'])
+
+@cart_routes.route('/add/<int:id>', methods=['POST'])
 def add_one_in_cart(id):
     cartItem = CartItem.query.get(id)
     cartItem.product_quantity += 1
     db.session.commit()
     return cartItem.to_dict()
 
-@cart_routes.route('/<int:id>', methods=['PUT'])
+
+@cart_routes.route('/minus/<int:id>', methods=['POST'])
 def minus_one_in_cart(id):
     cartItem = CartItem.query.get(id)
     cartItem.product_quantity -= 1
     if cartItem.product_quantity == 0:
         db.session.delete(cartItem)
+        db.session.commit()
+    db.session.commit()
+    return cartItem.to_dict()
+
+@cart_routes.route('/<int:id>', methods=['DELETE'])
+def remove_from_cart(id):
+    cartItem = CartItem.query.get(id)
+    db.session.delete(cartItem)
     db.session.commit()
     return cartItem.to_dict()

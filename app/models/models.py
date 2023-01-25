@@ -122,7 +122,7 @@ class Product(db.Model):
     wishlist = db.relationship('Wishlist', back_populates='product')
     # cart = db.relationship(
     #     'Cart', secondary='cart_products', back_populates='product')
-    cart_item = db.relationship('CartItem', back_populates='product')
+    cart_item = db.relationship('CartItem', back_populates='products')
 
     def to_dict(self):
         return {
@@ -251,7 +251,7 @@ class CartItem(db.Model):
         add_prefix_for_prod('carts.id')))
 
     cart = db.relationship('Cart', back_populates='cart_item')
-    product = db.relationship('Product', back_populates='cart_item')
+    products = db.relationship('Product', back_populates='cart_item')
 
     def to_dict(self):
         return {
