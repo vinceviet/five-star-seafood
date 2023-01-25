@@ -83,7 +83,6 @@ export const removeFromCart = (product) => async (dispatch) => {
 };
 
 
-
 const initialState = {}
 
 export default function cart(state = initialState, action) {
@@ -96,7 +95,6 @@ export default function cart(state = initialState, action) {
                 newState[item.id] = item
             })
             return newState
-            // return { ...state, cartItems: action.cartItems }
         case ADD_ITEM:
             newState = {...state};
             newState[action.product.id] = action.product

@@ -243,6 +243,7 @@ class CartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_quantity = db.Column(db.Integer, nullable=False)
     total_item_price = db.Column(db.Float, nullable=False)
+    price = db.Column(db.Float, nullable=False)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(
@@ -258,6 +259,7 @@ class CartItem(db.Model):
             'id': self.id,
             'productQuantity': self.product_quantity,
             'totalItemPrice': self.total_item_price,
+            'price': self.price,
             'name': self.name,
             'description': self.description,
             'productId': self.product_id,
