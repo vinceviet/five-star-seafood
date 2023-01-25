@@ -50,7 +50,7 @@ export default function cart(state = initialState, action) {
             console.log('accccccction', action)
             return {...state, cartItems: action.cartItems}
         case ADD_ITEM:
-            return { ...state, cartItem: action.product }
+            return { ...state, cartItems: action.product }
         default:
             return state;
     }

@@ -7,7 +7,7 @@ from sqlalchemy import and_
 cart_routes = Blueprint('cart', __name__)
 
 
-# @cart_routes.route('')
+@cart_routes.route('')
 def load_cart():
     # if current_user.is_authenticated:
     #     current_cart = Cart.query.filter(

@@ -17,8 +17,17 @@ export default function Cart() {
     return (
         <div>
             <h1>Cart</h1>
-            {cartItems.map((item) =>
-                <div>{item.name}</div>
+            {cartItems.cartItems.map((item) =>
+            <div>
+                <span>{item.name}</span><br />
+                <span>{item.description}</span><br />
+                <div>
+                <button>minus 1</button>
+                <span>{item.productQuantity}</span>
+                <button>plus 1</button>
+                </div>
+                <span>{item.totalItemPrice}</span><br />
+            </div>
             )}
         </div>
     )
