@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch} from "react-redux";
-import { loadCartItems, addItemToCart } from "../../store/cart";
+import { loadCartItems, addOneToCart} from "../../store/cart";
 
 export default function Cart() {
     const dispatch = useDispatch();
@@ -9,10 +9,25 @@ export default function Cart() {
     console.log('caaaaaaaartItems COMPONENET', cartItems)
 
     useEffect(() => {
-        dispatch(loadCartItems(cartItems)).then(() => setLoaded(true))
-    }, [dispatch])
+        dispatch(loadCartItems()).then(() => setLoaded(true))
+    },[dispatch])
 
     if(!cartItems) return null;
+    let cartList = cartItems.cartItems ? cartItems.cartItems : cartItems.cartItems.cartItems;
+
+    const handleAddItem = (e, item) => {
+        e.preventDefault();
+        dispatch(addOneToCart(item)).then(() => dispatch(loadCartItems()).then(() => setLoaded(true)))
+        // setLoaded(true)
+    }
+
+    // if(!loaded){
+    //     return (
+    //         <div>
+    //         <h1>Cart</h1>
+    //         </div>
+    //     )
+    // }
 
     return (
         <div>
@@ -24,9 +39,10 @@ export default function Cart() {
                 <div>
                 <button>minus 1</button>
                 <span>{item.productQuantity}</span>
-                <button>plus 1</button>
+                <button onClick={(e) => handleAddItem(e, item)}>plus 1</button>
+                <button>Remove</button>
                 </div>
-                <span>{item.totalItemPrice}</span><br />
+                <span>${Number(item.totalItemPrice).toFixed(2)}</span><br />
             </div>
             )}
         </div>

@@ -14,12 +14,10 @@ const addItem = (product) => ({
 //     type: REMOVE_ITEM, productId
 // });
 
-export const loadCartItems = (cartItems) => async (dispatch) => {
-    console.log('fetched cartstuffs', cartItems)
+export const loadCartItems = () => async (dispatch) => {
     const res = await fetch('/api/cart');
-    if (res.ok){
+    if (res.ok) {
         const cart = await res.json()
-        console.log('carrrrrrrt RES', cart)
         dispatch(loadCart(cart));
     };
 };
@@ -42,15 +40,39 @@ export const addItemToCart = (product) => async (dispatch) => {
     };
 };
 
+export const addOneToCart = (product) => async (dispatch) => {
+
+    const res = await fetch(`/api/cart/${product.id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            product
+        })
+    });
+    if (res.ok) {
+        const data = await res.json();
+        console.log('daaaataaa', data)
+        dispatch(addItem(data));
+        return null;
+    };
+};
+
+
+
 const initialState = {}
 
 export default function cart(state = initialState, action) {
     switch (action.type) {
         case LOAD_CART:
-            console.log('accccccction', action)
-            return {...state, cartItems: action.cartItems}
+            return { ...state, cartItems: action.cartItems }
         case ADD_ITEM:
-            return { ...state, cartItems: action.product }
+            console.log('accccccction', action)
+            let newState = {...state};
+            newState[action.product.id] = action.product
+            return newState
+            // return { ...state, cartItems: action.product }
         default:
             return state;
     }

@@ -61,3 +61,11 @@ def add_to_cart(id):
         db.session.add(add_item)
         db.session.commit()
         return add_item.to_dict()
+
+@cart_routes.route('/<int:id>', methods=['POST'])
+def add_one_in_cart(id):
+    cartItem = CartItem.query.get(id)
+    cartItem.product_quantity += 1
+    db.session.commit()
+    # cart_list = CartItem.query.all()
+    return cartItem.to_dict()
