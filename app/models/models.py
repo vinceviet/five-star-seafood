@@ -10,21 +10,21 @@ def add_prefix_for_prod(attr):
         return attr
 
 
-cart_products = db.Table(
-    "cart_products",
-    db.Column(
-        "product_id",
-        db.Integer,
-        db.ForeignKey("products.id"),
-        primary_key=True
-    ),
-    db.Column(
-        "cart_id",
-        db.Integer,
-        db.ForeignKey("carts.id"),
-        primary_key=True
-    )
-)
+# cart_products = db.Table(
+#     "cart_products",
+#     db.Column(
+#         "product_id",
+#         db.Integer,
+#         db.ForeignKey("products.id"),
+#         primary_key=True
+#     ),
+#     db.Column(
+#         "cart_id",
+#         db.Integer,
+#         db.ForeignKey("carts.id"),
+#         primary_key=True
+#     )
+# )
 
 
 class User(db.Model, UserMixin):
@@ -38,12 +38,6 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    phone = db.Column(db.String(15))
-    address = db.Column(db.String(40))
-    city = db.Column(db.String(40))
-    state = db.Column(db.String(40))
-    country = db.Column(db.String(40), default='United States')
-    zip_code = db.Column(db.Integer)
 
     address = db.relationship(
         'UserAddress', back_populates='user', cascade='all, delete-orphan')
@@ -71,7 +65,7 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'firstName': self.first_name,
-            'lastName': self.last_name,
+            'address': self.last_name,
             'email': self.email
         }
 
@@ -82,6 +76,7 @@ class UserAddress(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
+    id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.String(15))
     address = db.Column(db.String(40))
     city = db.Column(db.String(40))
@@ -92,6 +87,18 @@ class UserAddress(db.Model):
         add_prefix_for_prod('users.id')), nullable=False)
 
     user = db.relationship('User', back_populates='address')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'phone': self.phone,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'country': self.country,
+            'zipCode': self.zip_code,
+            'userId': self.user_id
+        }
 
 
 class Product(db.Model):
@@ -111,10 +118,9 @@ class Product(db.Model):
     product_images = db.relationship(
         'ProductImage', back_populates='product', cascade='all, delete-orphan')
     category = db.relationship('Category', back_populates='product')
-    cart = db.relationship(
-        'Cart', secondary='cart_products', back_populates='product')
     review = db.relationship('Review', back_populates='product')
     wishlist = db.relationship('Wishlist', back_populates='product')
+    cart_items = db.relationship('CartItem', back_populates='product')
 
     def to_dict(self):
         return {
@@ -205,18 +211,14 @@ class Cart(db.Model):
 
     user = db.relationship('User', back_populates='cart')
     order = db.relationship('Order', back_populates='cart')
-    product = db.relationship(
-        'Product', secondary='cart_products', back_populates='cart')
+    cart_items = db.relationship(
+        'CartItem', back_populates='cart')
 
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.user_id,
-            'productId': self.product_id,
-            'productQuantity': self.product_quantity,
-            'price': self.price,
             'totalPrice': self.total_price,
-            'orderId': self.order_id
         }
 
 
@@ -233,6 +235,18 @@ class CartItem(db.Model):
         add_prefix_for_prod('products.id')), nullable=False)
     cart_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('carts.id')), nullable=False)
+
+    cart = db.relationship('Cart', back_populates='cart_items')
+    product = db.relationship('Product', back_populates='cart_items')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'productQuantity': self.product_quantity,
+            'totalItemPrice': self.total_item_price,
+            'productId': self.product_id,
+            'cartId': self.cart_id,
+        }
 
 
 class Review(db.Model):
