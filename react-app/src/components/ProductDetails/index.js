@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProductDetails } from '../../store/products';
 import { addItemToCart } from '../../store/cart';
 import OpenModalMenuItem from '../Modal/OpenModalMenuItem';
+import Reviews from '../Reviews';
+import CreateReviewModal from '../CreateReviewModal';
+import DeleteReviewModal from '../DeleteReviewModal';
 
 export default function ProdcutDetails() {
     const dispatch = useDispatch();
@@ -11,6 +14,7 @@ export default function ProdcutDetails() {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef()
     const product = useSelector((state) => state.products[productId]);
+    const reviews = useSelector((state => state.reviews))
     const sessionUser = useSelector(state => state.session.user);
 
     const openMenu = () => {
@@ -49,7 +53,7 @@ export default function ProdcutDetails() {
                 <span>{product.price}</span>
             </div>
             <div className="reviews">
-                <Reviews />
+                <Reviews product={product}/>
             </div>
             <div className="review-buttons">
                 {sessionUser && (
@@ -61,7 +65,7 @@ export default function ProdcutDetails() {
                                 modalComponent={<CreateReviewModal productId={productId} user={sessionUser} />}
                             />
                         </div>
-                        {sessionUser && reviews.find(review => sessionUser.id === review.userId) && (
+                        {sessionUser /* && reviews.find(review => sessionUser.id === review.userId)*/ && (
                             <div className="detail-page-buttons">
                                 <OpenModalMenuItem
                                     itemText="Delete Review"

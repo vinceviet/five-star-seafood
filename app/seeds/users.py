@@ -5,8 +5,10 @@ from app.models import db, User, environment, SCHEMA
 def seed_users():
     demo = User(
         first_name='Demo', last_name="Mon", email='demo@aa.io', password='pass')
+    demo2 = User(
+        first_name='Demo2', last_name="Mon", email='demo2@aa.io', password='pass')
 
-    db.session.add(demo)
+    db.session.add(demo, demo2)
     db.session.commit()
 
 

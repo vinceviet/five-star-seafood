@@ -111,6 +111,7 @@ class Product(db.Model):
     description = db.Column(db.String(255), nullable=False)
     origin = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
+    num_reviews = db.Column(db.Integer)
     avg_star_rating = db.Column(db.Float)
     category_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('categories.id')), nullable=False)
@@ -128,9 +129,11 @@ class Product(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'description': self.description,
             'origin': self.origin,
             'price': self.price,
             'avgStarRating': self.avg_star_rating,
+            'numReviews': self.num_reviews,
             'categoryId': self.category_id
         }
 
@@ -291,7 +294,8 @@ class Review(db.Model):
             'userId': self.user_id,
             'productId': self.product_id,
             'review': self.review,
-            'stars': self.stars
+            'stars': self.stars,
+            'dateTime': self.date_time
         }
 
 
