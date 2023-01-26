@@ -10,7 +10,7 @@ cart_routes = Blueprint('cart', __name__)
 @cart_routes.route('')
 def load_cart():
     cart_items = CartItem.query.all()
-    return {'cartItems': [cart_items.to_dict() for cart_items in cart_items], 'cart': cart.to_dict()}
+    return {'cartItems': [cart_items.to_dict() for cart_items in cart_items]}, 200
 
 
 @cart_routes.route('/addItem/<int:id>', methods=['POST'])
@@ -53,7 +53,6 @@ def add_to_cart(id):
         db.session.add(add_item)
         db.session.commit()
         return add_item.to_dict()
-
 
 @cart_routes.route('/add/<int:id>', methods=['POST'])
 def add_one_in_cart(id):
