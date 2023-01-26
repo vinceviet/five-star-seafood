@@ -24,6 +24,7 @@ export const getReviews = (productId) => async dispatch => {
 };
 
 export const createReview = (productId, user, review) => async dispatch => {
+    console.log('thunk hitting', productId, user, review)
     const res = await fetch(`/api/product/${productId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -31,8 +32,9 @@ export const createReview = (productId, user, review) => async dispatch => {
     });
     if (res.ok) {
         const review = await res.json();
-        review.productId = productId;
-        review.User = user;
+        // review.productId = productId;
+        // review.User = user;
+        console.log('response REVIEW', review)
         dispatch(add(review))
         return review;
     };
@@ -56,12 +58,13 @@ export default function reviews(state = initialState, action) {
     switch (action.type) {
         case LOAD_REVIEWS:
             newState = {};
-            const reviewList = action.reviews.Reviews;
+            const reviewList = action.reviews.reviews;
             reviewList.forEach(review => {
                 newState[review.id] = review;
             });
             return newState;
         case ADD_REVIEW:
+            console.log('accccctioooon', action)
             newState[action.review.id] = action.review;
             return newState;
         case DELETE_REVIEW:

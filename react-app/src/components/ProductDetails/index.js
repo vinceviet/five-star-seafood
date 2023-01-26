@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductDetails } from '../../store/products';
+import { getReviews } from '../../store/reviews';
 import { addItemToCart } from '../../store/cart';
 import OpenModalMenuItem from '../Modal/OpenModalMenuItem';
 import Reviews from '../Reviews';

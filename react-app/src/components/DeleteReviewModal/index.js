@@ -6,10 +6,12 @@ import { getProductDetails } from '../../store/products';
 export default function DeleteReviewModal({ reviews, user, productId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-    const review = reviews.find(review => review.userId === user.id);
+    console.log('reviews', reviews)
+    console.log('user', user)
+    const reviewList = Object.values(reviews)
+    const review = reviewList.find(review => review.userId === user.id);
 
-    if(!review) return null;
-    
+
     const deleteReviewHandler = async (review) => {
         await dispatch(deleteReview(review))
         await dispatch(getProductDetails(productId))
