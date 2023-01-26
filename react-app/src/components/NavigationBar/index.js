@@ -28,7 +28,7 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/products/seafood' exact={true} activeClassName='active'>
+          <NavLink to='/products/pages/seafood' exact={true} activeClassName='active'>
             Products
           </NavLink>
         </li>

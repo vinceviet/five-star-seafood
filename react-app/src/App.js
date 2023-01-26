@@ -9,6 +9,7 @@ import User from './components/Users';
 import { authenticate } from './store/session';
 import Products from './components/Products';
 import Cart from './components/Cart';
+import ProductDetails from './components/ProductDetails';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,8 +30,11 @@ function App() {
     <>
       <NavBar />
       <Switch>
-        <Route path='/products/:category' exact={true}>
+        <Route path='/products/pages/:category' exact={true}>
           <Products />
+        </Route>
+        <Route path='/products/:productId' exact={true}>
+          <ProductDetails />
         </Route>
         <Route path='/cart' exact={true}>
           <Cart />
