@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+    font-family: Nunito Sans,sans-serif;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+}
+
+.nav-bar-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    height: 30px;
+    padding: 6px 15px 5px;
+    /* width: 100vw; */
+    border-bottom: 1px solid rgb(209, 204, 204);
+    background-color: white;
+}
+
+.nav-link {
+    display: flex;
+    gap: 10px;
+    color: #1C1B1B;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.nav-link:link {
+    text-decoration: none;
+}
+
+/* .search-icon {
+
+} */
+
+.product-list{
+    display: flex;
+    gap: 15px;
+}
+
+.cart-user {
+    display: flex;
+    gap: 15px;
+}

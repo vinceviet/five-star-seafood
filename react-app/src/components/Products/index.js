@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../../store/products';
 import { addItemToCart } from '../../store/cart';
+import './Products.css';
+import seafood from '../../assets/seafood.png';
 
 export default function Products() {
     const dispatch = useDispatch();
@@ -36,13 +38,20 @@ export default function Products() {
     // }
 
     return (
-        <div>
-            <div>
+        <div className='products-containter'>
+            <div className='product-banner'>
+                {category === 'seafood' && (
+                    <img className='banner-img' src={seafood} alt='seafood' />
+                )}
+            </div>
+            <div className='product-cards-container'>
                 {products.map((product) =>
-                    <NavLink to={`/products/${product.id}`} exact={true}>
-                        <div>{product.name}</div>
-                        <button onClick={(e) => handleAddItem(e, product)}>Add to Cart</button>
-                    </NavLink>
+                    <div className='product-card'>
+                        <NavLink to={`/products/${product.id}`} exact={true}>
+                            <div>{product.name}</div>
+                            <button onClick={(e) => handleAddItem(e, product)}>Add to Cart</button>
+                        </NavLink>
+                    </div>
                 )}
             </div>
         </div>
