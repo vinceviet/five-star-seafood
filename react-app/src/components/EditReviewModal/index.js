@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../Context/Modal";
-import { createReview } from "../../store/reviews";
+import { editReview } from "../../store/reviews";
 import { getProductDetails } from "../../store/products";
 
-export default function CreateReviewModal({ productId }) {
+export default function EditReviewModal({ productId }) {
     const dispatch = useDispatch();
     const [review, setReview] = useState("");
     const [stars, setStars] = useState("");
@@ -15,7 +15,7 @@ export default function CreateReviewModal({ productId }) {
         e.preventDefault();
         const newReview = { review, stars }
 
-        await dispatch(createReview(productId, newReview)).then(dispatch(getProductDetails(productId)))
+        await dispatch(editReview(productId, newReview)).then(dispatch(getProductDetails(productId)))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
@@ -33,7 +33,7 @@ export default function CreateReviewModal({ productId }) {
         <div className="login-container">
             <header className="header">
                 <button id="cancel-x" onClick={closeModal}>X</button>
-                Create a Review
+                Edit Review
             </header>
             <li className="header-divider"></li>
             <form onSubmit={handleSubmit}>

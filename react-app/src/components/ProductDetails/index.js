@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductDetails } from '../../store/products';
-import { getReviews } from '../../store/reviews';
 import { addItemToCart } from '../../store/cart';
 import OpenModalMenuItem from '../Modal/OpenModalMenuItem';
 import Reviews from '../Reviews';
 import CreateReviewModal from '../CreateReviewModal';
+import EditReviewModal from '../EditReviewModal';
 import DeleteReviewModal from '../DeleteReviewModal';
 
 export default function ProdcutDetails() {
@@ -44,6 +44,9 @@ export default function ProdcutDetails() {
     }, [dispatch])
 
     if (!product) return null;
+    if (!reviews) return null;
+
+    const reviewList = Object.values(reviews);
 
     return (
         <>
@@ -54,19 +57,30 @@ export default function ProdcutDetails() {
                 <span>{product.price}</span>
             </div>
             <div className="reviews">
-                <Reviews product={product}/>
+                <Reviews product={product} />
             </div>
             <div className="review-buttons">
                 {sessionUser && (
                     <>
-                        <div className="detail-page-buttons">
-                            <OpenModalMenuItem
-                                itemText="Create a Review"
-                                onItemClick={closeMenu}
-                                modalComponent={<CreateReviewModal productId={productId} user={sessionUser} />}
-                            />
-                        </div>
-                        {sessionUser /* && reviews.find(review => sessionUser.id === review.userId)*/ && (
+                        {sessionUser && !reviewList.find(review => sessionUser.id === review.userId) && (
+                            <div className="detail-page-buttons">
+                                <OpenModalMenuItem
+                                    itemText="Create a Review"
+                                    onItemClick={closeMenu}
+                                    modalComponent={<CreateReviewModal productId={productId} />}
+                                />
+                            </div>
+                        )}
+                        {sessionUser && reviewList.find(review => sessionUser.id === review.userId) && (
+                            <div className="detail-page-buttons">
+                                <OpenModalMenuItem
+                                    itemText="Edit Review"
+                                    onItemClick={closeMenu}
+                                    modalComponent={<EditReviewModal reviews={reviews} user={sessionUser} productId={productId} />}
+                                />
+                            </div>
+                        )}
+                        {sessionUser && reviewList.find(review => sessionUser.id === review.userId) && (
                             <div className="detail-page-buttons">
                                 <OpenModalMenuItem
                                     itemText="Delete Review"

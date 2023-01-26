@@ -6,8 +6,6 @@ import { getProductDetails } from '../../store/products';
 export default function DeleteReviewModal({ reviews, user, productId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-    console.log('reviews', reviews)
-    console.log('user', user)
     const reviewList = Object.values(reviews)
     const review = reviewList.find(review => review.userId === user.id);
 

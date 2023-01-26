@@ -32,7 +32,6 @@ const Reviews = ({ product }) => {
 
     useEffect(() => {
         dispatch(getReviews(product.id));
-        console.log('useeffect hitting', product.id)
     }, []);
 
     if (!reviews) return null;
