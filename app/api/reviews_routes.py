@@ -64,7 +64,6 @@ def update_review(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        print('--------------------form data UPDATE', form.data)
         current_review = Review.query.get([review.id for review in review])
         current_review.user_id = current_user.id
         current_review.product_id = product.id
@@ -72,7 +71,6 @@ def update_review(id):
         current_review.stars = form.data['stars']
         current_review.date_time = datetime.now().strftime("%m/%d/%Y")
 
-        print('--------------------form data UPDATE', current_review)
         db.session.add(current_review)
         reviews = Review.query.filter(Review.product_id == id).all()
         review_ratings = [int(reviews.stars) for reviews in reviews]

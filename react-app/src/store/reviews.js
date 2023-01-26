@@ -40,7 +40,6 @@ export const createReview = (productId, review) => async dispatch => {
 };
 
 export const editReview = (productId, review) => async dispatch => {
-    console.log('thunk hitting')
     const res = await fetch(`/api/product/${productId}/reviews`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -50,7 +49,6 @@ export const editReview = (productId, review) => async dispatch => {
         const review = await res.json();
         // review.productId = productId;
         // review.User = user;
-        console.log('REVIEW', review)
         dispatch(add(review))
         return review;
     };
