@@ -1,4 +1,4 @@
-from app.models import db, Product, Category, environment, SCHEMA
+from app.models import db, Product, Category,ProductImage, environment, SCHEMA
 
 
 
@@ -36,6 +36,19 @@ def seed_products():
 
     [db.session.add(product) for product in finfish_products]
     [db.session.add(product) for product in poultry_products]
+
+    db.session.commit()
+
+    root_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/RootDownChicken_400x.jpg?v=1623482531', product_id=root.id)
+    fogline_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FoglineChicken_1_400x.jpg?v=1621969706', product_id=fogline.id)
+    quail_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/e85fef_a46c0d72bcd941ada03dbc7fac312fbe_mv2_400x.jpg?v=1595405914', product_id=quail.id)
+    squab_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/SQUAB_654268de-0352-4905-b46f-0e8704295849_400x.jpg?v=1653088477', product_id=squab.id)
+    duck_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/IMG_3551_400x.jpg?v=1643742983', product_id=duck.id)
+    hen_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/guinea_400x.jpg?v=1671818749', product_id=hen.id)
+
+    poultry_images = [root_img, fogline_img, quail_img, squab_img, duck_img, hen_img]
+
+    [db.session.add(img) for img in poultry_images]
 
     db.session.commit()
 
