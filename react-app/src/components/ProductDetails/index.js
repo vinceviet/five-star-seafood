@@ -80,7 +80,7 @@ export default function ProdcutDetails() {
                         {sessionUser && !reviewList.find(review => sessionUser.id === review.userId) && (
                             <div className="detail-page-buttons">
                                 <OpenModalMenuItem
-                                    itemText="Create a Review"
+                                    itemText="Write a Review"
                                     onItemClick={closeMenu}
                                     modalComponent={<CreateReviewModal productId={productId} />}
                                 />

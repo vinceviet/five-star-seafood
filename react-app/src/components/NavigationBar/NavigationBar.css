@@ -1,11 +1,7 @@
-body{
-    margin: 0;
-    font-family: Nunito Sans,sans-serif;
-}
-
+/* 
 button:hover {
     cursor: pointer;
-}
+} */
 
 .nav-link:hover {
     cursor: pointer;

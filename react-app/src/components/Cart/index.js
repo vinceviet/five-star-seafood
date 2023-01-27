@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadCartItems, addOneToCart, minusOneToCart, removeFromCart } from "../../store/cart";
+import './Cart.css';
 
 export default function Cart() {
     const dispatch = useDispatch();

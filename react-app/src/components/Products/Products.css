@@ -43,6 +43,7 @@
     margin: auto;
     row-gap: 30px;
     column-gap: 25px;
+    padding-bottom: 50px;
 }
 
 .sub-category-header {

@@ -39,15 +39,16 @@ const Reviews = ({ product }) => {
     return (
         <div className='reviews-container'>
         <div className="review-header">
-            <h2>{Number(avgStarRating).toFixed(1)} &middot; {numReviews} reviews</h2>
+            <h2>{Number(avgStarRating).toFixed(1)} &middot; {numReviews} Reviews</h2>
         </div>
-            <div className="reviews-info">
+            <div className="reviews-cards-container">
                 {reviews.map(review => {
                     return (
                         <div className="review-card">
-                            <span>{review.userId}</span><span id="rating"><i className="fas fa-sharp fa-solid fa-star fa-xs fa-align" /> {review.stars}</span><br />
-                            <span id="date">{review.date_time}</span>
-                            <p id="review-body">{review.review}</p>
+                            <div id='user-name'>{review.user.firstName} {review.user.lastName[0]}.</div>
+                            <div id="date">{review.dateTime}</div>
+                            <div>{review.stars}</div>
+                            <div id="review-body">{review.review}</div>
                         </div>
                     )
                 })}

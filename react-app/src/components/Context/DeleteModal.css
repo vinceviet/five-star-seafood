@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+.delete-container {
+    text-align: left;
+    padding: 24px;
+    width: 568px;
+    height: 200px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#cancel-button {
+    display: block;
+    color: rgb(134, 129, 129);
+    border: none;
+    width: 100px;
+    height: 25px;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid rgb(134, 129, 129);
+}
+
+#delete-button {
+    display: block;
+    color: white;
+    border: none;
+    width: 100px;
+    height: 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: rgb(251, 2, 2);
+}

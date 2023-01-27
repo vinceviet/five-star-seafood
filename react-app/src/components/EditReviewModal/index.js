@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../Context/Modal";
 import { editReview } from "../../store/reviews";
 import { getProductDetails } from "../../store/products";
+import '../Context/Forms.css';
 
 export default function EditReviewModal({ productId }) {
     const dispatch = useDispatch();
