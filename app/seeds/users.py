@@ -7,8 +7,17 @@ def seed_users():
         first_name='Demo', last_name="Mon", email='demo@aa.io', password='pass')
     demo2 = User(
         first_name='Demo2', last_name="Mon", email='demo2@aa.io', password='pass')
+    vi = User(
+        first_name='Vi', last_name="Viet", email='vviet@aa.io', password='vviet')
+    david = User(
+        first_name='David', last_name="Xu", email='imdavid@aa.io', password='imdavid')
+    claire = User(
+        first_name='Claire', last_name="Chan", email='imclaire@aa.io', password='imclaire')
+    barry = User(
+        first_name='Barry', last_name="Pham", email='imbarry@aa.io', password='imbarry')
 
-    db.session.add(demo, demo2)
+    users = [demo, demo2, vi, david, claire, barry]
+    [db.session.add(user) for user in users]
     db.session.commit()
 
 

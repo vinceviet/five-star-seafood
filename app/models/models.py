@@ -134,7 +134,8 @@ class Product(db.Model):
             'price': self.price,
             'avgStarRating': self.avg_star_rating,
             'numReviews': self.num_reviews,
-            'categoryId': self.category_id
+            'categoryId': self.category_id,
+            'productImages': [product_images.to_dict() for product_images in self.product_images]
         }
 
 

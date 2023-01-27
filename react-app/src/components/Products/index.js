@@ -38,23 +38,32 @@ export default function Products() {
     // }
 
     return (
-        <div className='products-containter'>
+        <>
             <div className='product-banner'>
                 {category === 'seafood' && (
                     <img className='banner-img' src={seafood} alt='seafood' />
                 )}
             </div>
-            <div className='product-cards-container'>
-                {products.map((product) =>
-                    <div className='product-card'>
-                        <NavLink to={`/products/${product.id}`} exact={true}>
-                            <div>{product.name}</div>
-                            <button onClick={(e) => handleAddItem(e, product)}>Add to Cart</button>
-                        </NavLink>
-                    </div>
+            <div className='products-containter'>
+                {category === 'seafood' && (
+                    <h3 className='sub-category-header'>Finfish</h3>
                 )}
+                <div className='product-cards-container'>
+                    {products.map((product) =>
+                        <div className='product-card'>
+                            <NavLink to={`/products/${product.id}`} exact={true} className='nav-link'>
+                                <img className='product-img' src={product.productImages[0].imageUrl} alt='img' />
+                            </NavLink>
+                                <div className='product-info'>
+                                    <span>{product.origin}</span>
+                                    <span>{product.name}</span>
+                                </div>
+                            <button onClick={(e) => handleAddItem(e, product)}>Add to Cart</button>
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     )
 
 }
