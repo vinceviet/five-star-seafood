@@ -50,12 +50,17 @@ export default function ProdcutDetails() {
     const reviewList = Object.values(reviews);
 
     return (
-        <>
-            <div>
-                <h3>{product.name}</h3>
-                <span>{product.description}</span>
-                <span>{product.origin}</span>
-                <span>{product.price}</span>
+        <div className='details-container'>
+            <div className='details-info-container'>
+                <div className='details-img'>
+                    <img className='details-img' src={product.productImages[0].imageUrl} />
+                </div>
+                <div className='details-info'>
+                    <h3>{product.name}</h3>
+                    <span>{product.description}</span>
+                    <span>{product.origin}</span>
+                    <span>{product.price}</span>
+                </div>
             </div>
             <div className="reviews">
                 <Reviews product={product} />
@@ -93,6 +98,6 @@ export default function ProdcutDetails() {
                     </>
                 )}
             </div>
-        </>
+        </div>
     )
 }
