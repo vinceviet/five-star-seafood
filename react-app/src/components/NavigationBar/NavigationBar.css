@@ -23,6 +23,7 @@ button:hover {
     /* width: 100vw; */
     border-bottom: 1px solid rgb(209, 204, 204);
     background-color: white;
+    z-index: 10;
 }
 
 .nav-link {

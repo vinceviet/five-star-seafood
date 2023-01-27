@@ -75,7 +75,7 @@ def update_review(id):
         reviews = Review.query.filter(Review.product_id == id).all()
         review_ratings = [int(reviews.stars) for reviews in reviews]
         total_ratings = sum(review_ratings)
-        product.num_reviews += 1
+        # product.num_reviews += 1
         product.avg_star_rating = total_ratings / product.num_reviews
         db.session.commit()
         return current_review.to_dict(), 201

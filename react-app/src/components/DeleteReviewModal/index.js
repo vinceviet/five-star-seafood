@@ -11,9 +11,8 @@ export default function DeleteReviewModal({ reviews, user, productId }) {
 
 
     const deleteReviewHandler = async (review) => {
-        await dispatch(deleteReview(review))
-        await dispatch(getProductDetails(productId))
-        .then(closeModal);
+        await dispatch(deleteReview(review)).then(closeModal)
+        await dispatch(getProductDetails(productId));
     };
 
     return (

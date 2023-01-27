@@ -15,8 +15,8 @@ export default function EditReviewModal({ productId }) {
         e.preventDefault();
         const newReview = { review, stars }
 
-        await dispatch(editReview(productId, newReview)).then(dispatch(getProductDetails(productId)))
-            .then(closeModal)
+        await dispatch(editReview(productId, newReview)).then(closeModal)
+        await dispatch(getProductDetails(productId))
             .catch(async (res) => {
                 const data = await res.json();
                 const validationErrors = [];

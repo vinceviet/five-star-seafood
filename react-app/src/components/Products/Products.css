@@ -3,9 +3,30 @@
 }
 
 .product-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100vw;
     height: 40vh;
 }
+
+.category-banner {
+    position: absolute;
+    color: white;
+    font-size: 50px;
+    letter-spacing: 3px;
+    text-shadow: 0px 4px 5px rgb(112, 110, 110);
+    padding-bottom: 10px;
+    border-bottom: 2px solid white;
+}
+
+/* .category-info{
+    display: flex;
+    position: absolute;
+    justify-content: flex-end;
+    align-items: flex-end;
+    z-index: 1;
+} */
 
 .banner-img {
     width: 100%;
@@ -24,13 +45,13 @@
     column-gap: 25px;
 }
 
-.sub-category-header{
+.sub-category-header {
     text-align: center;
     font-size: 30px;
     font-weight: bolder;
     letter-spacing: 5px;
     color: rgb(40, 96, 117);
-    text-shadow: (0 0 0 / 40%) 0px 4px 5px
+    text-shadow: 0px 4px 5px rgb(148, 144, 144);
 }
 
 .product-card {
@@ -50,7 +71,7 @@
     height: 100%;
 }
 
-.product-info{
+.product-info {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -65,11 +86,11 @@
 
 .product-card-link {
     text-decoration: none;
-    color:rgb(54, 124, 152);
+    color: rgb(54, 124, 152);
 }
 
 .product-card-link:hover {
-    color:rgb(14, 56, 135);
+    color: rgb(14, 56, 135);
 }
 
 .info-divider {
@@ -80,25 +101,25 @@
     margin-top: -5px;
 }
 
-.inner-info{
+.inner-info {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
     padding-bottom: 40px;
 }
 
-#product-price{
-    color:  rgb(75, 134, 158)
+#product-price {
+    color: rgb(75, 134, 158)
 }
 
-.product-page-buttons{
+.product-page-buttons {
     display: flex;
     justify-content: space-between;
     border: 1px black solid;
     height: 40px;
 }
 
-.counter-container{
+.counter-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -106,23 +127,20 @@
     height: 100%;
 }
 
-.counter-container > button{
+.counter-container>button {
     background-color: white;
     border: none;
     width: 40px;
     font-size: 15px;
 }
 
-#minus{
-    color: rgb(53, 51, 51);
-}
 
-#plus{
+#plus {
     font-size: 25px;
     font-weight: 100;
 }
 
-.add-to-cart{
+.add-to-cart {
     width: 50%;
     height: 100%;
     color: white;
@@ -131,6 +149,6 @@
     font-size: 15px;
 }
 
-.add-to-cart:hover{
+.add-to-cart:hover {
     background-color: rgb(79, 141, 163);
 }

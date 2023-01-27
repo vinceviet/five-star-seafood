@@ -1,4 +1,4 @@
-from app.models import db, Category, environment, SCHEMA
+from app.models import db, Category, Product, environment, SCHEMA
 
 
 def seed_categories():
@@ -33,6 +33,17 @@ def seed_categories():
     categories = [finfish, oysters, shellfish, caviar, poultry, beef, lamb, pork, game, fruit, vegtables, mushrooms, seaweed, milk, butter, cheese, boxes, comal, cochon, pizza, pies, flour, crackers, asian, coffee, grain, honey]
     [db.session.add(category) for category in categories]
     db.session.commit()
+
+    # big_glory = Product(name='Big Glory Bay King Salmon', description='(6oz) - 2 ea', origin='New Zealand', price=20.95, category_id=finfish.id)
+    # sea_bass = Product(name='Black Sea Bass', description='~1.5lb', origin='Massachusetts', price=26.95, category_id=finfish.id)
+    # halibut = Product(name='Halibut Fillet', description='Skin Off(6oz) - 2 ea', origin='Normway', price=29.95, category_id=finfish.id)
+    # kampachi = Product(name='Kampachi Fillet', description='1lb', origin='Panama', price=34.95, category_id=finfish.id)
+    # turbot = Product(name='Turbot', description='1.5-2lb', origin='Spain', price=39.95, category_id=finfish.id)
+    # stripe_bass = Product(name='True Striped Bass Fillet', description='(6oz) - 2ea', origin='Baja California', price=19.95, category_id=finfish.id)
+
+    # finfish_products = [big_glory, sea_bass, halibut, kampachi, turbot, stripe_bass]
+    # [db.session.add(product) for product in finfish_products]
+    # db.session.commit()
 
 
 def undo_categories():

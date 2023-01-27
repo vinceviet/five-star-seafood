@@ -39,9 +39,13 @@ export default function Products() {
 
     return (
         <>
-            <div className='product-banner'>
+            <div>
                 {category === 'seafood' && (
-                    <img className='banner-img' src={seafood} alt='seafood' />
+                    <div className='product-banner'>
+                        <img className='banner-img' src={seafood} alt='seafood' />
+                        <h1 className='category-banner'>FRESH SEAFOOD</h1>
+                        {/* <h3 className='category-info'>Our high-quality seafood is always cut on the morning of your order, and carefully wrapped individually. It arrives directly to your door, incredibly fresh and ready to cook, refrigerate, or freeze needed. Click the product photo to learn more.</h3> */}
+                    </div>
                 )}
             </div>
             <div className='products-containter'>
@@ -57,7 +61,7 @@ export default function Products() {
                             <div className='product-info'>
                                 <span id='product-origin'>{product.origin}</span>
                                 <NavLink to={`/products/${product.id}`} exact={true} className='product-card-link'>{product.name} {product.description}</NavLink>
-                                <li className='info-divider'/>
+                                <li className='info-divider' />
                                 <div className='inner-info'>
                                     <span id='product-price'>$ {product.price}</span>
                                     <span>Stars: {product.avgStarRating} ({product.numReviews})</span>
