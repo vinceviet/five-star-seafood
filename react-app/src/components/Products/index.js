@@ -59,7 +59,7 @@ export default function Products() {
                                 <img className='product-img' src={product.productImages[0].imageUrl} alt='img' />
                             </NavLink>
                             <div className='product-info'>
-                                <span id='product-origin'>{product.origin}</span>
+                                <span id='product-origin'>{product.origin.toUpperCase()}</span>
                                 <NavLink to={`/products/${product.id}`} exact={true} className='product-card-link'>{product.name} {product.description}</NavLink>
                                 <li className='info-divider' />
                                 <div className='inner-info'>
