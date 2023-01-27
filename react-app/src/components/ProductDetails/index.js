@@ -8,6 +8,7 @@ import Reviews from '../Reviews';
 import CreateReviewModal from '../CreateReviewModal';
 import EditReviewModal from '../EditReviewModal';
 import DeleteReviewModal from '../DeleteReviewModal';
+import './ProductDetails.css';
 
 export default function ProdcutDetails() {
     const dispatch = useDispatch();

@@ -86,10 +86,19 @@ def update_review(id):
 def delete_review(id):
     review = Review.query.get(id)
     product = Product.query.get(review.product_id)
+
     db.session.delete(review)
-    reviews = Review.query.filter(Review.product_id == id).all()
+
+    reviews = Review.query.filter(Review.product_id == product.id).all()
     review_ratings = [reviews.stars for reviews in reviews]
     total_ratings = sum(review_ratings)
+
+    if total_ratings == 0:
+        product.num_reviews = 0
+        product.avg_star_rating = 0
+        db.session.commit()
+        return review.to_dict()
+
     product.num_reviews -= 1
     product.avg_star_rating = total_ratings / product.num_reviews
     db.session.commit()

@@ -5,6 +5,7 @@ import { getAllProducts } from '../../store/products';
 import { addItemToCart } from '../../store/cart';
 import './Products.css';
 import seafood from '../../assets/seafood.png';
+import meat from '../../assets/meat.png';
 
 export default function Products() {
     const dispatch = useDispatch();
@@ -47,10 +48,20 @@ export default function Products() {
                         {/* <h3 className='category-info'>Our high-quality seafood is always cut on the morning of your order, and carefully wrapped individually. It arrives directly to your door, incredibly fresh and ready to cook, refrigerate, or freeze needed. Click the product photo to learn more.</h3> */}
                     </div>
                 )}
+                {category === 'meat' && (
+                    <div className='product-banner'>
+                        <img className='banner-img' src={meat} alt='meat' />
+                        <h1 className='category-banner'>MEAT</h1>
+                        {/* <h3 className='category-info'>Our high-quality seafood is always cut on the morning of your order, and carefully wrapped individually. It arrives directly to your door, incredibly fresh and ready to cook, refrigerate, or freeze needed. Click the product photo to learn more.</h3> */}
+                    </div>
+                )}
             </div>
             <div className='products-containter'>
                 {category === 'seafood' && (
                     <h3 className='sub-category-header'>Finfish</h3>
+                )}
+                {category === 'meat' && (
+                    <h3 className='sub-category-header'>Poultry</h3>
                 )}
                 <div className='product-cards-container'>
                     {products.map((product) =>
