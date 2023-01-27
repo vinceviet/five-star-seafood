@@ -2,12 +2,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 // import LogoutButton from '../auth/LogoutButton';
 import './NavigationBar.css';
+import search from '../../assets/search.png';
+import cart from '../../assets/cart.png';
+import user from '../../assets/user.png';
 
 const NavBar = () => {
   return (
     <nav className='nav-bar-container'>
-      <div className='search-icon'>
-      <div>Search placeholder</div>
+      <div className='search-icon-container'>
+        <img className='search-icon' src={search} alt='searchIcon'/>
       </div>
       <div className='product-list'>
         <div>
@@ -54,9 +57,10 @@ const NavBar = () => {
       <div className='cart-user'>
         <div>
           <NavLink to='/cart' exact={true} activeClassName='active' className='nav-link'>
-            Cart
+            <img className='cart-icon' src={cart} alt='cartIcon' />
           </NavLink>
         </div>
+        <img className='user-icon' src={user} alt='userIcon' />
         <div>
           <NavLink to='/login' exact={true} activeClassName='active' className='nav-link'>
             Login

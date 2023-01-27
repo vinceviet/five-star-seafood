@@ -56,7 +56,7 @@ export default function Products() {
                             </NavLink>
                             <div className='product-info'>
                                 <span id='product-origin'>{product.origin}</span>
-                                <NavLink to={`/products/${product.id}`} exact={true} className='product-card-link'>{product.name}{product.description}</NavLink>
+                                <NavLink to={`/products/${product.id}`} exact={true} className='product-card-link'>{product.name} {product.description}</NavLink>
                                 <li className='info-divider'/>
                                 <div className='inner-info'>
                                     <span id='product-price'>$ {product.price}</span>

@@ -11,7 +11,7 @@ def seed_products():
     sea_bass = Product(name='Black Sea Bass', description='~1.5lb', origin='Massachusetts', price=26.95)
     halibut = Product(name='Halibut Fillet', description='Skin Off(6oz) - 2 ea', origin='Normway', price=29.95)
     kampachi = Product(name='Kampachi Fillet', description='1lb', origin='Panama', price=34.95)
-    turbot = Product(name='Turbot', description='1.5-2lb', origin='Span', price=39.95)
+    turbot = Product(name='Turbot', description='1.5-2lb', origin='Spain', price=39.95)
     stripe_bass = Product(name='True Striped Bass Fillet', description='(6oz) - 2ea', origin='Baja California', price=19.95)
 
 

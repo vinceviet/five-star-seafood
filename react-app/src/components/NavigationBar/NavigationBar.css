@@ -18,8 +18,8 @@ button:hover {
     align-items: center;
     position: sticky;
     top: 0;
-    height: 30px;
-    padding: 6px 15px 5px;
+    height: 40px;
+    padding: 5px 60px 5px 60px;
     /* width: 100vw; */
     border-bottom: 1px solid rgb(209, 204, 204);
     background-color: white;
@@ -29,17 +29,30 @@ button:hover {
     display: flex;
     gap: 10px;
     color: #1C1B1B;
-    font-weight: bold;
+    font-weight: 550;
     font-size: 14px;
+    letter-spacing: 1px;
 }
 
 .nav-link:link {
     text-decoration: none;
 }
 
-/* .search-icon {
+.search-icon-container{
+    width: 123px;
+}
 
-} */
+.search-icon {
+    width: 18px;
+}
+
+.cart-icon {
+    width: 30px;
+}
+
+.user-icon {
+    width: 25px;
+}
 
 .product-list{
     display: flex;
@@ -48,5 +61,6 @@ button:hover {
 
 .cart-user {
     display: flex;
+    align-items: center;
     gap: 15px;
 }

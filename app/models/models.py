@@ -176,7 +176,7 @@ class Category(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'subCategory': self. sub_category
+            'subCategory': self.sub_category
         }
 
 
