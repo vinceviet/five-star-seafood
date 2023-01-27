@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductDetails } from '../../store/products';
-// import { addItemToCart } from '../../store/cart';
+import { addItemToCart } from '../../store/cart';
 import OpenModalMenuItem from '../Modal/OpenModalMenuItem';
 import Reviews from '../Reviews';
 import CreateReviewModal from '../CreateReviewModal';
@@ -49,6 +49,12 @@ export default function ProdcutDetails() {
 
     const reviewList = Object.values(reviews);
 
+
+    const handleAddItem = async (e, product) => {
+        e.preventDefault();
+        await dispatch(addItemToCart(product))
+    }
+
     return (
         <div className='details-container'>
             <div className='details-info-container'>
@@ -56,13 +62,16 @@ export default function ProdcutDetails() {
                     <img className='details-img' src={product.productImages[0].imageUrl} />
                 </div>
                 <div className='details-info'>
-                    <h3>{product.name}</h3>
-                    <span>{product.description}</span>
                     <span>{product.origin}</span>
-                    <span>{product.price}</span>
+                    <h3 className='details-name'>{product.name} {product.description}</h3>
+                    <span>avgRating: {product.avgStarRating} ({product.numReviews})</span>
+                    <span className='details-price'>${product.price}</span>
+                    <div className='details-button-container'>
+                        <button className='details-add-to-cart' onClick={(e) => handleAddItem(e, product)}>ADD TO CART</button>
+                    </div>
                 </div>
             </div>
-            <div className="reviews">
+            <div>
                 <Reviews product={product} />
             </div>
             <div className="review-buttons">

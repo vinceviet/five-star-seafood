@@ -22,7 +22,6 @@ export default function Products() {
     const handleAddItem = async (e, product) => {
         e.preventDefault();
         await dispatch(addItemToCart(product))
-        // setLoaded(false)
     }
 
     // if (!loaded) {

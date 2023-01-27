@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getReviews } from '../../store/reviews';
-
+import './Reviews.css';
 
 
 const Reviews = ({ product }) => {
@@ -37,11 +37,11 @@ const Reviews = ({ product }) => {
     if (!reviews) return null;
 
     return (
-        <>
+        <div className='reviews-container'>
         <div className="review-header">
             <h2>{Number(avgStarRating).toFixed(1)} &middot; {numReviews} reviews</h2>
         </div>
-            <div className="reviews-container">
+            <div className="reviews-info">
                 {reviews.map(review => {
                     return (
                         <div className="review-card">
@@ -52,7 +52,7 @@ const Reviews = ({ product }) => {
                     )
                 })}
             </div>
-        </>
+        </div>
     );
 };
 

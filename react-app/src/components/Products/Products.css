@@ -57,17 +57,19 @@
 .product-card {
     display: flex;
     flex-direction: column;
-    flex-basis: 33.33%;
-    max-width: 300px;
-    max-height: 450px;
-    /* height: 100%;
-    width: 100%; */
+    flex-basis: calc(33.33% - 30px);
+    /* max-width: 300px;
+    max-height: 450px; */
+    height: 100%;
+    width: 100%;
 }
 
 .product-img {
+    max-width: 270px;
     max-height: 175px;
     width: 100%;
     height: 100%;
+    object-fit: contain;
 }
 
 .product-info {

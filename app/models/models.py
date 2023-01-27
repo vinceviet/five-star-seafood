@@ -297,7 +297,8 @@ class Review(db.Model):
             'productId': self.product_id,
             'review': self.review,
             'stars': self.stars,
-            'dateTime': self.date_time
+            'dateTime': self.date_time,
+            'user': self.user.to_dict()
         }
 
 
