@@ -6,8 +6,8 @@ product_routes = Blueprint('products', __name__)
 
 @product_routes.route('/pages/<string:category>')
 def get_products_by_category(category):
-    category_name = Category.query.filter(Category.name == category).all()
-    products = Product.query.filter(Product.category_id.in_([category.id for category in category_name])).all()
+    category_name = Category.query.filter(Category.name == category).first()
+    products = Product.query.filter(Product.category_id == category_name.id).all()
 
     return {'products' : [product.to_dict() for product in products]}
 

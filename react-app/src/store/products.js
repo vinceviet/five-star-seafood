@@ -32,6 +32,7 @@ export default function productsReducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_PRODUCTS:
+      newState = {}
       const productList = [...action.category.products];
       productList.forEach((product) => {
         newState[product.id] = product;
