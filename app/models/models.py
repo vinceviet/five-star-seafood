@@ -111,8 +111,8 @@ class Product(db.Model):
     description = db.Column(db.String(255), nullable=False)
     origin = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    num_reviews = db.Column(db.Integer)
-    avg_star_rating = db.Column(db.Float)
+    num_reviews = db.Column(db.Integer, default=0)
+    avg_star_rating = db.Column(db.Float, default=0)
     category_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('categories.id')), nullable=False)
 

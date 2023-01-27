@@ -54,11 +54,23 @@ export default function Products() {
                             <NavLink to={`/products/${product.id}`} exact={true} className='nav-link'>
                                 <img className='product-img' src={product.productImages[0].imageUrl} alt='img' />
                             </NavLink>
-                                <div className='product-info'>
-                                    <span>{product.origin}</span>
-                                    <span>{product.name}</span>
+                            <div className='product-info'>
+                                <span id='product-origin'>{product.origin}</span>
+                                <NavLink to={`/products/${product.id}`} exact={true} className='product-card-link'>{product.name}{product.description}</NavLink>
+                                <li className='info-divider'/>
+                                <div className='inner-info'>
+                                    <span id='product-price'>$ {product.price}</span>
+                                    <span>Stars: {product.avgStarRating} ({product.numReviews})</span>
                                 </div>
-                            <button onClick={(e) => handleAddItem(e, product)}>Add to Cart</button>
+                            </div>
+                            <div className='product-page-buttons'>
+                                <div className='counter-container'>
+                                    <button id='minus' className='product-minus-one'> &mdash; </button>
+                                    <span> 1 </span>
+                                    <button id='plus' className='product-plus-one'> + </button>
+                                </div>
+                                <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add</button>
+                            </div>
                         </div>
                     )}
                 </div>
