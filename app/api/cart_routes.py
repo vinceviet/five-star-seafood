@@ -39,6 +39,7 @@ def add_to_cart(id):
             name=product.name,
             price=product.price,
             description=product.description,
+            item_url = product.product_images[0].image_url,
             total_item_price=product.price,
             cart_id=current_cart.id
         )

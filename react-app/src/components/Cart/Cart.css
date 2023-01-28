@@ -10,7 +10,7 @@
     height: 100vh;
 }
 
-.empty-cart-nav-link{
+.empty-cart-nav-link {
     text-decoration: none;
     background-color: rgb(55, 111, 132);
     color: white;
@@ -18,7 +18,7 @@
     padding: 15px 25px 15px 25px;
 }
 
-.cart-container{
+.cart-container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -31,11 +31,11 @@
     letter-spacing: 3px;
 }
 
-#cart-header{
+#cart-header {
     font-weight: 100;
 }
 
-.cart-info{
+.cart-info {
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid rgb(230, 223, 223);
@@ -43,22 +43,90 @@
     width: 100%;
     color: rgb(150, 143, 143);
     font-size: 12px;
-    padding-top: 70px;
+    padding: 70px 0 15px 0;
     justify-content: space-between;
 }
 
-.quantity-total{
+.quantity-total {
     display: flex;
     gap: 250px;
 }
 
-.cart-cards{
+.cart-cards {
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
     width: 100%;
     color: rgb(150, 143, 143);
     font-size: 12px;
-    padding-top: 70px;
+    padding-top: 20px;
     justify-content: space-between;
+}
+
+.img-info {
+    display: flex;
+}
+
+.item-info {
+    font-size: 14px;
+    color: black;
+}
+
+.cart-img {
+    max-width: 120px;
+    width: 100%;
+    border-radius: 11px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0 0 20px;
+    gap: 20px;
+}
+
+.item-quantity-total {
+    display: flex;
+    gap: 230px;
+}
+
+.incart-quanity {
+    display: flex;
+}
+
+.minus-plus {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 100;
+    border: 1px solid rgb(230, 223, 223);
+    color: rgb(150, 143, 143);
+    width: 100px;
+    padding: 5px;
+}
+
+.minus-plus>button {
+    background-color: white;
+    border: none;
+    font-size: 18px;
+    color: rgb(150, 143, 143);
+}
+
+.remove-button{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: white;
+    border: none;
+    color:rgb(150, 143, 143);
+    border-bottom: 1px solid rgb(150, 143, 143);
+    padding: 10px 0 2px 0 ;
+}
+
+.total-price{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

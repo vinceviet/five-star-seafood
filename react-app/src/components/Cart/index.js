@@ -52,15 +52,22 @@ export default function Cart() {
             {cartItems.map((item) =>
                 <div className='cart-cards'>
                     <div className='img-info'>
-                        <span>{item.name}</span>
-                        <span>{item.description}</span>
+                        <img className='cart-img' src={item.itemUrl} alt='itemurl' />
+                        <div className='info'>
+                            <span className='item-info'>{item.name} {item.description}</span>
+                            <span>${item.price}</span>
+                        </div>
                     </div>
                     <div className='item-quantity-total'>
-                        <button onClick={(e) => handleMinusItem(e, item)}>minus 1</button>
-                        <span>{item.productQuantity}</span>
-                        <button onClick={(e) => handleAddItem(e, item)}>plus 1</button>
-                        <button onClick={(e) => handleRemoveItem(e, item)}>Remove</button>
-                        <span>${Number(item.totalItemPrice).toFixed(2)}</span>
+                        <div className='incart-quantity'>
+                            <div className='minus-plus'>
+                                <button onClick={(e) => handleMinusItem(e, item)}>&mdash;</button>
+                                <span>{item.productQuantity}</span>
+                                <button onClick={(e) => handleAddItem(e, item)}>+</button>
+                            </div>
+                            <button className='remove-button' onClick={(e) => handleRemoveItem(e, item)}>Remove</button>
+                        </div>
+                        <span className='total-price'>${Number(item.totalItemPrice).toFixed(2)}</span>
                     </div>
                 </div>
             )}

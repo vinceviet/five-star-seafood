@@ -251,6 +251,7 @@ class CartItem(db.Model):
     price = db.Column(db.Float, nullable=False)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
+    item_url = db.Column(db.Text, nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('products.id')))
     cart_id = db.Column(db.Integer, db.ForeignKey(
@@ -267,6 +268,7 @@ class CartItem(db.Model):
             'price': self.price,
             'name': self.name,
             'description': self.description,
+            'itemUrl': self.item_url,
             'productId': self.product_id,
             'cartId': self.cart_id,
         }
