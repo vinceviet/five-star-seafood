@@ -4,7 +4,7 @@ from app.models import db, Review, Product
 from ..forms import ReviewForm
 from datetime import datetime
 from sqlalchemy import and_
-from .auth_routes import validation_errors_to_error_messages
+# from .auth_routes import validation_errors_to_error_messages
 
 
 reviews_routes = Blueprint('reviews', __name__)

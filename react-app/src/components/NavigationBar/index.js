@@ -1,16 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import LogoutButton from '../auth/LogoutButton';
 import './NavigationBar.css';
 import search from '../../assets/search.png';
 import cart from '../../assets/cart.png';
-import user from '../../assets/user.png';
+import userIcon from '../../assets/user.png';
 
 const NavBar = () => {
+  const user = useSelector((state) => state.session.user);
+
   return (
     <nav className='nav-bar-container'>
       <div className='search-icon-container'>
-        <img className='search-icon' src={search} alt='searchIcon'/>
+        <img className='search-icon' src={search} alt='searchIcon' />
       </div>
       <div className='product-list'>
         <div>
@@ -60,11 +63,19 @@ const NavBar = () => {
             <img className='cart-icon' src={cart} alt='cartIcon' />
           </NavLink>
         </div>
-        <img className='user-icon' src={user} alt='userIcon' />
+        <img className='user-icon' src={userIcon} alt='userIcon' />
         <div>
-          <NavLink to='/login' exact={true} activeClassName='active' className='nav-link'>
-            Login
-          </NavLink>
+          {!user && (
+            <NavLink to='/login' exact={true} activeClassName='active' className='nav-link'>
+              Login
+            </NavLink>
+          )}
+          {user &&(
+                <NavLink to='/profile' exact={true} activeClassName='active' className='nav-link'>
+                {user.firstName}
+              </NavLink>
+          )}
+
         </div>
         <LogoutButton />
       </div>
