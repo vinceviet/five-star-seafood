@@ -323,5 +323,6 @@ class Wishlist(db.Model):
         return {
             'id': self.id,
             'userId': self.user_id,
-            'productId': self.product_id
+            'productId': self.product_id,
+            'product': self.product
         }

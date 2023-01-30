@@ -59,7 +59,7 @@ export default function ProdcutDetails() {
         <div className='details-container'>
             <div className='details-info-container'>
                 <div className='details-img'>
-                    <img className='details-img' src={product.productImages[0].imageUrl} />
+                    <img className='details-img' src={product.productImages[0].imageUrl} alt='product-img' />
                 </div>
                 <div className='details-info'>
                     <span>{product.origin}</span>

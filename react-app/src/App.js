@@ -10,6 +10,7 @@ import { authenticate } from './store/session';
 import Products from './components/Products';
 import Cart from './components/Cart';
 import ProductDetails from './components/ProductDetails';
+import SplashPage from './components/SplashPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -49,7 +50,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <SplashPage />
         </Route>
       </Switch>
     </>
