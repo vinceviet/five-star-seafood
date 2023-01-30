@@ -226,7 +226,7 @@ class Cart(db.Model):
     # product = db.relationship(
     #     'Product', secondary='cart_products', back_populates='cart')
     cart_item = db.relationship(
-        'CartItem', back_populates='cart')
+        'CartItem', back_populates='cart', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {
@@ -253,9 +253,9 @@ class CartItem(db.Model):
     description = db.Column(db.String(255), nullable=False)
     item_url = db.Column(db.Text, nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('products.id')))
+        add_prefix_for_prod('products.id')), nullable=False)
     cart_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('carts.id')))
+        add_prefix_for_prod('carts.id')), nullable=False)
 
     cart = db.relationship('Cart', back_populates='cart_item')
     products = db.relationship('Product', back_populates='cart_item')

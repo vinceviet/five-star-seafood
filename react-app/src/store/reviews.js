@@ -78,7 +78,6 @@ export default function reviews(state = initialState, action) {
             });
             return newState;
         case ADD_REVIEW:
-            console.log('accccctioooon', action)
             newState[action.review.id] = action.review;
             return newState;
         case DELETE_REVIEW:

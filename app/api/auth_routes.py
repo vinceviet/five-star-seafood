@@ -40,10 +40,11 @@ def login():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
+        current_cart = Cart.query.filter(Cart.user_id == None).first()
+        if current_cart:
+            current_cart.user_id = user.id
+            db.session.commit()
         login_user(user)
-        # new_cart = Cart(user_id=user.id)
-        # db.session.add(new_cart)
-        # db.session.commit()
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

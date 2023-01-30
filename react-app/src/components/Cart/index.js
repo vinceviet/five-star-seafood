@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from 'react-router-dom'
-import { loadCartItems, addOneToCart, minusOneToCart, removeFromCart } from "../../store/cart";
+import { NavLink, useHistory } from 'react-router-dom'
+import { loadCartItems, addOneToCart, minusOneToCart, removeFromCart , checkoutCart} from "../../store/cart";
 import './Cart.css';
 
 export default function Cart() {
     const dispatch = useDispatch();
+    const history = useHistory();
     // const [loaded, setLoaded] = useState(false);
     const cartItems = Object.values(useSelector((state) => state.cart));
+    let cartId
+    cartItems.forEach(item =>
+        cartId = item.cartId)
 
     useEffect(() => {
         dispatch(loadCartItems())
@@ -29,6 +33,12 @@ export default function Cart() {
         e.preventDefault();
         dispatch(removeFromCart(item)).then(() => dispatch(loadCartItems()))
     }
+
+    const handleCheckout = async (e) => {
+        e.preventDefault();
+        dispatch(checkoutCart(cartId)).then(() => dispatch(loadCartItems()))
+        history.push('/');
+    };
 
     if (!cartItems.length) {
         return (
@@ -72,7 +82,7 @@ export default function Cart() {
                 </div>
             )}
             <div>Total Price: ${Number(cartItems.reduce((total, item) => total + item.totalItemPrice, 0)).toFixed(2)}</div>
-            <button>Checkout</button>
+            <button onClick={handleCheckout}>Checkout</button>
         </div>
     )
 }

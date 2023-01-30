@@ -2,6 +2,7 @@ const LOAD_CART = 'cart/LOAD_CART';
 const ADD_ITEM = 'cart/ADD_ITEM';
 const MINUS_ONE = 'cart/MINUS_ONE';
 const REMOVE_ITEM = 'cart/REMOVE_ITEM';
+const CHECKOUT = 'cart/CHECKOUT'
 
 const loadCart = (cartItems) => ({
     type: LOAD_CART, cartItems
@@ -17,6 +18,10 @@ const minusOne = (product) => ({
 
 const removeItem = (product) => ({
     type: REMOVE_ITEM, product
+});
+
+const checkout = (cart) => ({
+    type: CHECKOUT, cart
 });
 
 export const loadCartItems = () => async (dispatch) => {
@@ -82,6 +87,20 @@ export const removeFromCart = (product) => async (dispatch) => {
     };
 };
 
+export const checkoutCart = (cart) => async (dispatch) => {
+    console.log('------------_CART', cart)
+    const res = await fetch(`/api/cart/checkout/${cart}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    });
+    if (res.ok) {
+        const data = await res.json();
+        console.log('--------DATA', data)
+        dispatch(checkout(data));
+        return null;
+    };
+};
+
 
 const initialState = {}
 
@@ -89,26 +108,26 @@ export default function cart(state = initialState, action) {
     let newState = {...state}
     switch (action.type) {
         case LOAD_CART:
-            newState = {...state};
             const cartList = [...action.cartItems.cartItems];
             cartList.forEach(item => {
                 newState[item.id] = item
             })
             return newState
         case ADD_ITEM:
-            newState = {...state};
             newState[action.product.id] = action.product
             return newState
         case MINUS_ONE:
-            newState = {...state};
             newState[action.product.id] = action.product
             if(!action.product.productQuantity){
                 delete newState[action.product.id]
             }
             return newState
         case REMOVE_ITEM:
-            newState = {...state};
             delete newState[action.product.id]
+            return newState
+        case CHECKOUT:
+            newState = {}   
+            delete newState[action.cart.id]
             return newState
         default:
             return state;

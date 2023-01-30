@@ -23,9 +23,9 @@ def add_to_cart(id):
             db.session.add(current_cart)
             db.session.commit()
     else:
-        current_cart = Cart.query.filter(Cart.user_id == 0).first()
+        current_cart = Cart.query.filter(Cart.user_id == None).first()
         if not current_cart:
-            current_cart = Cart(user_id=0)
+            current_cart = Cart(user_id=None)
             db.session.add(current_cart)
             db.session.commit()
 
@@ -83,8 +83,19 @@ def minus_one_in_cart(id):
 def remove_from_cart(id):
     cartItem = CartItem.query.get(id)
     removed_price = cartItem.total_item_price * cartItem.product_quantity
+    cartList = CartItem.query.filter(CartItem.cart_id == cartItem.cart_id).all()
     db.session.delete(cartItem)
     cart = Cart.query.get(cartItem.cart_id)
     cart.total_price -= removed_price
+    if len(cartList) == 0:
+        db.session.delete(cart)
     db.session.commit()
     return cartItem.to_dict()
+
+@cart_routes.route('/checkout/<int:id>', methods=['DELETE'])
+def checkout_cart(id):
+    print('API----------', id)
+    cart = Cart.query.get(id)
+    db.session.delete(cart)
+    db.session.commit()
+    return cart.to_dict()

@@ -18,6 +18,14 @@ const LoginForm = () => {
     }
   };
 
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'pass'));
+    if (data) {
+      setErrors(data);
+    }
+  };
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -58,8 +66,10 @@ const LoginForm = () => {
         />
         <button type='submit'>Login</button>
       </div>
+      <button onClick={demoLogin}>Demo Login</button>
     </form>
   );
 };
 
 export default LoginForm;
+  
