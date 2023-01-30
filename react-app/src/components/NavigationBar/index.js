@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import LogoutButton from '../auth/LogoutButton';
 import './NavigationBar.css';
 import search from '../../assets/search.png';
 import cart from '../../assets/cart.png';
@@ -77,7 +76,6 @@ const NavBar = () => {
           )}
 
         </div>
-        <LogoutButton />
       </div>
     </nav>
   );

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../Context/Modal";
 import { createReview } from "../../store/reviews";
 import { getProductDetails } from "../../store/products";
+import '../Context/ModalForms.css';
 
 export default function CreateReviewModal({ productId }) {
     const dispatch = useDispatch();
