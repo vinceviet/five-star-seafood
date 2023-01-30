@@ -94,7 +94,6 @@ def remove_from_cart(id):
 
 @cart_routes.route('/checkout/<int:id>', methods=['DELETE'])
 def checkout_cart(id):
-    print('API----------', id)
     cart = Cart.query.get(id)
     db.session.delete(cart)
     db.session.commit()

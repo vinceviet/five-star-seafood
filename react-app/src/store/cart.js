@@ -88,14 +88,12 @@ export const removeFromCart = (product) => async (dispatch) => {
 };
 
 export const checkoutCart = (cart) => async (dispatch) => {
-    console.log('------------_CART', cart)
     const res = await fetch(`/api/cart/checkout/${cart}`, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}
     });
     if (res.ok) {
         const data = await res.json();
-        console.log('--------DATA', data)
         dispatch(checkout(data));
         return null;
     };
@@ -126,7 +124,7 @@ export default function cart(state = initialState, action) {
             delete newState[action.product.id]
             return newState
         case CHECKOUT:
-            newState = {}   
+            newState = {}
             delete newState[action.cart.id]
             return newState
         default:
