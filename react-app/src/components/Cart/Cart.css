@@ -95,23 +95,38 @@
     gap: 230px;
 }
 
-/* .incart-quanity {
-    display: flex;
-    position: absolute;
-} */
+.incart-quanity {
+    position: relative;
+}
 
 .minus-plus {
     display: flex;
     justify-content: center;
     justify-content: space-between;
     align-items: center;
-    font-size: 25px;
+    position: relative;
+    font-size: 20px;
     font-weight: 100;
     border: 1px solid rgb(230, 223, 223);
     color: rgb(150, 143, 143);
     width: 100px;
-    padding: 5px;
+    height: 40px;
+    padding: 8px;
 }
+
+/* .minus-click{
+    position: absolute;
+}
+.plus-click{
+    position: absolute;
+    right: 10px;
+}
+.quantity-counter{
+    position: absolute;
+    left: 36px;
+    min-width: 20px;
+    text-align: center;
+} */
 
 .minus-plus>button {
     background-color: white;
@@ -127,8 +142,10 @@
     background-color: white;
     border: none;
     color:rgb(150, 143, 143);
-    border-bottom: 1px solid rgb(150, 143, 143);
+    text-decoration: underline;
     padding: 10px 0 2px 0 ;
+    letter-spacing: 2px;
+    font-size: 12px;
 }
 
 .total-checkout{

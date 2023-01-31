@@ -33,12 +33,6 @@ export default function Cart() {
         dispatch(removeFromCart(item)).then(() => dispatch(loadCartItems()))
     }
 
-    // const handleCheckout = async (e) => {
-    //     e.preventDefault();
-    //     dispatch(checkoutCart(cartId)).then(() => dispatch(loadCartItems()))
-    //     history.push('/profile');
-    // };
-
     if (!cartItems.length) {
         return (
             <div className='empty-cart'>
@@ -74,11 +68,11 @@ export default function Cart() {
                     <div className='item-quantity-total'>
                         <div className='incart-quantity'>
                             <div className='minus-plus'>
-                                <button onClick={(e) => handleMinusItem(e, item)}>&ndash;</button>
-                                <span>{item.productQuantity}</span>
-                                <button onClick={(e) => handleAddItem(e, item)}>+</button>
+                                <button className='minus-click' onClick={(e) => handleMinusItem(e, item)}>&ndash;</button>
+                                <span className='quantity-counter'>{item.productQuantity}</span>
+                                <button className='plus-click' onClick={(e) => handleAddItem(e, item)}>+</button>
                             </div>
-                            <button className='remove-button' onClick={(e) => handleRemoveItem(e, item)}>Remove</button>
+                            <button className='remove-button' onClick={(e) => handleRemoveItem(e, item)}>REMOVE</button>
                         </div>
                         <span className='total-price'>${Number(item.totalItemPrice).toFixed(2)}</span>
                     </div>

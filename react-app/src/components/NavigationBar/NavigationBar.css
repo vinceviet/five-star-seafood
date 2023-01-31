@@ -63,6 +63,8 @@
 
 .num-in-cart{
     position: absolute;
-    left: 13px;
-    font-size: 10px;
+    left: 7px;
+    font-size: 12px;
+    min-width:20px;
+    text-align: center;
 }
