@@ -149,6 +149,7 @@
     background-color: rgb(79, 141, 163);
     border: 1px black solid;
     height: 40px;
+    width: 100%;
     font-size: 15px;
     font-weight: 100;
     letter-spacing: 2px;

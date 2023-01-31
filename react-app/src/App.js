@@ -11,6 +11,7 @@ import Cart from './components/Cart';
 import ProductDetails from './components/ProductDetails';
 import SplashPage from './components/SplashPage';
 import Profile from './components/Profile';
+import CheckoutPage from './components/CheckoutPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,6 +40,9 @@ function App() {
         </Route>
         <Route path='/cart' exact={true}>
           <Cart />
+        </Route>
+        <Route path='/checkout' exact={true}>
+          <CheckoutPage />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />

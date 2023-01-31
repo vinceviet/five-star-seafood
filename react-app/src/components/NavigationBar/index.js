@@ -62,17 +62,26 @@ const NavBar = () => {
             <img className='cart-icon' src={cart} alt='cartIcon' />
           </NavLink>
         </div>
-        <img className='user-icon' src={userIcon} alt='userIcon' />
+        {!user && (
+          <NavLink to='/login' exact={true} activeClassName='active' className='nav-link'>
+            <img className='user-icon' src={userIcon} alt='userIcon' />
+          </NavLink>
+        )}
+        {user && (
+          <NavLink to='/profile' exact={true} activeClassName='active' className='nav-link'>
+            <img className='user-icon' src={userIcon} alt='userIcon' />
+          </NavLink>
+        )}
         <div>
           {!user && (
             <NavLink to='/login' exact={true} activeClassName='active' className='nav-link'>
               Login
             </NavLink>
           )}
-          {user &&(
-                <NavLink to='/profile' exact={true} activeClassName='active' className='nav-link'>
-                {user.firstName}
-              </NavLink>
+          {user && (
+            <NavLink to='/profile' exact={true} activeClassName='active' className='nav-link'>
+              {user.firstName}
+            </NavLink>
           )}
 
         </div>
