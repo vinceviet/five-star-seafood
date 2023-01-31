@@ -80,7 +80,7 @@ export default function Products() {
                             <div className='product-page-buttons'>
                                 <div className='counter-container'>
                                     <button id='minus' className='product-minus-one'> &mdash; </button>
-                                    <span> 1 </span>
+                                    <span>1</span>
                                     <button id='plus' className='product-plus-one'> + </button>
                                 </div>
                                 <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add</button>

@@ -48,12 +48,12 @@ def seed_products():
     fogline = Product(name='Fogline Farm Whole Chicken', description='- ea', origin="Fogline Farm", price=34, category_id=poultry.id)
     quail = Product(name='Wolfe Ranch Whole Quail', description='- 2ea', origin="Wolfe Ranch", price=36.99, category_id=poultry.id)
     squab = Product(name='Squab', description='- ea', origin="Squab producers", price=36.99, category_id=poultry.id)
-    duck = Product(name='Duck Confit', description='Corvus Ranch Breast and Leg', origin="Five star kitchen", price=29.50, category_id=poultry.id)
+    turkey = Product(name='Joyce Farms Naked White Turkey', description='- ea', origin="Joyce Farms", price=158, category_id=poultry.id)
     hen = Product(name='Corvus Guinea Hen', description='- ea', origin="Corvus Farms", price=64.99, category_id=poultry.id)
 
 
     finfish_products = [big_glory, sea_bass, halibut, kampachi, turbot, stripe_bass]
-    poultry_products = [root, fogline, quail, squab, duck, hen]
+    poultry_products = [root, fogline, quail, squab, turkey, hen]
 
     [db.session.add(product) for product in finfish_products]
     [db.session.add(product) for product in poultry_products]
@@ -71,11 +71,11 @@ def seed_products():
     fogline_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FoglineChicken_1_400x.jpg?v=1621969706', product_id=fogline.id)
     quail_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/e85fef_a46c0d72bcd941ada03dbc7fac312fbe_mv2_400x.jpg?v=1595405914', product_id=quail.id)
     squab_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/SQUAB_654268de-0352-4905-b46f-0e8704295849_400x.jpg?v=1653088477', product_id=squab.id)
-    duck_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/IMG_3551_400x.jpg?v=1643742983', product_id=duck.id)
+    turkey_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/shutterstock_1396161521_400x.jpg?v=1668283423', product_id=turkey.id)
     hen_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/guinea_400x.jpg?v=1671818749', product_id=hen.id)
 
     finfish_images = [big_glory_img, sea_bass_img, halibut_img, kampachi_img, turbot_img, stripe_bass_img]
-    poultry_images = [root_img, fogline_img, quail_img, squab_img, duck_img, hen_img]
+    poultry_images = [root_img, fogline_img, quail_img, squab_img, turkey_img, hen_img]
 
     [db.session.add(image) for image in finfish_images]
     [db.session.add(img) for img in poultry_images]

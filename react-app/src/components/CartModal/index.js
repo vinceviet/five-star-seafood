@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from 'react-router-dom'
 import { loadCartItems, addOneToCart, minusOneToCart, removeFromCart, checkoutCart } from "../../store/cart";
-import './Cart.css';
+import { useModal } from '../Context/Modal';
+import './CartModal.css';
 
-export default function Cart() {
+export default function CartModal() {
     const dispatch = useDispatch();
-    const history = useHistory();
-    // const [loaded, setLoaded] = useState(false);
+    // const history = useHistory();
+    const { closeModal } = useModal();
     const cartItems = Object.values(useSelector((state) => state.cart));
     let cartId
     cartItems.forEach(item =>
@@ -37,17 +38,8 @@ export default function Cart() {
     const handleCheckout = async (e) => {
         e.preventDefault();
         dispatch(checkoutCart(cartId)).then(() => dispatch(loadCartItems()))
-        history.push('/');
+        // history.push('/');
     };
-
-    if (!cartItems.length) {
-        return (
-            <div className='empty-cart'>
-                <div>YOUR CART IS EMPTY</div>
-                <NavLink to='/' exact={true} className='empty-cart-nav-link'>SHOP OUR PRODUCTS</NavLink>
-            </div>
-        )
-    }
 
     return (
         <div className='cart-container'>

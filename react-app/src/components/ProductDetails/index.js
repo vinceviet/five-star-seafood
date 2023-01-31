@@ -8,6 +8,7 @@ import Reviews from '../Reviews';
 import CreateReviewModal from '../CreateReviewModal';
 import EditReviewModal from '../EditReviewModal';
 import DeleteReviewModal from '../DeleteReviewModal';
+import CartModal from '../CartModal';
 import './ProductDetails.css';
 
 export default function ProdcutDetails() {
@@ -19,10 +20,10 @@ export default function ProdcutDetails() {
     const reviews = useSelector((state => state.reviews))
     const sessionUser = useSelector(state => state.session.user);
 
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
-    };
+    // const openMenu = () => {
+    //     if (showMenu) return;
+    //     setShowMenu(true);
+    // };
 
     useEffect(() => {
         if (!showMenu) return;
@@ -53,7 +54,7 @@ export default function ProdcutDetails() {
     const handleAddItem = async (e, product) => {
         e.preventDefault();
         await dispatch(addItemToCart(product))
-    }
+    };
 
     return (
         <div className='details-container'>
