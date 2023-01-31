@@ -6,6 +6,12 @@ import { addItemToCart } from '../../store/cart';
 import './Products.css';
 import seafood from '../../assets/seafood.png';
 import meat from '../../assets/meat.png';
+import produce from '../../assets/produce.png';
+import dairy from '../../assets/dairy.png';
+import meals from '../../assets/meal.png';
+import bakery from '../../assets/bakery.png';
+import pantry from '../../assets/pantry.png';
+
 
 export default function Products() {
     const dispatch = useDispatch();
@@ -44,14 +50,42 @@ export default function Products() {
                     <div className='product-banner'>
                         <img className='banner-img' src={seafood} alt='seafood' />
                         <h1 className='category-banner'>FRESH SEAFOOD</h1>
-                        {/* <h3 className='category-info'>Our high-quality seafood is always cut on the morning of your order, and carefully wrapped individually. It arrives directly to your door, incredibly fresh and ready to cook, refrigerate, or freeze needed. Click the product photo to learn more.</h3> */}
                     </div>
                 )}
                 {category === 'meat' && (
                     <div className='product-banner'>
                         <img className='banner-img' src={meat} alt='meat' />
                         <h1 className='category-banner'>MEAT</h1>
-                        {/* <h3 className='category-info'>Our high-quality seafood is always cut on the morning of your order, and carefully wrapped individually. It arrives directly to your door, incredibly fresh and ready to cook, refrigerate, or freeze needed. Click the product photo to learn more.</h3> */}
+                    </div>
+                )}
+                {category === 'produce' && (
+                    <div className='product-banner'>
+                        <img className='banner-img' src={produce} alt='produce' />
+                        <h1 className='category-banner'>PRODUCE</h1>
+                    </div>
+                )}
+                {category === 'dairy' && (
+                    <div className='product-banner'>
+                        <img className='banner-img' src={dairy} alt='dairy' />
+                        <h1 className='category-banner'>DAIRY</h1>
+                    </div>
+                )}
+                {category === 'meals' && (
+                    <div className='product-banner'>
+                        <img className='banner-img' src={meals} alt='meals' />
+                        <h1 className='category-banner'>MEALS & KITS</h1>
+                    </div>
+                )}
+                {category === 'bakery' && (
+                    <div className='product-banner'>
+                        <img className='banner-img' src={bakery} alt='bakery' />
+                        <h1 className='category-banner'>BAKERY</h1>
+                    </div>
+                )}
+                {category === 'pantry' && (
+                    <div className='product-banner'>
+                        <img className='banner-img' src={pantry} alt='pantry' />
+                        <h1 className='category-banner'>PANTRY</h1>
                     </div>
                 )}
             </div>
