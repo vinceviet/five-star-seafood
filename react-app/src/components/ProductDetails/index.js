@@ -56,6 +56,13 @@ export default function ProdcutDetails() {
         await dispatch(addItemToCart(product))
     };
 
+    const handleCartModal = async () =>{
+        <OpenModalMenuItem
+        onItemClick={closeMenu}
+        modalComponent={<CartModal />}
+    />
+    }
+
     return (
         <div className='details-container'>
             <div className='details-info-container'>
@@ -67,9 +74,7 @@ export default function ProdcutDetails() {
                     <h3 className='details-name'>{product.name} {product.description}</h3>
                     <span>avgRating: {product.avgStarRating} ({product.numReviews})</span>
                     <span className='details-price'>${product.price}</span>
-                    <div className='details-button-container'>
-                        <button className='details-add-to-cart' onClick={(e) => handleAddItem(e, product)}>ADD TO CART</button>
-                    </div>
+                    <button className='details-add-to-cart' onClick={(e) => handleAddItem(e, product).then(() => handleCartModal())}>ADD TO CART</button>
                 </div>
             </div>
             <div>
