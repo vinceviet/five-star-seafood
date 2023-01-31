@@ -106,6 +106,7 @@ export default function cart(state = initialState, action) {
     let newState = {...state}
     switch (action.type) {
         case LOAD_CART:
+            newState = {}
             const cartList = [...action.cartItems.cartItems];
             cartList.forEach(item => {
                 newState[item.id] = item

@@ -8,6 +8,12 @@ import userIcon from '../../assets/user.png';
 
 const NavBar = () => {
   const user = useSelector((state) => state.session.user);
+  const cartItems = Object.values(useSelector((state) => state.cart));
+
+  let totalItems = 0
+  cartItems.forEach(item => {
+    totalItems += Number(item.productQuantity)
+  })
 
   return (
     <nav className='nav-bar-container'>
@@ -57,7 +63,8 @@ const NavBar = () => {
         </div>
       </div>
       <div className='cart-user'>
-        <div>
+        <div className='nav-cart'>
+          {cartItems.length && <span className='num-in-cart'>{totalItems}</span>}
           <NavLink to='/cart' exact={true} activeClassName='active' className='nav-link'>
             <img className='cart-icon' src={cart} alt='cartIcon' />
           </NavLink>

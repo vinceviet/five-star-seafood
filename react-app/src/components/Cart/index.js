@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom'
-import { loadCartItems, addOneToCart, minusOneToCart, removeFromCart, checkoutCart } from "../../store/cart";
+import { loadCartItems, addOneToCart, minusOneToCart, removeFromCart } from "../../store/cart";
 import './Cart.css';
 
 export default function Cart() {

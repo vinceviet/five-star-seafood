@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import { loadCartItems, checkoutCart } from "../../store/cart";
 import './CheckoutPage.css';
 
@@ -8,6 +8,8 @@ export default function CheckoutPage() {
     const history = useHistory();
     const dispatch = useDispatch();
     const cartItems = Object.values(useSelector((state) => state.cart));
+    const user = useSelector(state => state.session.user);
+
     let cartId
     cartItems.forEach(item =>
         cartId = item.cartId)
@@ -29,7 +31,23 @@ export default function CheckoutPage() {
     return (
         <div className='checkout-container'>
             <div className='checkout-address-container'>
-                <div className='checkout-address-header'>Five Star Seafood and Provisions</div>
+                <span className='checkout-address-header'>Five Star Seafood and Provisions</span>
+                <li className="checkout-address-divider" />
+                <div className='contact-info-container'>
+                    <span>Contact Information</span>
+                    {user && (
+                        <span>{user.firstName} {user.lastName} ({user.email})</span>
+                    )}
+                    {!user && (
+                        <NavLink to='/login' exact={true} className='nav-link'>
+                            <button className='form-button' type='submit'>Login/sign up to Checkout</button>
+                        </NavLink>
+                    )}
+                </div>
+                <div className='shipping-container'>
+                    <span>Shipping Address</span>
+                </div>
+                <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>
             </div>
             <div className='checkout-cart-container'>
                 {cartItems.map((item) =>
