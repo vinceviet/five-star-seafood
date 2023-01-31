@@ -26,11 +26,26 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    position: relative;
+}
+
+.checkout-quantity{
+    position: absolute;
+    bottom: 55px;
+    left: 90px;
+    background-color: rgb(150, 146, 146);
+    color: white;
+    padding: 2px;
+    width: 20px;
+    height: 20xpx;
+    text-align: center;
+    border-radius: 50%;
+
 }
 
 .cart-page-img {
     width: 100px;
-    border-radius: 11px;
+    border-radius: 15px;
 }
 
 .checkout-total-price {
@@ -48,8 +63,8 @@
 
 .subtotal-container{
     display: flex;
-    flex-direction: column;
 }
+
 .subtotal {
     display: flex;
     flex-direction: column;
@@ -60,4 +75,25 @@
     font-size: 15px;
     margin-left: auto;
     padding-right: 150px;
+}
+
+.total-price-container{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.usd-total{
+    display: flex;
+    align-items: flex-end;
+    font-size: 25px;
+    margin-left: auto;
+    padding-right: 150px;
+    gap: 10px;
+}
+
+#usd{
+
+    font-size: 14px;
+    color: rgb(180, 174, 174);
 }

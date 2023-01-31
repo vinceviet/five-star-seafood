@@ -35,6 +35,7 @@ export default function CheckoutPage() {
                 {cartItems.map((item) =>
                     <div className='checkout-cart-items'>
                         <img className='cart-page-img' src={item.itemUrl} alt='itemurl' />
+                        <span className='checkout-quantity'>{item.productQuantity}</span>
                         <span className='item-info'>{item.name} {item.description}</span>
                         <div className='checkout-total-price'>
                             <span>${Number(item.totalItemPrice).toFixed(2)}</span>
@@ -43,24 +44,26 @@ export default function CheckoutPage() {
                 )}
                 <li className="checkout-divider" />
                 <div className='subtotal-container'>
-                    <div className='subtotal'>
-                        <div>
-                            <span>Subtotal Price</span>
-                        </div>
-                        <div className='sub-shipping'>
-                            <span>${Number(cartItems.reduce((total, item) => total + item.totalItemPrice, 0)).toFixed(2)}</span>
-                        </div>
-                        <div className='subtotal'>
-                            <div>Shipping</div>
-                            <div className='sub-shipping'>
-                                <span>Free</span>
-                            </div>
-                        </div>
+                    <span>Subtotal Price</span>
+                    <div className='sub-shipping'>
+                        <span>${Number(cartItems.reduce((total, item) => total + item.totalItemPrice, 0)).toFixed(2)}</span>
+                    </div>
+                </div>
+                <div className='subtotal-container'>
+                    <div>Shipping</div>
+                    <div className='sub-shipping'>
+                        <span>Free</span>
                     </div>
                 </div>
                 <li className="checkout-divider" />
-                <div>Total</div><div>USD ${Number(cartItems.reduce((total, item) => total + item.totalItemPrice, 0)).toFixed(2)}</div>
+                <div className='total-price-container'>
+                    <span>Total</span>
+                    <div className='usd-total'>
+                        <span id='usd'>USD</span>
+                        <div>${Number(cartItems.reduce((total, item) => total + item.totalItemPrice, 0)).toFixed(2)}</div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
