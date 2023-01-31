@@ -1,5 +1,4 @@
 import React from 'react';
-import splash1 from '../../assets/Splash1.png';
 import splashb1 from '../../assets/splashb-1.png';
 import splashb2 from '../../assets/splashb-2.png';
 import splashb3 from '../../assets/splashb-3.png';
@@ -8,8 +7,7 @@ import './SplashPage.css';
 
 export default function SplashPage() {
     return (
-        <div className='splash-page-container'>
-            <img className='splash-img' src={splash1} alt='splash2' />
+        <div>
             <div className='splash-header-container'>
                 <div className='top-header'>
                     <h1 className='splash-header1'>CHEF - DRIVEN</h1>
@@ -19,7 +17,7 @@ export default function SplashPage() {
                 </div>
                 <h2 className='splash-header'>FRESH LOCAL SUSTAINABLE</h2>
                 <h1 className='splash-header5'>HOME DELIVERY</h1>
-                <li className='splash-header-divider' />
+                <li className='splash-header-divider-bottom' />
             </div>
             <div className='splash-bottom'>
                 <div className='splash-bottom-row'>

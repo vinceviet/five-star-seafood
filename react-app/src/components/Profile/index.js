@@ -13,6 +13,7 @@ export default function Profile() {
                 <div className='profile-header'>
                     <span id='my-acccont'>MY ACCOUNT</span>
                     <span>Welcome back, {user.firstName}!</span>
+                    <span>Order History Coming Soon...</span>
                 </div>
             </div>
         </>
