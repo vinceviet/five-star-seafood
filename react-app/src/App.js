@@ -30,7 +30,7 @@ function App() {
   }
 
   return (
-    <>
+    <div className='main-container'>
       <NavBar />
       <Switch>
         <Route path='/products/pages/:category' exact={true}>
@@ -59,7 +59,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
-    </>
+    </div>
   );
 }
 
