@@ -65,7 +65,8 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'firstName': self.first_name,
             'lastName': self.last_name,
-            'email': self.email
+            'email': self.email,
+            'address': self.address
         }
 
 

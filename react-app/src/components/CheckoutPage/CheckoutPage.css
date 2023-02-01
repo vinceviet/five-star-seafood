@@ -120,10 +120,15 @@
     padding: 20px 0 0 100px;
 }
 
+#contact-header{
+    padding-bottom: 20px;
+}
+
 .shipping-container {
     display: flex;
     flex-direction: column;
     padding: 20px 0 0 100px;
+    align-items: flex-start;
 }
 
 .checkout-checkout-button {
@@ -131,9 +136,9 @@
     background-color: rgb(79, 141, 163);
     border: 1px black solid;
     height: 40px;
-    width: 50%;
+    width: 400px;
     font-size: 15px;
     font-weight: 100;
     letter-spacing: 2px;
-    margin: 15px 0 50px;
+
 }

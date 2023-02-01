@@ -1,10 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, NavLink } from "react-router-dom";
 import { loadCartItems, checkoutCart } from "../../store/cart";
 import './CheckoutPage.css';
 
 export default function CheckoutPage() {
+    const [errors, setErrors] = useState([]);
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    const [phone, setPhone] = useState('');
     const history = useHistory();
     const dispatch = useDispatch();
     const cartItems = Object.values(useSelector((state) => state.cart));
@@ -20,6 +27,29 @@ export default function CheckoutPage() {
 
     if (!cartItems) return null;
 
+    const updateAddress = (e) => {
+        setAddress(e.target.value);
+    };
+
+    const updateCity = (e) => {
+        setCity(e.target.value);
+    };
+
+    const updateState = (e) => {
+        setState(e.target.value);
+    };
+    const updateCountry = (e) => {
+        setCountry(e.target.value);
+    };
+
+    const updateZipCode = (e) => {
+        setZipCode(e.target.value);
+    };
+
+    const updatePhone = (e) => {
+        setPhone(e.target.value);
+    };
+
     const handleCheckout = async (e) => {
         e.preventDefault();
         dispatch(checkoutCart(cartId)).then(() => dispatch(loadCartItems()))
@@ -34,7 +64,7 @@ export default function CheckoutPage() {
                 <span className='checkout-address-header'>Five Star Seafood and Provisions</span>
                 <li className="checkout-address-divider" />
                 <div className='contact-info-container'>
-                    <span>Contact Information</span>
+                    <span id='contact-header'>Contact Information</span>
                     {user && (
                         <span>{user.firstName} {user.lastName} ({user.email})</span>
                     )}
@@ -46,8 +76,87 @@ export default function CheckoutPage() {
                 </div>
                 <div className='shipping-container'>
                     <span>Shipping Address</span>
-                </div>
+                    <form>
+                        <div>
+                            {errors.map((error, ind) => (
+                                <div key={ind}>{error}</div>
+                            ))}
+                        </div>
+                        <div className='form-input-container'>
+                            <label className='form-label'>Address</label>
+                            <input
+                                type='text'
+                                name='address'
+                                placeholder='Address'
+                                onChange={updateAddress}
+                                value={address}
+                                required={true}
+                                className='form-input-fields'
+                            ></input>
+                        </div>
+                        <div className='form-input-container'>
+                            <label className='form-label'>City</label>
+                            <input
+                                type='text'
+                                name='city'
+                                placeholder='City'
+                                onChange={updateCity}
+                                value={city}
+                                required={true}
+                                className='form-input-fields'
+                            ></input>
+                        </div>
+                        <div className='form-input-container'>
+                            <label className='form-label'>State</label>
+                            <input
+                                type='text'
+                                name='state'
+                                placeholder='State'
+                                onChange={updateState}
+                                value={state}
+                                required={true}
+                                className='form-input-fields'
+                            ></input>
+                        </div>
+                        <div className='form-input-container'>
+                            <label className='form-label'>Country</label>
+                            <input
+                                type='text'
+                                name='country'
+                                placeholder='Country'
+                                onChange={updateCountry}
+                                value={country}
+                                required={true}
+                                className='form-input-fields'
+                            ></input>
+                        </div>
+                        <div className='form-input-container'>
+                            <label className='form-label'>Zip Code</label>
+                            <input
+                                type='number'
+                                name='zipCode'
+                                placeholder='Zip Code'
+                                onChange={updateZipCode}
+                                value={zipCode}
+                                required={true}
+                                className='form-input-fields'
+                            ></input>
+                        </div>
+                        <div className='form-input-container'>
+                            <label className='form-label'>Phone Number</label>
+                            <input
+                                type='text'
+                                name='phone'
+                                placeholder='Phone Number'
+                                onChange={updatePhone}
+                                value={phone}
+                                required={true}
+                                className='form-input-fields'
+                            ></input>
+                        </div>
+                    </form>
                 <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>
+                </div>
             </div>
             <div className='checkout-cart-container'>
                 {cartItems.map((item) =>

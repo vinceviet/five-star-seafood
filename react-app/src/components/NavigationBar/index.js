@@ -5,6 +5,7 @@ import './NavigationBar.css';
 import search from '../../assets/search.png';
 import cart from '../../assets/cart.png';
 import userIcon from '../../assets/user.png';
+import fish from '../../assets/fish.png';
 
 const NavBar = () => {
   const user = useSelector((state) => state.session.user);
@@ -23,7 +24,7 @@ const NavBar = () => {
       <div className='product-list'>
         <div>
           <NavLink to='/' exact={true} activeClassName='active' className='nav-link'>
-            Home
+            <img className='fish-icon' src={fish} alt='fish' />
           </NavLink>
         </div>
         <div>
