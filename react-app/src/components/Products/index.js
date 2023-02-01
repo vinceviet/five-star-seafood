@@ -23,20 +23,33 @@ export default function Products() {
         dispatch(getAllProducts(category));
     }, [dispatch, category])
 
-    if (!products) return null;
 
     const handleAddItem = async (e, product) => {
         e.preventDefault();
         await dispatch(addItemToCart(product))
     }
 
-    const handleIncrement = () => {
-        fetch('/api/products/increment').then(res => res.json()).then(data => setCount(data.count))
-    }
+    const handleIncrement = (product) => {
+            fetch('/api/products/increment').then(res => res.json()).then(data => setCount(data.count))
+        }
 
-    const handleDecrement = () => {
-        fetch('/api/products/decrement').then(res => res.json()).then(data => setCount(data.count))
-    }
+    const handleDecrement = (product) => {
+            fetch('/api/products/decrement').then(res => res.json()).then(data => setCount(data.count))
+        }
+
+    // useEffect(() => {
+    //         setCount(product.count)
+    // }, [product.count])
+
+    // const handleIncrement = (product) => {
+    //     setCount(count +1)
+    // }
+
+    // const handleDecrement = (product) => {
+    //     setCount(count -1)
+    // }
+
+    if (!products) return null;
 
     return (
         <>
@@ -91,6 +104,21 @@ export default function Products() {
                 {category === 'meat' && (
                     <h3 className='sub-category-header'>Poultry</h3>
                 )}
+                {category === 'produce' && (
+                    <h3 className='sub-category-header'>Fruit</h3>
+                )}
+                {category === 'dairy' && (
+                    <h3 className='sub-category-header'>Milk</h3>
+                )}
+                {category === 'meals' && (
+                    <h3 className='sub-category-header'>Boxes & Kits</h3>
+                )}
+                {category === 'bakery' && (
+                    <h3 className='sub-category-header'>Pies</h3>
+                )}
+                {category === 'pantry' && (
+                    <h3 className='sub-category-header'>Asian</h3>
+                )}
                 <div className='product-cards-container'>
                     {products.map((product) =>
                         <div className='product-card'>
@@ -108,9 +136,9 @@ export default function Products() {
                             </div>
                             <div className='product-page-buttons'>
                                 <div className='counter-container'>
-                                    <button id='minus' className='product-minus-one' onClick={handleDecrement}> &mdash; </button>
+                                    <button id='minus' className='product-minus-one' onClick={handleDecrement(product)}> &mdash; </button>
                                     <span>{count}</span>
-                                    <button id='plus' className='product-plus-one' onClick={handleIncrement}> + </button>
+                                    <button id='plus' className='product-plus-one' onClick={handleIncrement(product)}> + </button>
                                 </div>
                                 <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add</button>
                             </div>

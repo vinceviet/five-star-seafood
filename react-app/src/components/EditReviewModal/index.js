@@ -7,8 +7,8 @@ import '../Context/ModalForms.css';
 
 export default function EditReviewModal({ productId }) {
     const dispatch = useDispatch();
-    const [review, setReview] = useState("");
-    const [stars, setStars] = useState("");
+    const [review, setReview] = useState('');
+    const [stars, setStars] = useState('');
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
 

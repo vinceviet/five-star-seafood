@@ -12,6 +12,7 @@ import ProductDetails from './components/ProductDetails';
 import SplashPage from './components/SplashPage';
 import Profile from './components/Profile';
 import CheckoutPage from './components/CheckoutPage';
+import Footer from './components/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -57,6 +58,7 @@ function App() {
           <SplashPage />
         </Route>
       </Switch>
+      <Footer />
     </>
   );
 }
