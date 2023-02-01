@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../../store/products';
@@ -16,32 +16,27 @@ import pantry from '../../assets/pantry.png';
 export default function Products() {
     const dispatch = useDispatch();
     const { category } = useParams();
-    // const [loaded, setLoaded] = useState(false);
+    const [count, setCount] = useState(1);
     const products = Object.values(useSelector((state) => state.products));
 
     useEffect(() => {
         dispatch(getAllProducts(category));
     }, [dispatch, category])
 
-    // if (!products) return null;
+    if (!products) return null;
 
     const handleAddItem = async (e, product) => {
         e.preventDefault();
         await dispatch(addItemToCart(product))
     }
 
-    // if (!loaded) {
-    //     return (
-    //         <div>
-    //             {products.map((product) =>
-    //                 <div>
-    //                     <div>{product.name}</div>
-    //                     <button>Add to Cart</button>
-    //                 </div>
-    //             )}
-    //         </div>
-    //     )
-    // }
+    const handleIncrement = () => {
+        fetch('/api/products/increment').then(res => res.json()).then(data => setCount(data.count))
+    }
+
+    const handleDecrement = () => {
+        fetch('/api/products/decrement').then(res => res.json()).then(data => setCount(data.count))
+    }
 
     return (
         <>
@@ -113,9 +108,9 @@ export default function Products() {
                             </div>
                             <div className='product-page-buttons'>
                                 <div className='counter-container'>
-                                    <button id='minus' className='product-minus-one'> &mdash; </button>
-                                    <span>1</span>
-                                    <button id='plus' className='product-plus-one'> + </button>
+                                    <button id='minus' className='product-minus-one' onClick={handleDecrement}> &mdash; </button>
+                                    <span>{count}</span>
+                                    <button id='plus' className='product-plus-one' onClick={handleIncrement}> + </button>
                                 </div>
                                 <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add</button>
                             </div>
