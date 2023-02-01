@@ -10,6 +10,7 @@ import EditReviewModal from '../EditReviewModal';
 import DeleteReviewModal from '../DeleteReviewModal';
 import CartModal from '../CartModal';
 import './ProductDetails.css';
+import star from '../../assets/star.png'
 
 export default function ProdcutDetails() {
     const dispatch = useDispatch();
@@ -56,11 +57,11 @@ export default function ProdcutDetails() {
         await dispatch(addItemToCart(product))
     };
 
-    const handleCartModal = async () =>{
+    const handleCartModal = async () => {
         <OpenModalMenuItem
-        onItemClick={closeMenu}
-        modalComponent={<CartModal />}
-    />
+            onItemClick={closeMenu}
+            modalComponent={<CartModal />}
+        />
     }
 
     return (
@@ -72,7 +73,12 @@ export default function ProdcutDetails() {
                 <div className='details-info'>
                     <span>{product.origin}</span>
                     <h3 className='details-name'>{product.name} {product.description}</h3>
-                    <span>avgRating: {product.avgStarRating} ({product.numReviews})</span>
+                    <div className='details-ratings'>
+                        <span className='the-stars'>{Array(Math.floor(product.avgStarRating)).fill().map((_, i) => (
+                            <img key={i} className='details-star-img' src={star} alt='star' />
+                        ))}</span>
+                        <span>({product.numReviews})</span>
+                    </div>
                     <span className='details-price'>${product.price}</span>
                     <button className='details-add-to-cart' onClick={(e) => handleAddItem(e, product).then(() => handleCartModal())}>ADD TO CART</button>
                 </div>

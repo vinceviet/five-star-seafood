@@ -10,14 +10,29 @@
     margin: auto;
 }
 
+.review-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    padding-bottom: 20px;
+}
+
+.reviews-cards-container{
+    display: flex;
+    gap: 30px;
+}
+
 .review-card{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 8px;
+    padding: 10px;
+    word-wrap: break-word;
     border: 1px solid rgb(230, 223, 223);
-    max-width: 500px;
-    width: 100%;
+    width: 200px;
+    height: 200px;
+    overflow: scroll;
     border-radius: 11px;
 }
 
@@ -29,4 +44,12 @@
 #date{
     font-size: 12px;
     color: grey;
+}
+
+.star-img{
+    width: 15px;
+}
+
+.top-star-img{
+    width: 25px;
 }

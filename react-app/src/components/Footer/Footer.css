@@ -1,13 +1,9 @@
-
 .footer {
-    /* position: absolute;
-    bottom: 0; */
-    flex-shrink: 0;
     width: 100%;
     display: flex;
     background-color: #1a1a1a;
     justify-content: space-evenly;
-    padding-top: 10px;
+    padding: 10px 0 10px 0;
 }
 
 .github-container {
@@ -27,13 +23,8 @@
     color: white;
 }
 
-.linkedin-links {
-    text-decoration: none;
-    color: white;
-}
 
-.git-links-title,
-.linkedin-links-title {
+.git-links-title {
     color: white;
 }
 

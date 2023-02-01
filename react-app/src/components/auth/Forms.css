@@ -1,14 +1,14 @@
 .form-container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 10px;
     font-weight: 300;
     font-size: 14px;
-    height: 70vh;
+    height: 100vh;
     width: 100vw;
     margin: auto;
+    padding-top: 100px;
 }
 
 .form-header-container{
@@ -45,6 +45,7 @@
 
 input:focus {
     background-color: rgb(220, 239, 246);
+    outline: none;
 }
 
 

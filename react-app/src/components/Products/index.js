@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../../store/products';
@@ -11,12 +11,13 @@ import dairy from '../../assets/dairy.png';
 import meals from '../../assets/meal.png';
 import bakery from '../../assets/bakery.png';
 import pantry from '../../assets/pantry.png';
+import star from '../../assets/star.png'
 
 
 export default function Products() {
     const dispatch = useDispatch();
     const { category } = useParams();
-    const [count, setCount] = useState(1);
+    // const [count, setCount] = useState(1);
     const products = Object.values(useSelector((state) => state.products));
 
     useEffect(() => {
@@ -29,13 +30,13 @@ export default function Products() {
         await dispatch(addItemToCart(product))
     }
 
-    const handleIncrement = (product) => {
-            fetch('/api/products/increment').then(res => res.json()).then(data => setCount(data.count))
-        }
+    // const handleIncrement = () => {
+    //     fetch('/api/products/increment').then(res => res.json()).then(data => setCount(data.count))
+    // }
 
-    const handleDecrement = (product) => {
-            fetch('/api/products/decrement').then(res => res.json()).then(data => setCount(data.count))
-        }
+    // const handleDecrement = () => {
+    //     fetch('/api/products/decrement').then(res => res.json()).then(data => setCount(data.count))
+    // }
 
     // useEffect(() => {
     //         setCount(product.count)
@@ -131,16 +132,21 @@ export default function Products() {
                                 <li className='info-divider' />
                                 <div className='inner-info'>
                                     <span id='product-price'>$ {product.price}</span>
-                                    <span>Stars: {product.avgStarRating} ({product.numReviews})</span>
+                                    <div className='product-page-avgrating'>
+                                        <span className='the-stars'>{Array(Math.floor(product.avgStarRating)).fill().map((_, i) => (
+                                            <img key={i} className='star-img' src={star} alt='star' />
+                                        ))}</span>
+                                        <span>({product.numReviews})</span>
+                                    </div>
                                 </div>
                             </div>
                             <div className='product-page-buttons'>
-                                <div className='counter-container'>
-                                    <button id='minus' className='product-minus-one' onClick={handleDecrement(product)}> &mdash; </button>
+                                {/* <div className='counter-container'>
+                                    <button id='minus' className='product-minus-one'> &mdash; </button>
                                     <span>{count}</span>
-                                    <button id='plus' className='product-plus-one' onClick={handleIncrement(product)}> + </button>
-                                </div>
-                                <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add</button>
+                                    <button id='plus' className='product-plus-one'> + </button>
+                                </div> */}
+                                <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add to Cart</button>
                             </div>
                         </div>
                     )}

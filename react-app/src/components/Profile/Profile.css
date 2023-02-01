@@ -8,6 +8,7 @@
     margin: auto;
     letter-spacing: 3px;
     font-weight: 100;
+    min-height: 100vh;
 }
 
 .profile-header{

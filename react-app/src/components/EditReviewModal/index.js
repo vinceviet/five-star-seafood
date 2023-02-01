@@ -5,12 +5,15 @@ import { editReview } from "../../store/reviews";
 import { getProductDetails } from "../../store/products";
 import '../Context/ModalForms.css';
 
-export default function EditReviewModal({ productId }) {
+export default function EditReviewModal({ productId, reviews, user }) {
     const dispatch = useDispatch();
     const [review, setReview] = useState('');
     const [stars, setStars] = useState('');
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
+
+    const reviewList = Object.values(reviews);
+    const currentReview = reviewList.find(review => review.userId === user.id)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -45,7 +48,7 @@ export default function EditReviewModal({ productId }) {
                     <input
                         className="fields-top"
                         type="text"
-                        placeholder="Review"
+                        placeholder={currentReview.review}
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
                         required
@@ -55,7 +58,7 @@ export default function EditReviewModal({ productId }) {
                     <input
                         className="fields-bottom"
                         type="number"
-                        placeholder="Rating"
+                        placeholder={currentReview.stars}
                         min="1"
                         max="5"
                         value={stars}

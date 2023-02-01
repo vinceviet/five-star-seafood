@@ -5,13 +5,13 @@ import { loadCartItems, checkoutCart } from "../../store/cart";
 import './CheckoutPage.css';
 
 export default function CheckoutPage() {
-    const [errors, setErrors] = useState([]);
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [country, setCountry] = useState('');
-    const [zipCode, setZipCode] = useState('');
-    const [phone, setPhone] = useState('');
+    // const [errors, setErrors] = useState([]);
+    // const [address, setAddress] = useState('');
+    // const [city, setCity] = useState('');
+    // const [state, setState] = useState('');
+    // const [country, setCountry] = useState('');
+    // const [zipCode, setZipCode] = useState('');
+    // const [phone, setPhone] = useState('');
     const history = useHistory();
     const dispatch = useDispatch();
     const cartItems = Object.values(useSelector((state) => state.cart));
@@ -27,28 +27,28 @@ export default function CheckoutPage() {
 
     if (!cartItems) return null;
 
-    const updateAddress = (e) => {
-        setAddress(e.target.value);
-    };
+    // const updateAddress = (e) => {
+    //     setAddress(e.target.value);
+    // };
 
-    const updateCity = (e) => {
-        setCity(e.target.value);
-    };
+    // const updateCity = (e) => {
+    //     setCity(e.target.value);
+    // };
 
-    const updateState = (e) => {
-        setState(e.target.value);
-    };
-    const updateCountry = (e) => {
-        setCountry(e.target.value);
-    };
+    // const updateState = (e) => {
+    //     setState(e.target.value);
+    // };
+    // const updateCountry = (e) => {
+    //     setCountry(e.target.value);
+    // };
 
-    const updateZipCode = (e) => {
-        setZipCode(e.target.value);
-    };
+    // const updateZipCode = (e) => {
+    //     setZipCode(e.target.value);
+    // };
 
-    const updatePhone = (e) => {
-        setPhone(e.target.value);
-    };
+    // const updatePhone = (e) => {
+    //     setPhone(e.target.value);
+    // };
 
     const handleCheckout = async (e) => {
         e.preventDefault();
@@ -74,7 +74,7 @@ export default function CheckoutPage() {
                         </NavLink>
                     )}
                 </div>
-                <div className='shipping-container'>
+                {/* <div className='shipping-container'>
                     <span>Shipping Address</span>
                     <form>
                         <div>
@@ -155,8 +155,8 @@ export default function CheckoutPage() {
                             ></input>
                         </div>
                     </form>
+                </div> */}
                 <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>
-                </div>
             </div>
             <div className='checkout-cart-container'>
                 {cartItems.map((item) =>

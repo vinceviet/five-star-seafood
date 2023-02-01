@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     /* align-items: center; */
+    min-height: 100vh;
 }
 
 .details-info-container{
@@ -34,6 +35,16 @@
     letter-spacing: 2px;
 }
 
+.details-ratings{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.details-star-img{
+    width: 20px;
+}
+
 .details-name{
     font-size: 25px;
 }
@@ -61,7 +72,7 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 20px 0 100px 25px;
+    padding: 30px 0 100px 25px;
     max-width: 1000px;
     width: 100%;
     margin: auto;
