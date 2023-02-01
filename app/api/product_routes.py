@@ -17,20 +17,3 @@ def get_product_details(id):
     product = Product.query.get(id)
     return product.to_dict()
 
-@product_routes.route('/increment')
-def increment():
-    global count
-    count += 1
-    return jsonify(count=count)
-
-@product_routes.route('/decrement')
-def decrement():
-    global count
-    if count <= 1:
-        return  jsonify(count=count)
-    count -= 1
-    return jsonify(count=count)
-
-@product_routes.route('/get_count')
-def get_count():
-    return jsonify(count=count)
