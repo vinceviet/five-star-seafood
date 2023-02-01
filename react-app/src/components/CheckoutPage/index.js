@@ -53,6 +53,7 @@ export default function CheckoutPage() {
     const handleCheckout = async (e) => {
         e.preventDefault();
         dispatch(checkoutCart(cartId)).then(() => dispatch(loadCartItems()))
+        alert('Your order has been received!')
         history.push('/profile');
     };
 
