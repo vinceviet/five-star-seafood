@@ -34,7 +34,7 @@ def seed_products():
     categories = [finfish, oysters, shellfish, caviar, poultry, beef, lamb, pork, game, fruit, vegtables, mushrooms, seaweed, milk, butter, cheese, boxes, comal, cochon, pizza, pies, crackers, asian, coffee, grain, honey]
     [db.session.add(category) for category in categories]
 
-    # db.session.commit()
+    db.session.commit()
 
     big_glory = Product(name='Big Glory Bay King Salmon', description='(6oz) - 2 ea', origin='New Zealand', price=20.95, category_id=finfish.id)
     sea_bass = Product(name='Black Sea Bass', description='~1.5lb', origin='Massachusetts', price=26.95, category_id=finfish.id)
@@ -100,7 +100,7 @@ def seed_products():
     [db.session.add(product) for product in asian_products]
 
 
-    # db.session.commit()
+    db.session.commit()
 
     big_glory_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/Big_Glory_Bay_King_Salmon_Portions_1000x.jpg?v=1672859838', product_id=big_glory.id)
     sea_bass_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/DSC_0659_600x.jpg?v=1605091700', product_id=sea_bass.id)
