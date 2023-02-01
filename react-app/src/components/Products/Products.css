@@ -129,12 +129,12 @@
 
 .product-page-buttons {
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     border: 1px black solid;
     height: 40px;
 }
 
-/* .counter-container {
+.counter-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -147,7 +147,7 @@
     border: none;
     width: 40px;
     font-size: 15px;
-} */
+}
 
 
 #plus {
@@ -156,7 +156,7 @@
 }
 
 .add-to-cart {
-    width: 100%;
+    width: 50%;
     height: 100%;
     color: white;
     background-color: rgb(40, 96, 117);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect , useState} from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../../store/products';
@@ -17,7 +17,7 @@ import star from '../../assets/star.png'
 export default function Products() {
     const dispatch = useDispatch();
     const { category } = useParams();
-    // const [count, setCount] = useState(1);
+    const [count, setCount] = useState(1);
     const products = Object.values(useSelector((state) => state.products));
 
     useEffect(() => {
@@ -141,11 +141,11 @@ export default function Products() {
                                 </div>
                             </div>
                             <div className='product-page-buttons'>
-                                {/* <div className='counter-container'>
+                                <div className='counter-container'>
                                     <button id='minus' className='product-minus-one'> &mdash; </button>
                                     <span>{count}</span>
                                     <button id='plus' className='product-plus-one'> + </button>
-                                </div> */}
+                                </div>
                                 <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add to Cart</button>
                             </div>
                         </div>
