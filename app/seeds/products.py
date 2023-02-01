@@ -51,12 +51,30 @@ def seed_products():
     turkey = Product(name='Joyce Farms Naked White Turkey', description='- ea', origin="Joyce Farms", price=158, category_id=poultry.id)
     hen = Product(name='Corvus Guinea Hen', description='- ea', origin="Corvus Farms", price=64.99, category_id=poultry.id)
 
+    blueberries = Product(name='Blueberries', description='(Organic) - 6oz', origin="Central West", price=8.25, category_id=fruit.id)
+    kiwi = Product(name='Hayward Kiwi', description='- lb', origin="Brokaw Ranch", price=4, category_id=fruit.id)
+    orange = Product(name='Cara Cara Orange', description='(Organic) - 2lb', origin="Fruit World", price=8, category_id=fruit.id)
+    apples = Product(name='Fuji Apples', description='(Organic) - 1lb', origin="K & J Orchards", price=5.50, category_id=fruit.id)
+    lemons = Product(name='Eureka Lemons', description='(Organic) - 2lb', origin="Brokaw Ranch", price=10, category_id=fruit.id)
+    blood = Product(name='Moro Blood Oranges', description='- 2lb', origin="Brokaw Ranch", price=8.25, category_id=fruit.id)
+
+    straus = Product(name='Straus European Whole Milk Yogurt', description='(Organic) - Quart', origin="Straus Creamery", price=6.50, category_id=milk.id)
+    peach = Product(name='Peach Apricot Yogurt', description='- 5.6oz', origin="La Fermiere", price=4, category_id=milk.id)
+    bean = Product(name='Vanilla Bean Yogurt', description='- 5.6oz', origin="La Fermiere", price=4, category_id=milk.id)
+    strawberry = Product(name='Strawberry Pomegranate Yogurt', description='- 5.6oz', origin="La Fermiere", price=4, category_id=milk.id)
+    rasberry = Product(name='Raspberry Blueberry Yogurt', description='- 5.6oz', origin="La Fermiere", price=4, category_id=milk.id)
+    mango = Product(name='Mango Passionfruit Yogurt', description='- 5.6oz', origin="La Fermiere", price=4, category_id=milk.id)
 
     finfish_products = [big_glory, sea_bass, halibut, kampachi, turbot, stripe_bass]
     poultry_products = [root, fogline, quail, squab, turkey, hen]
+    fruit_products = [blueberries, kiwi, orange, apples, lemons, blood]
+    milk_products = [straus, peach, bean, strawberry, rasberry, mango]
 
     [db.session.add(product) for product in finfish_products]
     [db.session.add(product) for product in poultry_products]
+    [db.session.add(product) for product in fruit_products]
+    [db.session.add(product) for product in milk_products]
+
 
     db.session.commit()
 
@@ -74,11 +92,29 @@ def seed_products():
     turkey_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/shutterstock_1396161521_400x.jpg?v=1668283423', product_id=turkey.id)
     hen_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/guinea_400x.jpg?v=1671818749', product_id=hen.id)
 
+    blueberries_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FS_Blueberries-44_819bebe1-148e-4d30-9e3a-2493d8f4efc7_400x.jpg?v=1617982371', product_id=blueberries.id)
+    kiwi_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/HaywardKiwiw_9ef46c12-465e-475a-a435-58d0d8bcd15f_400x.jpg?v=1614387294', product_id=kiwi.id)
+    oranges_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/CaraCara_400x.jpg?v=1614356089', product_id=orange.id)
+    apples_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/fuji_400x.png?v=1632432185', product_id=apples.id)
+    lemons_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/Lemon_a6ad003c-a7b4-4f9a-a976-cb316027fa0f_400x.jpg?v=1614356235', product_id=lemons.id)
+    blood_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/e85fef_713454f5b6f34cdfbe65bec3c805e444_mv2_400x.jpg?v=1604242973', product_id=blood.id)
+
+    straus_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FSS_web-19_400x.jpg?v=1612978983', product_id=straus.id)
+    peach_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FS_Provisions-084_400x.jpg?v=1612978623', product_id=peach.id)
+    bean_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FS_Provisions-086_400x.jpg?v=1612978756', product_id=bean.id)
+    strawberry_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FS_Provisions-085_400x.jpg?v=1612978716', product_id=strawberry.id)
+    rasberry_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FS_Provisions-087_400x.jpg?v=1612978690', product_id=rasberry.id)
+    mango_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FS_-208_400x.jpg?v=1623718357', product_id=mango.id)
+
     finfish_images = [big_glory_img, sea_bass_img, halibut_img, kampachi_img, turbot_img, stripe_bass_img]
     poultry_images = [root_img, fogline_img, quail_img, squab_img, turkey_img, hen_img]
+    fruit_images = [blueberries_img, kiwi_img, oranges_img, apples_img, lemons_img, blood_img]
+    milk_images = [straus_img, peach_img, bean_img, strawberry_img, rasberry_img, mango_img]
 
     [db.session.add(image) for image in finfish_images]
     [db.session.add(img) for img in poultry_images]
+    [db.session.add(img) for img in fruit_images]
+    [db.session.add(img) for img in milk_images]
 
 
     db.session.commit()
