@@ -46,8 +46,6 @@ class User(db.Model, UserMixin):
                             cascade='all, delete-orphan')
     review = db.relationship(
         'Review', back_populates='user', cascade='all, delete-orphan')
-    wishlist = db.relationship(
-        'Wishlist', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):
@@ -123,7 +121,6 @@ class Product(db.Model):
         'ProductImage', back_populates='product', cascade='all, delete-orphan')
     category = db.relationship('Category', back_populates='products')
     review = db.relationship('Review', back_populates='product')
-    wishlist = db.relationship('Wishlist', back_populates='product')
     cart_item = db.relationship('CartItem', back_populates='products')
 
     def to_dict(self):
@@ -157,7 +154,6 @@ class ProductImage(db.Model):
         return {
             'id': self.id,
             'imageUrl': self.image_url,
-            # 'productId': self.product_id
         }
 
 
@@ -294,28 +290,4 @@ class Review(db.Model):
             'stars': self.stars,
             'dateTime': self.date_time,
             'user': self.user.to_dict()
-        }
-
-
-class Wishlist(db.Model):
-    __tablename__ = 'wishlists'
-
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
-
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('products.id')), nullable=False)
-
-    user = db.relationship('User', back_populates='wishlist')
-    product = db.relationship('Product', back_populates='wishlist')
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'userId': self.user_id,
-            'productId': self.product_id,
-            # 'product': self.product
         }

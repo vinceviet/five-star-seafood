@@ -16,13 +16,13 @@ def user(id):
     return user.to_dict()
 
 
-@user_routes.route('/<int:id>/addresses')
+@user_routes.route('/<int:id>/address')
 @login_required
 def user_addresses(id):
     user = User.query.get(id)
     return {'addresses': [user.address.to_dict() for user in user]}
 
-@user_routes.route('/<int:id>/addresses', methods=['POST'])
+@user_routes.route('/<int:id>/address', methods=['POST'])
 @login_required
 def add_address(id):
     user = User.query.get(id)
@@ -47,7 +47,7 @@ def add_address(id):
         db.session.commit()
         return new_address.to_dict()
 
-@user_routes.route('/addresses/<int:id>', methods=['PUT'])
+@user_routes.route('/address/<int:id>', methods=['PUT'])
 @login_required
 def update_address(id):
     address = UserAddress.query.get(id)
@@ -72,7 +72,7 @@ def update_address(id):
 
     return {'errors': [form.errors]}
 
-@user_routes.route('/addresses/<int:id>', methods=['DELETE'])
+@user_routes.route('/address/<int:id>', methods=['DELETE'])
 @login_required
 def delete_address(id):
     address = UserAddress.query.get(id)
