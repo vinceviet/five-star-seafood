@@ -5,17 +5,19 @@ import { loadCartItems, checkoutCart } from "../../store/cart";
 import './CheckoutPage.css';
 
 export default function CheckoutPage() {
-    // const [errors, setErrors] = useState([]);
-    // const [address, setAddress] = useState('');
-    // const [city, setCity] = useState('');
-    // const [state, setState] = useState('');
-    // const [country, setCountry] = useState('');
-    // const [zipCode, setZipCode] = useState('');
-    // const [phone, setPhone] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    const [phone, setPhone] = useState('');
+    const [primary, setPrimary] = useState(false)
     const history = useHistory();
     const dispatch = useDispatch();
     const cartItems = Object.values(useSelector((state) => state.cart));
     const user = useSelector(state => state.session.user);
+    console.log('USER', user)
 
     let cartId
     cartItems.forEach(item =>
@@ -27,28 +29,32 @@ export default function CheckoutPage() {
 
     if (!cartItems) return null;
 
-    // const updateAddress = (e) => {
-    //     setAddress(e.target.value);
-    // };
+    const updateAddress = (e) => {
+        setAddress(e.target.value);
+    };
 
-    // const updateCity = (e) => {
-    //     setCity(e.target.value);
-    // };
+    const updateCity = (e) => {
+        setCity(e.target.value);
+    };
 
-    // const updateState = (e) => {
-    //     setState(e.target.value);
-    // };
-    // const updateCountry = (e) => {
-    //     setCountry(e.target.value);
-    // };
+    const updateState = (e) => {
+        setState(e.target.value);
+    };
+    const updateCountry = (e) => {
+        setCountry(e.target.value);
+    };
 
-    // const updateZipCode = (e) => {
-    //     setZipCode(e.target.value);
-    // };
+    const updateZipCode = (e) => {
+        setZipCode(e.target.value);
+    };
 
-    // const updatePhone = (e) => {
-    //     setPhone(e.target.value);
-    // };
+    const updatePhone = (e) => {
+        setPhone(e.target.value);
+    };
+
+    const updatePrimary = (e) => {
+        setPrimary(e.target.value);
+    };
 
     const handleCheckout = async (e) => {
         e.preventDefault();
@@ -75,9 +81,9 @@ export default function CheckoutPage() {
                         </NavLink>
                     )}
                 </div>
-                {/* <div className='shipping-container'>
+                <div className='shipping-container'>
                     <span>Shipping Address</span>
-                    <form>
+                    <form className='shipping-form-container'>
                         <div>
                             {errors.map((error, ind) => (
                                 <div key={ind}>{error}</div>
@@ -109,27 +115,18 @@ export default function CheckoutPage() {
                         </div>
                         <div className='form-input-container'>
                             <label className='form-label'>State</label>
-                            <input
-                                type='text'
-                                name='state'
-                                placeholder='State'
-                                onChange={updateState}
-                                value={state}
-                                required={true}
-                                className='form-input-fields'
-                            ></input>
+                            <select className='form-input-fields' value={state} onChange={updateState}>
+                                <option value='California'>California</option>
+                                <option value='Nevada'>Nevada</option>
+                                <option value='Arizona'>Arizona</option>
+                                <option value='Oregon'>Oregon</option>
+                            </select>
                         </div>
                         <div className='form-input-container'>
-                            <label className='form-label'>Country</label>
-                            <input
-                                type='text'
-                                name='country'
-                                placeholder='Country'
-                                onChange={updateCountry}
-                                value={country}
-                                required={true}
-                                className='form-input-fields'
-                            ></input>
+                        <label className='form-label'>Country</label>
+                            <select className='form-input-fields' value={country} onChange={updateCountry}>
+                                <option value='United States'>United States</option>
+                            </select>
                         </div>
                         <div className='form-input-container'>
                             <label className='form-label'>Zip Code</label>
@@ -155,8 +152,19 @@ export default function CheckoutPage() {
                                 className='form-input-fields'
                             ></input>
                         </div>
+                        <div className='form-input-bool-container'>
+                            <input
+                                type='checkbox'
+                                name='primary'
+                                id='primary'
+                                onChange={updatePrimary}
+                                value={primary}
+                                className='form-boolean-fields'
+                            ></input>
+                            <label className='bool-label' htmlFor="primary">Set as primary address?</label>
+                        </div>
                     </form>
-                </div> */}
+                </div>
                 <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>
             </div>
             <div className='checkout-cart-container'>

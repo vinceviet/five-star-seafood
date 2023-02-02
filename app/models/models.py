@@ -66,7 +66,7 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'email': self.email,
-            # 'address': self.address
+            'address': self.address
         }
 
 
@@ -78,11 +78,12 @@ class UserAddress(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.String(15), nullable=False)
-    address = db.Column(db.String(40), nullable=False)
+    address = db.Column(db.String(40), nullable=False, unique=True)
     city = db.Column(db.String(40), nullable=False)
-    state = db.Column(db.String(40), nullable=False)
+    state = db.Column(db.String(40), default='California', nullable=False)
     country = db.Column(db.String(40), default='United States', nullable=False)
     zip_code = db.Column(db.Integer, nullable=False)
+    primary = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
@@ -176,7 +177,7 @@ class Category(db.Model):
             'id': self.id,
             'name': self.name,
             'subCategory': self.sub_category,
-            # 'product': self.product
+            'product': self.product
         }
 
 
@@ -226,7 +227,7 @@ class Cart(db.Model):
             'id': self.id,
             'userId': self.user_id,
             'totalPrice': self.total_price,
-            # 'cartItem': self.cart_item
+            'cartItem': self.cart_item
         }
 
 

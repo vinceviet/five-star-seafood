@@ -1,4 +1,4 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, UserAddress, environment, SCHEMA
 
 
 # Adds a demo user, you can add other users here if you want
@@ -18,6 +18,12 @@ def seed_users():
 
     users = [demo, demo2, vi, david, claire, barry]
     [db.session.add(user) for user in users]
+
+    db.session.commit()
+    
+    demo_addy = UserAddress(phone='408-777-8106', address='123 Fake Street', city='Demo City', state='California', country='United States', zip_code=95014, primary=True, user_id=demo.id)
+    db.session.add(demo_addy)
+
     db.session.commit()
 
 
