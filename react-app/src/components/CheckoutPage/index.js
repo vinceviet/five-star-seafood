@@ -5,19 +5,20 @@ import { loadCartItems, checkoutCart } from "../../store/cart";
 import './CheckoutPage.css';
 
 export default function CheckoutPage() {
+    const cartItems = Object.values(useSelector((state) => state.cart));
+    const user = useSelector(state => state.session.user);
+    let primaryAddress = user.address.find(address => address.primary === true)
+
     const [errors, setErrors] = useState([]);
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [country, setCountry] = useState('');
-    const [zipCode, setZipCode] = useState('');
-    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState(primaryAddress ? primaryAddress.address : '');
+    const [city, setCity] = useState(primaryAddress ? primaryAddress.city : '');
+    const [state, setState] = useState(primaryAddress ? primaryAddress.state : '');
+    const [country, setCountry] = useState(primaryAddress ? primaryAddress.country : '');
+    const [zipCode, setZipCode] = useState(primaryAddress ? primaryAddress.zipCode : '');
+    const [phone, setPhone] = useState(primaryAddress ? primaryAddress.phone : '');
     const [primary, setPrimary] = useState(false)
     const history = useHistory();
     const dispatch = useDispatch();
-    const cartItems = Object.values(useSelector((state) => state.cart));
-    const user = useSelector(state => state.session.user);
-    console.log('USER', user)
 
     let cartId
     cartItems.forEach(item =>
@@ -152,7 +153,7 @@ export default function CheckoutPage() {
                                 className='form-input-fields'
                             ></input>
                         </div>
-                        <div className='form-input-bool-container'>
+                        {!primaryAddress && <div className='form-input-bool-container'>
                             <input
                                 type='checkbox'
                                 name='primary'
@@ -162,7 +163,7 @@ export default function CheckoutPage() {
                                 className='form-boolean-fields'
                             ></input>
                             <label className='bool-label' htmlFor="primary">Set as primary address?</label>
-                        </div>
+                        </div>}
                     </form>
                 </div>
                 <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>

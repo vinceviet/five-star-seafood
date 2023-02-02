@@ -38,7 +38,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    address = db.relationship(
+    addresses = db.relationship(
         'UserAddress', back_populates='user', cascade='all, delete-orphan')
     cart = db.relationship('Cart', back_populates='user',
                            cascade='all, delete-orphan')
@@ -66,7 +66,7 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'email': self.email,
-            'address': self.address
+            'address': [address.to_dict() for address in self.addresses]
         }
 
 
@@ -87,7 +87,7 @@ class UserAddress(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
-    user = db.relationship('User', back_populates='address')
+    user = db.relationship('User', back_populates='addresses')
 
     def to_dict(self):
         return {
@@ -98,6 +98,7 @@ class UserAddress(db.Model):
             'state': self.state,
             'country': self.country,
             'zipCode': self.zip_code,
+            'primary': self.primary,
             'userId': self.user_id
         }
 
@@ -120,7 +121,7 @@ class Product(db.Model):
 
     product_images = db.relationship(
         'ProductImage', back_populates='product', cascade='all, delete-orphan')
-    category = db.relationship('Category', back_populates='product')
+    category = db.relationship('Category', back_populates='products')
     review = db.relationship('Review', back_populates='product')
     wishlist = db.relationship('Wishlist', back_populates='product')
     cart_item = db.relationship('CartItem', back_populates='products')
@@ -170,14 +171,14 @@ class Category(db.Model):
     name = db.Column(db.String(55), nullable=False)
     sub_category = db.Column(db.String(55), nullable=False)
 
-    product = db.relationship('Product', back_populates='category')
+    products = db.relationship('Product', back_populates='category')
 
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
             'subCategory': self.sub_category,
-            'product': self.product
+            'products': [product.to_dict() for product in self.products]
         }
 
 
