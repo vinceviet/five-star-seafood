@@ -33,8 +33,8 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(40), nullable=False)
-    last_name = db.Column(db.String(40), nullable=False)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
@@ -122,8 +122,6 @@ class Product(db.Model):
     category = db.relationship('Category', back_populates='product')
     review = db.relationship('Review', back_populates='product')
     wishlist = db.relationship('Wishlist', back_populates='product')
-    # cart = db.relationship(
-    #     'Cart', secondary='cart_products', back_populates='product')
     cart_item = db.relationship('CartItem', back_populates='products')
 
     def to_dict(self):
@@ -137,7 +135,6 @@ class Product(db.Model):
             'numReviews': self.num_reviews,
             'categoryId': self.category_id,
             'productImages': [product_images.to_dict() for product_images in self.product_images],
-            # 'category': [category.to_dict() for category in self.category]
         }
 
 
@@ -158,7 +155,7 @@ class ProductImage(db.Model):
         return {
             'id': self.id,
             'imageUrl': self.image_url,
-            'productId': self.product_id
+            # 'productId': self.product_id
         }
 
 
@@ -178,7 +175,8 @@ class Category(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'subCategory': self.sub_category
+            'subCategory': self.sub_category,
+            # 'product': self.product
         }
 
 
@@ -214,18 +212,12 @@ class Cart(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    # product_quantity = db.Column(db.Integer, nullable=False)
-    # total_item_price = db.Column(db.Float, nullable=False)
-    # product_id = db.Column(db.Integer, db.ForeignKey(
-    #     add_prefix_for_prod('products.id')), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=True, unique=True)
     total_price = db.Column(db.Float, default=0)
 
     user = db.relationship('User', back_populates='cart')
     order = db.relationship('Order', back_populates='cart')
-    # product = db.relationship(
-    #     'Product', secondary='cart_products', back_populates='cart')
     cart_item = db.relationship(
         'CartItem', back_populates='cart', cascade='all, delete-orphan')
 
@@ -233,10 +225,8 @@ class Cart(db.Model):
         return {
             'id': self.id,
             'userId': self.user_id,
-            # 'productQuantity': self.product_quantity,
-            # 'totalItemPrice': self.total_item_price,
-            # 'productId': self.product_id,
             'totalPrice': self.total_price,
+            # 'cartItem': self.cart_item
         }
 
 
