@@ -1,5 +1,73 @@
 .address-page-container {
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    flex-direction: column;
+    padding-top: 20px;
+    max-width: 1000px;
+    width: 100%;
+    letter-spacing: 3px;
+    font-weight: 100;
+    min-height: 100vh;
+    margin: auto;
+}
+
+.address-page-header{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px 0 0 0;
+}
+
+#my-address{
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.add-address-button {
+    color: white;
+    background-color: rgb(79, 141, 163);
+    border: 1px black solid;
+    height: 50px;
+    width: 220px;
+    font-size: 12px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    margin-left: -3px;
+}
+
+.add-address-button:hover {
+    background-color: rgb(136, 193, 213);
+}
+
+
+.address-body-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 70px 0 0 0;
+    font-size: 14px;
+}
+
+.address-divider {
+    background-color: rgb(194, 186, 186);
+    height: 1px;
+    width: 25%;
+    list-style: none;
+}
+
+.address-cards-container{
+    display: flex;
+}
+
+.address-cards{
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0 0 0;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 100;
+}
+
+.edit-delete-address{
+    display: flex;
+    gap: 20px;
 }

@@ -29,7 +29,7 @@ export default function Profile() {
                             <span>{primaryAddress.city}, {primaryAddress.state} {primaryAddress.zipCode}</span>
                             <span>{primaryAddress.country}</span>
                         </div>
-                        <div className='profile-address-button'>
+                        <div>
                             <NavLink to='/user/address' exact={true} className='nav-link'>
                                 <button className='address-button'>EDIT ADDRESSES</button>
                             </NavLink>
