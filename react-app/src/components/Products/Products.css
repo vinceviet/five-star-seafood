@@ -62,9 +62,8 @@
     flex-basis: calc(33.33% - 30px);
     /* max-width: 300px; */
     width: calc(100% - 66.66%);
-    /* width: 300px; */
-    height: 350px;
-    /* height: 100%; */
+    /* min-width: 300px; */
+    min-height: 350px;
 }
 
 .product-img {
