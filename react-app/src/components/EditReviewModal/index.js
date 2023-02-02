@@ -7,13 +7,14 @@ import '../Context/ModalForms.css';
 
 export default function EditReviewModal({ productId, reviews, user }) {
     const dispatch = useDispatch();
-    const [review, setReview] = useState('');
-    const [stars, setStars] = useState('');
+    const reviewList = Object.values(reviews);
+    const currentReview = reviewList.find(review => review.userId === user.id)
+
+    const [review, setReview] = useState(currentReview.review);
+    const [stars, setStars] = useState(currentReview.stars);
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
 
-    const reviewList = Object.values(reviews);
-    const currentReview = reviewList.find(review => review.userId === user.id)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
