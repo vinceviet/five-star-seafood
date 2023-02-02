@@ -12,10 +12,10 @@ def get_products_by_category(category):
 
     return {'products' : [product.to_dict() for product in products]}
 
-# @product_routes.route('/<int:id>')
-# def get_product_details(id):
-#     product = Product.query.get(id)
-#     return product.to_dict()
+@product_routes.route('/<int:id>')
+def get_product_details(id):
+    product = Product.query.get(id)
+    return product.to_dict()
 
 # @product_routes.route('/increment')
 # def increment():
