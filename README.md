@@ -29,7 +29,7 @@ My site is a clone of the [Four Star Seafood](https://www.fourstarseafood.com/) 
 
 ## Landing Page:
 From the landing page you can browse products by category and even add them to your cart before logging in or making an account. To checkout you will need to have an account.
-<img width="1200" alt="image" src="https://user-images.githubusercontent.com/110574773/213533004-3ef491c9-15ff-4cb1-9cf5-dc18b76f090e.png">
+<img width="1200" alt="image" src="./assets/landing_page.png">
 
 ## Running the app locally:
 
