@@ -48,9 +48,10 @@ const LoginForm = () => {
         </div>
         <form onSubmit={onLogin}>
           <div>
-            {errors.map((error, ind) => (
+            {errors.length >= 1 && 'Invalid credentials'}
+            {/* {errors.map((error, ind) => (
               <div key={ind}>{error}</div>
-            ))}
+            ))} */}
           </div>
           <div className='form-input-container'>
             <label className='form-label' htmlFor='email'>Email</label>
@@ -61,6 +62,7 @@ const LoginForm = () => {
               value={email}
               onChange={updateEmail}
               className='form-input-fields'
+              required={true}
             />
           </div>
           <div className='form-input-container'>
@@ -72,6 +74,7 @@ const LoginForm = () => {
               value={password}
               onChange={updatePassword}
               className='form-input-fields'
+              required={true}
             />
             <button className='form-button' type='submit'>LOGIN</button>
             <button className='form-button' onClick={demoLogin}>DEMO LOGIN</button>

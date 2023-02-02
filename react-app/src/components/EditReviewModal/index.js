@@ -66,7 +66,7 @@ export default function EditReviewModal({ productId, reviews, user }) {
                         required
                     />
                 </label>
-                <button className="field-buttons" type="submit">Create Review</button>
+                <button className="field-buttons" type="submit">Edit Review</button>
             </form>
         </div>
     );
