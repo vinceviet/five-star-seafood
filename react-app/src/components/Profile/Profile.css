@@ -1,6 +1,6 @@
 .profile-container{
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     flex-direction: column;
     padding-top: 20px;
     max-width: 1000px;
@@ -9,6 +9,57 @@
     letter-spacing: 3px;
     font-weight: 100;
     min-height: 100vh;
+}
+
+.profile-info-container {
+    display: flex;
+}
+
+.order-history-container {
+    display: flex;
+    flex-basis: 60%;
+    padding-top: 60px;
+}
+
+.address-info-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 40%;
+    padding: 60px 0 0 0;
+    font-size: 12px;
+    gap: 10px;
+}
+
+.primary-address-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px 0 0 0;
+}
+
+.address-button {
+    color: white;
+    background-color: rgb(79, 141, 163);
+    border: 1px black solid;
+    height: 40px;
+    width: 200px;
+    font-size: 12px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    margin-top: 15px;
+}
+
+.address-button:hover {
+    background-color: rgb(136, 193, 213);
+}
+
+
+
+.profile-divider {
+    background-color: rgb(194, 186, 186);
+    height: 1px;
+    width: calc(100% - 100px);
+    list-style: none;
 }
 
 .profile-header{
@@ -33,4 +84,8 @@
     font-weight: 100;
     letter-spacing: 2px;
     margin-top: 15px;
+}
+
+.logout-button:hover {
+    background-color: rgb(136, 193, 213);
 }
