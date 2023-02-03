@@ -54,6 +54,7 @@ def add_address(id):
 
         db.session.add(new_address)
         db.session.commit()
+
         return new_address.to_dict()
     return {'errors': [form.errors]}
 
@@ -86,6 +87,7 @@ def update_address(id):
 @login_required
 def delete_address(id):
     address = UserAddress.query.get(id)
+
     if not address:
         return {'errors': ['address does not exist']}, 404
 

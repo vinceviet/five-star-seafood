@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import OpenModalMenuItem from "../Modal/OpenModalMenuItem";
 import CreateAddressModal from "../CreateAddressModal";
+import DeleteAddressModal from "../DeleteAddressModal";
 import './Address.css';
 
 export default function Address() {
@@ -56,10 +57,34 @@ export default function Address() {
                             <span>{primaryAddress.country}</span>
                             <div className='edit-delete-address'>
                                 <button>Edit</button>
-                                <button>Delete</button>
+                                <div className='delete-address-modal'>
+                                    <OpenModalMenuItem
+                                        itemText="Delete"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<DeleteAddressModal user={user} address={primaryAddress.id} />}
+                                    />
+                                </div>
                             </div>
                         </div>
                     )}
+                    {user.address.map(addy => (
+                        <div className='address-cards'>
+                            <span>{user.firstName} {user.lastName}</span>
+                            <span>{addy.address}</span>
+                            <span>{addy.city}, {addy.state} {addy.zipCode}</span>
+                            <span>{addy.country}</span>
+                            <div className='edit-delete-address'>
+                                <button>Edit</button>
+                                <div className='delete-address-modal'>
+                                    <OpenModalMenuItem
+                                        itemText="Delete"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<DeleteAddressModal user={user} address={addy.id} />}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </>

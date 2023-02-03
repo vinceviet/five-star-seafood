@@ -25,7 +25,7 @@ export const createAddress = (userId, address) => async dispatch => {
 };
 
 export const editAddress = (address) => async dispatch => {
-    const res = await fetch(`/api/address/${address.id}`, {
+    const res = await fetch(`/api/users/address/${address.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(address)
@@ -38,7 +38,7 @@ export const editAddress = (address) => async dispatch => {
 };
 
 export const deleteAddress = (address) => async dispatch => {
-    const res = await fetch(`/api/address/${address.id}`, {
+    const res = await fetch(`/api/users/address/${address}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     });
@@ -57,7 +57,7 @@ export default function address(state = initialState, action) {
             newState[action.address.id] = action.address;
             return newState;
         case DELETE_ADDRESS:
-            delete newState[action.address.id];
+            delete newState[action.address];
             return newState;
         default:
             return state;
