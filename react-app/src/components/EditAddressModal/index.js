@@ -54,7 +54,6 @@ export default function EditAddressModal({ user , addy}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updateAddress = { ...addy, address, city, state, country, zipCode, phone, primary }
-        console.log('updatedaddress', updateAddress)
 
         await dispatch(editAddress(updateAddress)).then(closeModal)
         await dispatch(getUser(user.id))

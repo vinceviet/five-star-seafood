@@ -43,23 +43,17 @@
 }
 
 
-.address-body-container{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 70px 0 0 0;
-    font-size: 14px;
-}
-
 .address-divider {
     background-color: rgb(194, 186, 186);
     height: 1px;
-    width: 25%;
+    width: 100%;
     list-style: none;
 }
 
 .address-cards-container{
     display: flex;
+    gap: 100px;
+    padding: 40px 0 0 0;
 }
 
 .address-cards{
@@ -74,4 +68,12 @@
 .edit-delete-address{
     display: flex;
     gap: 20px;
+    list-style-type: none;
+    padding: 20px 0 0 0;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.edit-delete-address:hover{
+    cursor: pointer;
 }

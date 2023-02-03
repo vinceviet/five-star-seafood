@@ -23,6 +23,11 @@ export default function Profile() {
                     <div className='address-info-container'>
                         <span>PRIMARY ADDRESS</span>
                         <li className="profile-divider" />
+                        {user.address.length < 1 && (
+                            <div>
+                                <span>No Primary Address Saved</span>
+                            </div>
+                        )}
                         {primaryAddress && <div className='primary-address-info'>
                             <span>{user.firstName} {user.lastName}</span>
                             <span>{primaryAddress.address}</span>

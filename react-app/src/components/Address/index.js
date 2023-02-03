@@ -12,6 +12,7 @@ export default function Address() {
     const [showMenu, setShowMenu] = useState(false);
     const user = useSelector((state) => state.session.user)
     let primaryAddress = user.address.find(address => address.primary === true)
+    let addressList = user.address.filter(addy => addy.primary === false)
 
     useEffect(() => {
         if (!showMenu) return;
@@ -45,13 +46,11 @@ export default function Address() {
                         />
                     </div>
                 </div>
-                <div className='address-body-container'>
-                    <span>DEFAULT ADDRESS</span>
-                    <li className="address-divider" />
-                </div>
                 <div className='address-cards-container'>
                     {primaryAddress && (
                         <div className='address-cards'>
+                            <span>DEFAULT ADDRESS</span>
+                            <li className="address-divider" />
                             <span>{user.firstName} {user.lastName}</span>
                             <span>{primaryAddress.address}</span>
                             <span>{primaryAddress.city}, {primaryAddress.state} {primaryAddress.zipCode}</span>
@@ -74,8 +73,10 @@ export default function Address() {
                             </div>
                         </div>
                     )}
-                    {user.address.map(addy => (
+                    {addressList.map(addy => (
                         <div className='address-cards'>
+                            <span>Address {addy.id}</span>
+                            <li className="address-divider" />
                             <span>{user.firstName} {user.lastName}</span>
                             <span>{addy.address}</span>
                             <span>{addy.city}, {addy.state} {addy.zipCode}</span>
