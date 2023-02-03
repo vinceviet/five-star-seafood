@@ -35,15 +35,12 @@ export default function Address() {
                         BACK TO ACCOUNT
                     </NavLink>
                     <span id='my-address'>MY ADDRESSES</span>
-                    <div>
+                    <div className='add-address-modal'>
                         <OpenModalMenuItem
                             itemText="ADD A NEW ADDRESS"
                             onItemClick={closeMenu}
                             modalComponent={<CreateAddressModal user={user} />}
                         />
-                        {/* <NavLink to='/user/address' exact={true} className='nav-link'>
-                            <button className='add-address-button'>ADD A NEW ADDRESS</button>
-                        </NavLink> */}
                     </div>
                 </div>
                 <div className='address-body-container'>

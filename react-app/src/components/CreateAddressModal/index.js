@@ -5,7 +5,7 @@ import { createAddress } from "../../store/address";
 import { getUser } from "../../store/session";
 import '../Context/ModalForms.css';
 
-export default function CreateAddressModal({user}) {
+export default function CreateAddressModal({ user }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [address, setAddress] = useState('')
@@ -47,7 +47,7 @@ export default function CreateAddressModal({user}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newAddress = {address, city, state, country, zipCode, phone, primary }
+        const newAddress = { address, city, state, country, zipCode, phone, primary }
 
         await dispatch(createAddress(user.id, newAddress)).then(closeModal)
         await dispatch(getUser(user.id))
@@ -65,13 +65,13 @@ export default function CreateAddressModal({user}) {
 
 
     return (
-        <div className="login-container">
+        <div className="address-form-container">
             <header className="header">
                 <button id="cancel-x" onClick={closeModal}>X</button>
                 Add an Address
             </header>
             <li className="header-divider"></li>
-            <form className='shipping-form-container' onSubmit={handleSubmit}>
+            <form className='address-modal-container' onSubmit={handleSubmit}>
                 <div>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
@@ -140,7 +140,7 @@ export default function CreateAddressModal({user}) {
                         className='form-input-fields'
                     ></input>
                 </div>
-                <div className='form-input-bool-container'>
+                <div className='form-input-bool-container-modal'>
                     <label className='bool-label' htmlFor="primary">Set as primary address?</label>
                     <input
                         type='checkbox'
@@ -151,7 +151,9 @@ export default function CreateAddressModal({user}) {
                         className='form-boolean-fields'
                     ></input>
                 </div>
-                <button className="field-buttons" type="submit">Add Address</button>
+                <div className='form-button-container'>
+                    <button className="field-buttons" type="submit">Add Address</button>
+                </div>
             </form>
         </div>
     );

@@ -35,7 +35,7 @@ export default function EditReviewModal({ productId, reviews, user }) {
     };
 
     return (
-        <div className="login-container">
+        <div className="review-modal-container">
             <header className="header">
                 <button id="cancel-x" onClick={closeModal}>X</button>
                 Edit Review
@@ -45,19 +45,21 @@ export default function EditReviewModal({ productId, reviews, user }) {
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
-                <label>
+                <div className='form-input-container'>
+                    <label className='form-label'>Review</label>
                     <input
-                        className="fields-top"
+                        className="form-input-fields"
                         type="text"
                         placeholder={currentReview.review}
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
                         required
                     />
-                </label>
-                <label>
+                </div>
+                <div className='form-input-container'>
+                    <label className='form-label'>Rating</label>
                     <input
-                        className="fields-bottom"
+                        className="form-input-fields"
                         type="number"
                         placeholder={currentReview.stars}
                         min="1"
@@ -66,8 +68,10 @@ export default function EditReviewModal({ productId, reviews, user }) {
                         onChange={(e) => setStars(e.target.value)}
                         required
                     />
-                </label>
-                <button className="field-buttons" type="submit">Edit Review</button>
+                </div>
+                <div className='form-button-container'>
+                    <button className="field-buttons" type="submit">Edit Review</button>
+                </div>
             </form>
         </div>
     );

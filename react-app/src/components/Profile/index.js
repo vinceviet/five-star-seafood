@@ -23,12 +23,12 @@ export default function Profile() {
                     <div className='address-info-container'>
                         <span>PRIMARY ADDRESS</span>
                         <li className="profile-divider" />
-                        <div className='primary-address-info'>
+                        {primaryAddress && <div className='primary-address-info'>
                             <span>{user.firstName} {user.lastName}</span>
                             <span>{primaryAddress.address}</span>
                             <span>{primaryAddress.city}, {primaryAddress.state} {primaryAddress.zipCode}</span>
                             <span>{primaryAddress.country}</span>
-                        </div>
+                        </div>}
                         <div>
                             <NavLink to='/user/address' exact={true} className='nav-link'>
                                 <button className='address-button'>EDIT ADDRESSES</button>
