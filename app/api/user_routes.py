@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import db, User, UserAddress
 from app.forms import AddressForm
 from sqlalchemy import and_
@@ -67,19 +67,27 @@ def update_address(id):
 
     form = AddressForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('FORM DATAAAAA--------', form.data)
+
     if form.validate_on_submit():
-        print('VALIDATED_____------------------')
-        address.phone=form.data['phone'],
-        address.address=form.data['address'],
-        address.city=form.data['city'],
-        address.state=form.data['state'],
-        address.country=form.data['country'],
-        address.zip_code=form.data['zipCode'],
+        address.phone=form.data['phone']
+        address.address=form.data['address']
+        address.city=form.data['city']
+        address.state=form.data['state']
+        address.country=form.data['country']
+        address.zip_code=form.data['zipCode']
         address.primary=form.data['primary']
 
+        if address.primary==True:
+            current_primary = UserAddress.query.filter(and_(UserAddress.user_id == current_user.id, UserAddress.primary == True)).first()
+            if current_primary:
+                current_primary.primary = False
+                db.session.add(current_primary)
+                db.session.commit()
+        
+        address.primary=form.data['primary']
         db.session.add(address)
         db.session.commit()
+
         return address.to_dict()
 
     return {'errors': [form.errors]}

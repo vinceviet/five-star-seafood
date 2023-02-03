@@ -20,7 +20,7 @@ export default function EditAddressModal({ user , addy}) {
     const [country, setCountry] = useState('USA');
     const [zipCode, setZipCode] = useState(addy.zipCode);
     const [phone, setPhone] = useState(addy.phone);
-    const [primary, setPrimary] = useState(addy.primary)
+    const [primary, setPrimary] = useState(false)
     const { closeModal } = useModal();
 
 
@@ -54,6 +54,7 @@ export default function EditAddressModal({ user , addy}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updateAddress = { ...addy, address, city, state, country, zipCode, phone, primary }
+        console.log('updatedaddress', updateAddress)
 
         await dispatch(editAddress(updateAddress)).then(closeModal)
         await dispatch(getUser(user.id))
@@ -154,6 +155,7 @@ export default function EditAddressModal({ user , addy}) {
                         id='primary'
                         onChange={updatePrimary}
                         value={primary}
+                        checked={primary ? true : false}
                         className='form-boolean-fields'
                     ></input>
                 </div>

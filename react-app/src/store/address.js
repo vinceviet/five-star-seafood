@@ -19,23 +19,21 @@ export const createAddress = (userId, address) => async dispatch => {
     });
     if (res.ok) {
         const address = await res.json();
-        console.log('data hitting', address)
         dispatch(add(address))
         return address;
     };
 };
 
 export const editAddress = (address) => async dispatch => {
-    console.log('thunk hitting', address)
     const res = await fetch(`/api/users/address/${address.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(address)
     });
     if (res.ok) {
-        const address = await res.json();
-        dispatch(add(address))
-        return address;
+        const data = await res.json();
+        dispatch(add(data))
+        return data;
     };
 };
 
