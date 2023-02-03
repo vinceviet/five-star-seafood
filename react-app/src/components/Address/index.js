@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import OpenModalMenuItem from "../Modal/OpenModalMenuItem";
 import CreateAddressModal from "../CreateAddressModal";
+import EditAddressModal from "../EditAddressModal";
 import DeleteAddressModal from "../DeleteAddressModal";
 import './Address.css';
 
@@ -56,8 +57,14 @@ export default function Address() {
                             <span>{primaryAddress.city}, {primaryAddress.state} {primaryAddress.zipCode}</span>
                             <span>{primaryAddress.country}</span>
                             <div className='edit-delete-address'>
-                                <button>Edit</button>
-                                <div className='delete-address-modal'>
+                                <div className='modify-address-modal'>
+                                    <OpenModalMenuItem
+                                        itemText="Edit"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<EditAddressModal user={user} addy={primaryAddress} />}
+                                    />
+                                </div>
+                                <div className='modify-address-modal'>
                                     <OpenModalMenuItem
                                         itemText="Delete"
                                         onItemClick={closeMenu}
@@ -74,8 +81,14 @@ export default function Address() {
                             <span>{addy.city}, {addy.state} {addy.zipCode}</span>
                             <span>{addy.country}</span>
                             <div className='edit-delete-address'>
-                                <button>Edit</button>
-                                <div className='delete-address-modal'>
+                            <div className='modify-address-modal'>
+                                    <OpenModalMenuItem
+                                        itemText="Edit"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<EditAddressModal user={user} addy={addy} />}
+                                    />
+                                </div>
+                                <div className='modify-address-modal'>
                                     <OpenModalMenuItem
                                         itemText="Delete"
                                         onItemClick={closeMenu}

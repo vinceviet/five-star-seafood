@@ -18,7 +18,7 @@
     display: block;
     color: rgb(134, 129, 129);
     border: none;
-    width: 100px;
+    width: 120px;
     height: 25px;
     border-radius: 6px;
     background-color: white;
@@ -30,7 +30,7 @@
     display: block;
     color: white;
     border: none;
-    width: 100px;
+    width: 120px;
     height: 25px;
     border-radius: 6px;
     cursor: pointer;
