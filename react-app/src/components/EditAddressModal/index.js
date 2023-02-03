@@ -154,7 +154,7 @@ export default function EditAddressModal({ user , addy}) {
                         id='primary'
                         onChange={updatePrimary}
                         value={primary}
-                        checked={primary ? true : false}
+                        // checked={addy.primary}
                         className='form-boolean-fields'
                     ></input>
                 </div>

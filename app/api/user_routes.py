@@ -78,13 +78,12 @@ def update_address(id):
         address.primary=form.data['primary']
 
         if address.primary==True:
-            current_primary = UserAddress.query.filter(and_(UserAddress.user_id == current_user.id, UserAddress.primary == True, not address)).first()
+            current_primary = UserAddress.query.filter(and_(UserAddress.id != address.id, UserAddress.user_id == current_user.id, UserAddress.primary == True)).first()
             if current_primary:
                 current_primary.primary = False
                 db.session.add(current_primary)
                 db.session.commit()
 
-        # address.primary=form.data['primary']
         db.session.add(address)
         db.session.commit()
 

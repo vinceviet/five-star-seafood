@@ -71,18 +71,18 @@ export default function CheckoutPage() {
             <div className='checkout-address-container'>
                 <span className='checkout-address-header'>Five Star Seafood and Provisions</span>
                 <li className="checkout-address-divider" />
-                <div className='contact-info-container'>
-                    <span id='contact-header'>Contact Information</span>
-                    {user && (
-                        <span>{user.firstName} {user.lastName} ({user.email})</span>
-                    )}
-                    {!user && (
-                        <NavLink to='/login' exact={true} className='nav-link'>
-                            <button className='form-button' type='submit'>Login/sign up to Checkout</button>
-                        </NavLink>
-                    )}
-                </div>
                 <div className='shipping-container'>
+                    <div className='checkout-contact-info-container'>
+                        <span id='contact-header'>Contact Information</span>
+                        {user && (
+                            <span>{user.firstName} {user.lastName} ({user.email})</span>
+                        )}
+                        {!user && (
+                            <NavLink to='/login' exact={true} className='nav-link'>
+                                <button className='form-button' type='submit'>Login/sign up to Checkout</button>
+                            </NavLink>
+                        )}
+                    </div>
                     <span>Shipping Address</span>
                     <form className='shipping-form-container'>
                         <div>
@@ -124,7 +124,7 @@ export default function CheckoutPage() {
                             </select>
                         </div>
                         <div className='form-input-container'>
-                        <label className='form-label'>Country</label>
+                            <label className='form-label'>Country</label>
                             <select className='form-input-fields' value={country} onChange={updateCountry}>
                                 <option value='United States'>United States</option>
                             </select>
@@ -166,7 +166,9 @@ export default function CheckoutPage() {
                         </div>}
                     </form>
                 </div>
-                <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>
+                <div className='checkout-button-container'>
+                    <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>
+                </div>
             </div>
             <div className='checkout-cart-container'>
                 {cartItems.map((item) =>
