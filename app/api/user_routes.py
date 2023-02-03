@@ -67,15 +67,16 @@ def update_address(id):
 
     form = AddressForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    print('FORM DATAAAAA--------', form.data)
     if form.validate_on_submit():
+        print('VALIDATED_____------------------')
         address.phone=form.data['phone'],
         address.address=form.data['address'],
         address.city=form.data['city'],
         address.state=form.data['state'],
         address.country=form.data['country'],
         address.zip_code=form.data['zipCode'],
-        address.primary=form.data['primary'],
+        address.primary=form.data['primary']
 
         db.session.add(address)
         db.session.commit()

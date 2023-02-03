@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../Context/Modal";
-import { createAddress } from "../../store/address";
+import { editAddress } from "../../store/address";
 import { getUser } from "../../store/session";
 import '../Context/ModalForms.css';
 
 export default function EditAddressModal({ user , addy}) {
     const dispatch = useDispatch();
+    // let currentState
+    // if(addy.state === 'California') currentState='CA';
+    // else if(addy.state === 'Nevada') currentState='NV';
+    // else if(addy.state === 'Arizona') currentState='AZ';
+    // else if(addy.state === 'Oregon') currentState='OR';
+
     const [errors, setErrors] = useState([]);
     const [address, setAddress] = useState(addy.address)
     const [city, setCity] = useState(addy.city)
@@ -47,9 +53,9 @@ export default function EditAddressModal({ user , addy}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const editAddress = { address, city, state, country, zipCode, phone, primary }
+        const updateAddress = { ...addy, address, city, state, country, zipCode, phone, primary }
 
-        await dispatch(createAddress(user.id, editAddress)).then(closeModal)
+        await dispatch(editAddress(updateAddress)).then(closeModal)
         await dispatch(getUser(user.id))
             .catch(async (res) => {
                 const data = await res.json();

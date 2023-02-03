@@ -12,7 +12,6 @@ const remove = (address, addressId) => ({
 
 
 export const createAddress = (userId, address) => async dispatch => {
-    console.log('thunk hitting', userId, address)
     const res = await fetch(`/api/users/${userId}/address`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -27,6 +26,7 @@ export const createAddress = (userId, address) => async dispatch => {
 };
 
 export const editAddress = (address) => async dispatch => {
+    console.log('thunk hitting', address)
     const res = await fetch(`/api/users/address/${address.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
