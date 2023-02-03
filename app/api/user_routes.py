@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, UserAddress
 from app.forms import AddressForm
+from sqlalchemy import and_
 
 user_routes = Blueprint('users', __name__)
 
@@ -20,7 +21,7 @@ def user(id):
 @login_required
 def user_addresses(id):
     user = User.query.get(id)
-    return {'addresses': [user.address.to_dict() for user in user]}
+    return {'addresses': [user.to_dict() for user in user]}
 
 @user_routes.route('/<int:id>/address', methods=['POST'])
 @login_required
@@ -43,9 +44,18 @@ def add_address(id):
             zip_code=form.data['zipCode'],
             primary=form.data['primary'],
         )
+
+        if new_address.primary==True:
+            current_primary = UserAddress.query.filter(and_(UserAddress.user_id == user.id, UserAddress.primary == True)).first()
+            if current_primary:
+                current_primary.primary = False
+                db.session.add(current_primary)
+                db.session.commit()
+
         db.session.add(new_address)
         db.session.commit()
         return new_address.to_dict()
+    return {'errors': [form.errors]}
 
 @user_routes.route('/address/<int:id>', methods=['PUT'])
 @login_required

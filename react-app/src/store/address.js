@@ -1,11 +1,6 @@
 
-const LOAD_ADDRESS = 'address/LOAD_ADDRESS';
 const ADD_ADDRESS = 'address/ADD_ADDRESS';
 const DELETE_ADDRESS = 'address/DELETE_ADDRESS';
-
-const load = address => ({
-    type: LOAD_ADDRESS, address
-});
 
 const add = (address) => ({
     type: ADD_ADDRESS, address
@@ -15,13 +10,6 @@ const remove = (address, addressId) => ({
     type: DELETE_ADDRESS, address, addressId
 });
 
-export const getAddress = (userId) => async dispatch => {
-    const res = await fetch(`/api/users/${userId}/address`);
-    if (res.ok) {
-        const address = await res.json();
-        dispatch(load(address));
-    };
-};
 
 export const createAddress = (userId, address) => async dispatch => {
     const res = await fetch(`/api/users/${userId}/address`, {
@@ -65,13 +53,6 @@ let initialState = {};
 export default function address(state = initialState, action) {
     let newState = { ...state }
     switch (action.type) {
-        case LOAD_ADDRESS:
-            newState = {};
-            const addressList = action.address.address;
-            addressList.forEach(address => {
-                newState[address.id] = address;
-            });
-            return newState;
         case ADD_ADDRESS:
             newState[action.address.id] = action.address;
             return newState;

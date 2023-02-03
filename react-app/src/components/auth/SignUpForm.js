@@ -23,10 +23,8 @@ const SignUpForm = () => {
       const data = await dispatch(signUp(firstName, lastName, email, password));
       if (data) {
         let errorStrings = []
-        console.log('DATA', data)
         data.forEach(err =>
           errorStrings.push(err.split(':')[1]))
-        console.log('errorStrings', errorStrings)
         setErrors(errorStrings)
       }
     }

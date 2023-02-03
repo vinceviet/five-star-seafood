@@ -86,7 +86,6 @@ export const signUp = (firstName, lastName, email, password) => async (dispatch)
 
   if (response.ok) {
     const data = await response.json();
-    console.log('DATA IS HITTING', data)
     dispatch(setUser(data))
     return null;
   } else if (response.status < 500) {
@@ -98,6 +97,14 @@ export const signUp = (firstName, lastName, email, password) => async (dispatch)
     return ['An error occurred. Please try again.']
   }
 }
+
+export const getUser = (userId) => async dispatch => {
+  const res = await fetch(`/api/users/${userId}`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(setUser(data));
+  };
+};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {

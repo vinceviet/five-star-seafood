@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../Context/Modal";
 import { createAddress } from "../../store/address";
+import { getUser } from "../../store/session";
 import '../Context/ModalForms.css';
 
 export default function CreateAddressModal({user}) {
@@ -9,11 +10,11 @@ export default function CreateAddressModal({user}) {
     const [errors, setErrors] = useState([]);
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
-    const [state, setState] = useState('');
-    const [country, setCountry] = useState('');
+    const [state, setState] = useState('CA');
+    const [country, setCountry] = useState('USA');
     const [zipCode, setZipCode] = useState('');
     const [phone, setPhone] = useState('');
-    const [primary, setPrimary] = useState(false)
+    const [primary, setPrimary] = useState('')
     const { closeModal } = useModal();
 
 
@@ -41,7 +42,7 @@ export default function CreateAddressModal({user}) {
     };
 
     const updatePrimary = (e) => {
-        setPrimary(e.target.value);
+        setPrimary(!primary);
     };
 
     const handleSubmit = async (e) => {
@@ -49,6 +50,7 @@ export default function CreateAddressModal({user}) {
         const newAddress = {address, city, state, country, zipCode, phone, primary }
 
         await dispatch(createAddress(user.id, newAddress)).then(closeModal)
+        await dispatch(getUser(user.id))
             .catch(async (res) => {
                 const data = await res.json();
                 const validationErrors = [];
@@ -69,7 +71,7 @@ export default function CreateAddressModal({user}) {
                 Add an Address
             </header>
             <li className="header-divider"></li>
-            <form className='shipping-form-container'>
+            <form className='shipping-form-container' onSubmit={handleSubmit}>
                 <div>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
@@ -102,16 +104,16 @@ export default function CreateAddressModal({user}) {
                 <div className='form-input-container'>
                     <label className='form-label'>State</label>
                     <select className='form-input-fields' value={state} onChange={updateState}>
-                        <option value='California'>California</option>
-                        <option value='Nevada'>Nevada</option>
-                        <option value='Arizona'>Arizona</option>
-                        <option value='Oregon'>Oregon</option>
+                        <option value='CA'>California</option>
+                        <option value='NV'>Nevada</option>
+                        <option value='AZ'>Arizona</option>
+                        <option value='OR'>Oregon</option>
                     </select>
                 </div>
                 <div className='form-input-container'>
                     <label className='form-label'>Country</label>
                     <select className='form-input-fields' value={country} onChange={updateCountry}>
-                        <option value='United States'>United States</option>
+                        <option value='USA'>United States</option>
                     </select>
                 </div>
                 <div className='form-input-container'>
@@ -138,7 +140,8 @@ export default function CreateAddressModal({user}) {
                         className='form-input-fields'
                     ></input>
                 </div>
-                {true && <div className='form-input-bool-container'>
+                <div className='form-input-bool-container'>
+                    <label className='bool-label' htmlFor="primary">Set as primary address?</label>
                     <input
                         type='checkbox'
                         name='primary'
@@ -147,8 +150,7 @@ export default function CreateAddressModal({user}) {
                         value={primary}
                         className='form-boolean-fields'
                     ></input>
-                    <label className='bool-label' htmlFor="primary">Set as primary address?</label>
-                </div>}
+                </div>
                 <button className="field-buttons" type="submit">Add Address</button>
             </form>
         </div>
