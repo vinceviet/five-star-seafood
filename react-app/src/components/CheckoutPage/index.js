@@ -7,9 +7,11 @@ import './CheckoutPage.css';
 
 export default function CheckoutPage() {
     const cartItems = Object.values(useSelector((state) => state.cart));
+    const history = useHistory();
+    const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
-    let primaryAddress = user.address.find(address => address.primary === true)
-    const addressList = user.address.filter(address => address.primary !== true)
+    let primaryAddress = user?.address.find(address => address.primary === true)
+    const addressList = user?.address.filter(address => address.primary !== true)
 
     const [errors, setErrors] = useState([]);
     const [savedAddress, setSavedAddress] = useState(primaryAddress ? primaryAddress.address : '');
@@ -21,8 +23,6 @@ export default function CheckoutPage() {
     const [zipCode, setZipCode] = useState(primaryAddress ? primaryAddress.zipCode : '');
     const [phone, setPhone] = useState(primaryAddress ? primaryAddress.phone : '');
     const [primary, setPrimary] = useState(false)
-    const history = useHistory();
-    const dispatch = useDispatch();
 
     let cartId
     cartItems.forEach(item =>
@@ -71,7 +71,7 @@ export default function CheckoutPage() {
 
     const handleCheckout = async (e) => {
         e.preventDefault();
-        if(user.address.find(addy => addy.address !== address) && save === true){
+        if (user.address.find(addy => addy.address !== address) && save === true) {
             const newAddress = { address, city, state, country, zipCode, phone, primary }
             console.log(newAddress)
             await dispatch(createAddress(user.id, newAddress)).catch(async (res) => {
@@ -89,8 +89,6 @@ export default function CheckoutPage() {
         history.push('/profile');
     };
 
-    if (!cartItems) return null;
-
     return (
         <div className='checkout-container'>
             <div className='checkout-address-container'>
@@ -103,123 +101,129 @@ export default function CheckoutPage() {
                             <span>{user.firstName} {user.lastName} ({user.email})</span>
                         )}
                         {!user && (
-                            <NavLink to='/login' exact={true} className='nav-link'>
-                                <button className='form-button' type='submit'>Login/sign up to Checkout</button>
-                            </NavLink>
+                                <NavLink to='/login' exact={true} className='nav-link'>
+                                    <button className='form-button' type='submit'>Login/sign up to Checkout</button>
+                                </NavLink>
                         )}
                     </div>
-                    <span id='shipping-header'>Shipping Address</span>
-                    <form className='saved-addresses'>
-                        {user.address.length > 0 &&(
-                            <div className='saved-addresses-container'>
-                                <label htmlFor='address-list'>Saved Addresses</label>
-                                <select id='address-list' value={savedAddress} onChange={handleSavedAddress}>
-                                {primaryAddress && (
-                                    <option>{primaryAddress.address}, {primaryAddress.city} {primaryAddress.state} {primaryAddress.country} {primaryAddress.zipCode} - Primary Address</option>
+                    {user && (
+                        <>
+                            <span id='shipping-header'>Shipping Address</span>
+                            <form className='saved-addresses'>
+                                {user.address.length > 0 && (
+                                    <div className='saved-addresses-container'>
+                                        <label htmlFor='address-list'>Saved Addresses</label>
+                                        <select id='address-list' value={savedAddress} onChange={handleSavedAddress}>
+                                            {primaryAddress && (
+                                                <option>{primaryAddress.address}, {primaryAddress.city} {primaryAddress.state} {primaryAddress.country} {primaryAddress.zipCode} - Primary Address</option>
+                                            )}
+                                            {addressList.map(addy => (
+                                                <option>{addy.address}, {addy.city} {addy.state} {addy.country} {addy.zipCode} {addy.primary ? '- Primary Address' : ''}</option>
+                                            ))}
+                                        </select>
+                                    </div>
                                 )}
-                                {addressList.map(addy => (
-                                    <option>{addy.address}, {addy.city} {addy.state} {addy.country} {addy.zipCode} {addy.primary ? '- Primary Address' : ''}</option>
-                                ))}
-                                </select>
-                            </div>
-                        )}
-                    </form>
-                    <form className='shipping-form-container'>
-                        <div>
-                            {errors.map((error, ind) => (
-                                <div key={ind}>{error}</div>
-                            ))}
-                        </div>
-                        <div className='form-input-container'>
-                            <label className='form-label'>Address</label>
-                            <input
-                                type='text'
-                                name='address'
-                                placeholder='Address'
-                                onChange={updateAddress}
-                                value={address}
-                                required={true}
-                                className='form-input-fields'
-                            ></input>
-                        </div>
-                        <div className='form-input-container'>
-                            <label className='form-label'>City</label>
-                            <input
-                                type='text'
-                                name='city'
-                                placeholder='City'
-                                onChange={updateCity}
-                                value={city}
-                                required={true}
-                                className='form-input-fields'
-                            ></input>
-                        </div>
-                        <div className='form-input-container'>
-                            <label className='form-label'>State</label>
-                            <select className='form-input-fields' value={state} onChange={updateState}>
-                                <option value='California'>California</option>
-                                <option value='Nevada'>Nevada</option>
-                                <option value='Arizona'>Arizona</option>
-                                <option value='Oregon'>Oregon</option>
-                            </select>
-                        </div>
-                        <div className='form-input-container'>
-                            <label className='form-label'>Country</label>
-                            <select className='form-input-fields' value={country} onChange={updateCountry}>
-                                <option value='United States'>United States</option>
-                            </select>
-                        </div>
-                        <div className='form-input-container'>
-                            <label className='form-label'>Zip Code</label>
-                            <input
-                                type='number'
-                                name='zipCode'
-                                placeholder='Zip Code'
-                                onChange={updateZipCode}
-                                value={zipCode}
-                                required={true}
-                                className='form-input-fields'
-                            ></input>
-                        </div>
-                        <div className='form-input-container'>
-                            <label className='form-label'>Phone Number</label>
-                            <input
-                                type='text'
-                                name='phone'
-                                placeholder='Phone Number'
-                                onChange={updatePhone}
-                                value={phone}
-                                required={true}
-                                className='form-input-fields'
-                            ></input>
-                        </div>
-                        {!primaryAddress && <div className='form-input-bool-container'>
-                            <input
-                                type='checkbox'
-                                name='primary'
-                                id='primary'
-                                onChange={updatePrimary}
-                                value={primary}
-                                className='form-boolean-fields'
-                            ></input>
-                            <label className='bool-label' htmlFor="primary">Set as primary address?</label>
-                        </div>}
-                        {!primaryAddress && <div className='form-input-bool-container'>
-                            <input
-                                type='checkbox'
-                                name='save'
-                                id='save'
-                                onChange={updateSave}
-                                value={save}
-                                className='form-boolean-fields'
-                            ></input>
-                            <label className='bool-label' htmlFor="save">Save address?</label>
-                        </div>}
-                    </form>
+                            </form>
+                            <form className='shipping-form-container'>
+                                <div>
+                                    {errors.map((error, ind) => (
+                                        <div key={ind}>{error}</div>
+                                    ))}
+                                </div>
+                                <div className='form-input-container'>
+                                    <label className='form-label'>Address</label>
+                                    <input
+                                        type='text'
+                                        name='address'
+                                        placeholder='Address'
+                                        onChange={updateAddress}
+                                        value={address}
+                                        required={true}
+                                        className='form-input-fields'
+                                    ></input>
+                                </div>
+                                <div className='form-input-container'>
+                                    <label className='form-label'>City</label>
+                                    <input
+                                        type='text'
+                                        name='city'
+                                        placeholder='City'
+                                        onChange={updateCity}
+                                        value={city}
+                                        required={true}
+                                        className='form-input-fields'
+                                    ></input>
+                                </div>
+                                <div className='form-input-container'>
+                                    <label className='form-label'>State</label>
+                                    <select className='form-input-fields' value={state} onChange={updateState}>
+                                        <option value='California'>California</option>
+                                        <option value='Nevada'>Nevada</option>
+                                        <option value='Arizona'>Arizona</option>
+                                        <option value='Oregon'>Oregon</option>
+                                    </select>
+                                </div>
+                                <div className='form-input-container'>
+                                    <label className='form-label'>Country</label>
+                                    <select className='form-input-fields' value={country} onChange={updateCountry}>
+                                        <option value='United States'>United States</option>
+                                    </select>
+                                </div>
+                                <div className='form-input-container'>
+                                    <label className='form-label'>Zip Code</label>
+                                    <input
+                                        type='number'
+                                        name='zipCode'
+                                        placeholder='Zip Code'
+                                        onChange={updateZipCode}
+                                        value={zipCode}
+                                        required={true}
+                                        className='form-input-fields'
+                                    ></input>
+                                </div>
+                                <div className='form-input-container'>
+                                    <label className='form-label'>Phone Number</label>
+                                    <input
+                                        type='text'
+                                        name='phone'
+                                        placeholder='Phone Number'
+                                        onChange={updatePhone}
+                                        value={phone}
+                                        required={true}
+                                        className='form-input-fields'
+                                    ></input>
+                                </div>
+                                {!primaryAddress && <div className='form-input-bool-container'>
+                                    <input
+                                        type='checkbox'
+                                        name='primary'
+                                        id='primary'
+                                        onChange={updatePrimary}
+                                        value={primary}
+                                        className='form-boolean-fields'
+                                    ></input>
+                                    <label className='bool-label' htmlFor="primary">Set as primary address?</label>
+                                </div>}
+                                {!primaryAddress && <div className='form-input-bool-container'>
+                                    <input
+                                        type='checkbox'
+                                        name='save'
+                                        id='save'
+                                        onChange={updateSave}
+                                        value={save}
+                                        className='form-boolean-fields'
+                                    ></input>
+                                    <label className='bool-label' htmlFor="save">Save address?</label>
+                                </div>}
+                            </form>
+                        </>
+                    )}
                 </div>
-                <div className='checkout-button-container'>
-                    <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>
-                </div>
+                {user && (
+                    <div className='checkout-button-container'>
+                        <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>
+                    </div>
+                )}
             </div>
             <div className='checkout-cart-container'>
                 {cartItems.map((item) =>
