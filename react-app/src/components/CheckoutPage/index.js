@@ -14,7 +14,7 @@ export default function CheckoutPage() {
     const addressList = user?.address.filter(address => address.primary !== true)
 
     const [errors, setErrors] = useState([]);
-    const [savedAddress, setSavedAddress] = useState(primaryAddress ? primaryAddress.address : '');
+    const [savedAddress, setSavedAddress] = useState('');
     const [save, setSave] = useState(false);
     const [address, setAddress] = useState(primaryAddress ? primaryAddress.address : '');
     const [city, setCity] = useState(primaryAddress ? primaryAddress.city : '');
@@ -35,8 +35,18 @@ export default function CheckoutPage() {
     if (!cartItems) return null;
 
     const handleSavedAddress = (e) => {
+        console.log('savedADRESS', savedAddress)
         setSavedAddress(e.target.value);
     };
+
+    const selectedAddress = savedAddress.split(', ');
+    if (selectedAddress.length === 5) {
+        setAddress(selectedAddress[0]);
+        setCity(selectedAddress[1]);
+        setState(selectedAddress[2]);
+        setCountry(selectedAddress[3]);
+        setZipCode(selectedAddress[4].split(' ')[0]);
+    }
 
     const updateSave = (e) => {
         setSave(!save)
@@ -96,14 +106,16 @@ export default function CheckoutPage() {
                 <li className="checkout-address-divider" />
                 <div className='shipping-container'>
                     <div className='checkout-contact-info-container'>
-                        <span id='contact-header'>Contact Information</span>
-                        {user && (
-                            <span>{user.firstName} {user.lastName} ({user.email})</span>
-                        )}
                         {!user && (
-                                <NavLink to='/login' exact={true} className='nav-link'>
-                                    <button className='form-button' type='submit'>Login/sign up to Checkout</button>
-                                </NavLink>
+                            <NavLink to='/login' exact={true} className='checkout-login-nav-link'>
+                                <button className='form-button' type='submit'>Login/sign up to Checkout</button>
+                            </NavLink>
+                        )}
+                        {user && (
+                            <>
+                                <span id='contact-header'>Contact Information</span>
+                                <span>{user.firstName} {user.lastName} ({user.email})</span>
+                            </>
                         )}
                     </div>
                     {user && (
