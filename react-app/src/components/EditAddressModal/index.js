@@ -7,11 +7,6 @@ import '../Context/ModalForms.css';
 
 export default function EditAddressModal({ user , addy}) {
     const dispatch = useDispatch();
-    // let currentState
-    // if(addy.state === 'California') currentState='CA';
-    // else if(addy.state === 'Nevada') currentState='NV';
-    // else if(addy.state === 'Arizona') currentState='AZ';
-    // else if(addy.state === 'Oregon') currentState='OR';
 
     const [errors, setErrors] = useState([]);
     const [address, setAddress] = useState(addy.address)

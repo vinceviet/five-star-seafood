@@ -33,7 +33,6 @@ export const loadCartItems = () => async (dispatch) => {
 };
 
 export const addItemToCart = (product) => async (dispatch) => {
-
     const res = await fetch(`/api/cart/addItem/${product.id}`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

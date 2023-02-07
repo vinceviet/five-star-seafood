@@ -75,7 +75,7 @@ export default function Address() {
                     )}
                     {addressList.map(addy => (
                         <div className='address-cards'>
-                            <span>Address {addy.id}</span>
+                            <span>Address</span>
                             <li className="address-divider" />
                             <span>{user.firstName} {user.lastName}</span>
                             <span>{addy.address}</span>

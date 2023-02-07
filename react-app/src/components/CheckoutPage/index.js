@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, NavLink } from "react-router-dom";
 import { loadCartItems, checkoutCart } from "../../store/cart";
+import { createAddress } from "../../store/address";
 import './CheckoutPage.css';
 
 export default function CheckoutPage() {
     const cartItems = Object.values(useSelector((state) => state.cart));
     const user = useSelector(state => state.session.user);
     let primaryAddress = user.address.find(address => address.primary === true)
+    const addressList = user.address.filter(address => address.primary !== true)
 
     const [errors, setErrors] = useState([]);
+    const [savedAddress, setSavedAddress] = useState(primaryAddress ? primaryAddress.address : '');
+    const [save, setSave] = useState(false);
     const [address, setAddress] = useState(primaryAddress ? primaryAddress.address : '');
     const [city, setCity] = useState(primaryAddress ? primaryAddress.city : '');
     const [state, setState] = useState(primaryAddress ? primaryAddress.state : '');
@@ -29,6 +33,14 @@ export default function CheckoutPage() {
     }, [dispatch])
 
     if (!cartItems) return null;
+
+    const handleSavedAddress = (e) => {
+        setSavedAddress(e.target.value);
+    };
+
+    const updateSave = (e) => {
+        setSave(!save)
+    }
 
     const updateAddress = (e) => {
         setAddress(e.target.value);
@@ -54,11 +66,24 @@ export default function CheckoutPage() {
     };
 
     const updatePrimary = (e) => {
-        setPrimary(e.target.value);
+        setPrimary(!primary);
     };
 
     const handleCheckout = async (e) => {
         e.preventDefault();
+        if(user.address.find(addy => addy.address !== address) && save === true){
+            const newAddress = { address, city, state, country, zipCode, phone, primary }
+            console.log(newAddress)
+            await dispatch(createAddress(user.id, newAddress)).catch(async (res) => {
+                const data = await res.json();
+                const validationErrors = [];
+                if (data && data.errors) setErrors(data.errors);
+                if (data && data.message) {
+                    validationErrors.push(data.message);
+                    setErrors(validationErrors);
+                };
+            });
+        }
         dispatch(checkoutCart(cartId)).then(() => dispatch(loadCartItems()))
         alert('Your order has been received!')
         history.push('/profile');
@@ -83,7 +108,22 @@ export default function CheckoutPage() {
                             </NavLink>
                         )}
                     </div>
-                    <span>Shipping Address</span>
+                    <span id='shipping-header'>Shipping Address</span>
+                    <form className='saved-addresses'>
+                        {user.address.length > 0 &&(
+                            <div className='saved-addresses-container'>
+                                <label htmlFor='address-list'>Saved Addresses</label>
+                                <select id='address-list' value={savedAddress} onChange={handleSavedAddress}>
+                                {primaryAddress && (
+                                    <option>{primaryAddress.address}, {primaryAddress.city} {primaryAddress.state} {primaryAddress.country} {primaryAddress.zipCode} - Primary Address</option>
+                                )}
+                                {addressList.map(addy => (
+                                    <option>{addy.address}, {addy.city} {addy.state} {addy.country} {addy.zipCode} {addy.primary ? '- Primary Address' : ''}</option>
+                                ))}
+                                </select>
+                            </div>
+                        )}
+                    </form>
                     <form className='shipping-form-container'>
                         <div>
                             {errors.map((error, ind) => (
@@ -163,6 +203,17 @@ export default function CheckoutPage() {
                                 className='form-boolean-fields'
                             ></input>
                             <label className='bool-label' htmlFor="primary">Set as primary address?</label>
+                        </div>}
+                        {!primaryAddress && <div className='form-input-bool-container'>
+                            <input
+                                type='checkbox'
+                                name='save'
+                                id='save'
+                                onChange={updateSave}
+                                value={save}
+                                className='form-boolean-fields'
+                            ></input>
+                            <label className='bool-label' htmlFor="save">Save address?</label>
                         </div>}
                     </form>
                 </div>

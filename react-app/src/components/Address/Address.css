@@ -38,8 +38,9 @@
     margin-left: -3px;
 }
 
-.add-address-button:hover {
+.add-address-modal:hover {
     background-color: rgb(136, 193, 213);
+    cursor: pointer;
 }
 
 

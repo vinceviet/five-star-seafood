@@ -77,6 +77,10 @@ def sign_up():
             password=form.data['password']
         )
         db.session.add(user)
+        current_cart = Cart.query.filter(Cart.user_id == None).first()
+        if current_cart:
+            current_cart.user_id = user.id
+            db.session.commit()
         db.session.commit()
         login_user(user)
         return user.to_dict()
