@@ -4,7 +4,7 @@ from app.models import db, Review, Product
 from ..forms import ReviewForm
 from datetime import datetime
 from sqlalchemy import and_
-# from .auth_routes import validation_errors_to_error_messages
+from .auth_routes import validation_errors_to_error_messages
 
 
 reviews_routes = Blueprint('reviews', __name__)
@@ -44,8 +44,8 @@ def create_review(id):
         return new_review.to_dict(), 201
 
     # return new_review.to_dict(), 201
-    return {'errors': [form.errors]}
-    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    # return {'errors': [form.errors]}
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @reviews_routes.route('/product/<int:id>/reviews', methods=['PUT'])

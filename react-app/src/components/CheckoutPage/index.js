@@ -35,18 +35,18 @@ export default function CheckoutPage() {
     if (!cartItems) return null;
 
     const handleSavedAddress = (e) => {
-        console.log('savedADRESS', savedAddress)
         setSavedAddress(e.target.value);
-    };
 
-    const selectedAddress = savedAddress.split(', ');
-    if (selectedAddress.length === 5) {
-        setAddress(selectedAddress[0]);
-        setCity(selectedAddress[1]);
-        setState(selectedAddress[2]);
-        setCountry(selectedAddress[3]);
-        setZipCode(selectedAddress[4].split(' ')[0]);
-    }
+        const selectedAddress = e.target.value.split(', ');
+        console.log('savedADRESS', selectedAddress)
+        if (selectedAddress.length === 5) {
+            setAddress(selectedAddress[0]);
+            setCity(selectedAddress[1]);
+            setState(selectedAddress[2]);
+            setCountry(selectedAddress[3]);
+            setZipCode(selectedAddress[4]);
+        }
+    };
 
     const updateSave = (e) => {
         setSave(!save)
@@ -130,7 +130,7 @@ export default function CheckoutPage() {
                                                 <option>{primaryAddress.address}, {primaryAddress.city} {primaryAddress.state} {primaryAddress.country} {primaryAddress.zipCode} - Primary Address</option>
                                             )}
                                             {addressList.map(addy => (
-                                                <option>{addy.address}, {addy.city} {addy.state} {addy.country} {addy.zipCode} {addy.primary ? '- Primary Address' : ''}</option>
+                                                <option>{addy.address}, {addy.city} {addy.state} {addy.country} {addy.zipCode} {addy.primary}</option>
                                             ))}
                                         </select>
                                     </div>

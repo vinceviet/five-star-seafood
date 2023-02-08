@@ -31,8 +31,6 @@ export const createReview = (productId, review) => async dispatch => {
     });
     if (res.ok) {
         const review = await res.json();
-        // review.productId = productId;
-        // review.User = user;
         dispatch(add(review))
         return review;
     };
