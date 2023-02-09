@@ -122,6 +122,8 @@ class Product(db.Model):
     category = db.relationship('Category', back_populates='products')
     review = db.relationship('Review', back_populates='product')
     cart_item = db.relationship('CartItem', back_populates='products')
+    order = db.relationship('Order', back_populates='products')
+
 
     def to_dict(self):
         return {
@@ -185,19 +187,37 @@ class Order(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    order_number = db.Column(db.String, nullable=False)
     date_time = db.Column(db.String(255), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), nullable=False)
+    product_quantity = db.Column(db.Integer, nullable=False)
+    total_item_price = db.Column(db.Float, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(255), nullable=False)
+    item_url = db.Column(db.Text, nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
     cart_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('carts.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
 
     user = db.relationship('User', back_populates='order')
     cart = db.relationship('Cart', back_populates='order')
+    products = db.relationship('Product', back_populates='order')
 
     def to_dict(self):
         return {
             'id': self.id,
+            'orderNumber': self.order_number,
             'dateTime': self.date_time,
+            'productQuantity': self.product_quantity,
+            'totalItemPrice': self.total_item_price,
+            'price': self.price,
+            'name': self.name,
+            'description': self.description,
+            'itemUrl': self.item_url,
+            'productId': self.product_id,
             'userId': self.user_id,
             'cartId': self.cart_id
         }

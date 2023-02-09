@@ -1,7 +1,9 @@
 from flask import Blueprint, session
 from flask_login import login_required, current_user
-from app.models import db, Cart, Product, CartItem, User
+from app.models import db, Cart, Product, CartItem, Order
 from sqlalchemy import and_
+from random import random, randint
+from datetime import datetime
 
 
 cart_routes = Blueprint('cart', __name__)
@@ -98,3 +100,26 @@ def checkout_cart(id):
     db.session.delete(cart)
     db.session.commit()
     return cart.to_dict()
+
+@cart_routes.route('/checkout/<int:id>', methods=['POST'])
+def add_order(id):
+    random_num = random.randint(10000, 100000)
+    cart_items = CartItem.query.filter(CartItem.cart_id == id).all()
+    for item in cart_items:
+        order_item = Order(
+            order_number=(f'FS{random_num}'),
+            date_time=datetime.now().strftime("%m/%d/%Y %H:%M"),
+            cart_id=item.cart_id,
+            product_quantity=item.product_quantity,
+            total_item_price=item.total_item_price,
+            price=item.price,
+            name=item.name,
+            description=item.description,
+            item_url=item.item_url,
+            product_id=item.product_id,
+            user_id=current_user.id
+        )
+        db.session.add(order_item)
+    new_order = Order.query.filter(Order.cart_id == id).first()
+    db.session.commit()
+    return new_order.to_dict()
