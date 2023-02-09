@@ -23,6 +23,18 @@
                     if (data && data.errors) setErrors(data.errors);
                 });
 
+            // const data = await dispatch(createReview(productId, newReview)).then(closeModal)
+            // console.log('data', data)
+            // if (data) {
+            //     let errorStrings = []
+            //     data.forEach(err =>
+            //       errorStrings.push(err.split(':')[1]))
+            //     console.log('errorrs', errorStrings)
+            //     setErrors(errorStrings)
+            //   }
+
+            // await dispatch(getProductDetails(productId))
+
         };
 
         return (
@@ -33,9 +45,9 @@
                 </header>
                 <li className="header-divider"></li>
                 <form onSubmit={handleSubmit}>
-                    <ul>
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                    </ul>
+                    <div>
+                        {errors.map((error, idx) => <div key={idx}>{error}</div>)}
+                    </div>
                     <div className='form-input-container'>
                         <label className='form-label'>Review</label>
                         <input

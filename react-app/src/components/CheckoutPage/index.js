@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, NavLink } from "react-router-dom";
 import { loadCartItems, checkoutCart } from "../../store/cart";
 import { createAddress } from "../../store/address";
+import { getUser } from "../../store/session";
 import './CheckoutPage.css';
 
 export default function CheckoutPage() {
@@ -15,14 +16,12 @@ export default function CheckoutPage() {
 
     const [errors, setErrors] = useState([]);
     const [savedAddress, setSavedAddress] = useState('');
-    const [save, setSave] = useState(false);
     const [address, setAddress] = useState(primaryAddress ? primaryAddress.address : '');
     const [city, setCity] = useState(primaryAddress ? primaryAddress.city : '');
     const [state, setState] = useState(primaryAddress ? primaryAddress.state : '');
     const [country, setCountry] = useState(primaryAddress ? primaryAddress.country : '');
     const [zipCode, setZipCode] = useState(primaryAddress ? primaryAddress.zipCode : '');
     const [phone, setPhone] = useState(primaryAddress ? primaryAddress.phone : '');
-    const [primary, setPrimary] = useState(false)
 
     let cartId
     cartItems.forEach(item =>
@@ -47,10 +46,6 @@ export default function CheckoutPage() {
         }
     };
 
-    const updateSave = (e) => {
-        setSave(!save)
-    }
-
     const updateAddress = (e) => {
         setAddress(e.target.value);
     };
@@ -74,15 +69,12 @@ export default function CheckoutPage() {
         setPhone(e.target.value);
     };
 
-    const updatePrimary = (e) => {
-        setPrimary(!primary);
-    };
-
     const handleCheckout = async (e) => {
         e.preventDefault();
-        if (user.address.find(addy => addy.address !== address) && save === true) {
-            const newAddress = { address, city, state, country, zipCode, phone, primary }
-            console.log(newAddress)
+        if (user.address.find(addy => addy.address !== address)) {
+            const newAddress = { address, city, state, country, zipCode, phone }
+            console.log('newAddress', newAddress)
+            console.log('userID', user)
             await dispatch(createAddress(user.id, newAddress)).catch(async (res) => {
                 const data = await res.json();
                 const validationErrors = [];
@@ -92,6 +84,7 @@ export default function CheckoutPage() {
                     setErrors(validationErrors);
                 };
             });
+            await dispatch(getUser(user.id))
         }
         dispatch(checkoutCart(cartId)).then(() => dispatch(loadCartItems()))
         alert('Your order has been received!')
@@ -104,6 +97,11 @@ export default function CheckoutPage() {
                 <span className='checkout-address-header'>Five Star Seafood and Provisions</span>
                 <li className="checkout-address-divider" />
                 <div className='shipping-container'>
+                    <div className='back-to-cart'>
+                        <NavLink to='/cart' exact={true} className='nav-link'>
+                            BACK TO CART
+                        </NavLink>
+                    </div>
                     <div className='checkout-contact-info-container'>
                         {!user && (
                             <NavLink to='/login' exact={true} className='checkout-login-nav-link'>
@@ -126,16 +124,16 @@ export default function CheckoutPage() {
                                         <label htmlFor='address-list'>Saved Addresses</label>
                                         <select id='address-list' value={savedAddress} onChange={handleSavedAddress}>
                                             {primaryAddress && (
-                                                <option>{primaryAddress.address}, {primaryAddress.city} {primaryAddress.state} {primaryAddress.country} {primaryAddress.zipCode} - Primary Address</option>
+                                                <option>{primaryAddress.address}, {primaryAddress.city}, {primaryAddress.state}, {primaryAddress.country}, {primaryAddress.zipCode}</option>
                                             )}
                                             {addressList.map(addy => (
-                                                <option>{addy.address}, {addy.city} {addy.state} {addy.country} {addy.zipCode} {addy.primary}</option>
+                                                <option>{addy.address}, {addy.city}, {addy.state}, {addy.country}, {addy.zipCode}</option>
                                             ))}
                                         </select>
                                     </div>
                                 )}
                             </form>
-                            <form className='shipping-form-container'>
+                            <form className='shipping-form-container' onSubmit={handleCheckout}>
                                 <div>
                                     {errors.map((error, ind) => (
                                         <div key={ind}>{error}</div>
@@ -149,8 +147,8 @@ export default function CheckoutPage() {
                                         placeholder='Address'
                                         onChange={updateAddress}
                                         value={address}
-                                        required={true}
                                         className='form-input-fields'
+                                        required
                                     ></input>
                                 </div>
                                 <div className='form-input-container'>
@@ -204,37 +202,13 @@ export default function CheckoutPage() {
                                         className='form-input-fields'
                                     ></input>
                                 </div>
-                                {!primaryAddress && <div className='form-input-bool-container'>
-                                    <input
-                                        type='checkbox'
-                                        name='primary'
-                                        id='primary'
-                                        onChange={updatePrimary}
-                                        value={primary}
-                                        className='form-boolean-fields'
-                                    ></input>
-                                    <label className='bool-label' htmlFor="primary">Set as primary address?</label>
-                                </div>}
-                                {!primaryAddress && <div className='form-input-bool-container'>
-                                    <input
-                                        type='checkbox'
-                                        name='save'
-                                        id='save'
-                                        onChange={updateSave}
-                                        value={save}
-                                        className='form-boolean-fields'
-                                    ></input>
-                                    <label className='bool-label' htmlFor="save">Save address?</label>
-                                </div>}
+                                <div className='checkout-button-container'>
+                                    <button className='checkout-checkout-button' type='submit'>Checkout</button>
+                                </div>
                             </form>
                         </>
                     )}
                 </div>
-                {user && (
-                    <div className='checkout-button-container'>
-                        <button className='checkout-checkout-button' onClick={handleCheckout}>Checkout</button>
-                    </div>
-                )}
             </div>
             <div className='checkout-cart-container'>
                 {cartItems.map((item) =>
