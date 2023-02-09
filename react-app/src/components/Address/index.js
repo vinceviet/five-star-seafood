@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import OpenModalMenuItem from "../Modal/OpenModalMenuItem";
+import StyledOpenModalMenuItem from "../Modal/StyledOpenModalMenuItem";
 import CreateAddressModal from "../CreateAddressModal";
 import EditAddressModal from "../EditAddressModal";
 import DeleteAddressModal from "../DeleteAddressModal";
@@ -38,12 +39,12 @@ export default function Address() {
                         BACK TO ACCOUNT
                     </NavLink>
                     <span id='my-address'>MY ADDRESSES</span>
-                    <div className='add-address-modal'>
-                        <OpenModalMenuItem
-                            itemText="ADD A NEW ADDRESS"
-                            onItemClick={closeMenu}
-                            modalComponent={<CreateAddressModal user={user} />}
-                        />
+                    <div>
+                            <StyledOpenModalMenuItem
+                                itemText="ADD A NEW ADDRESS"
+                                onItemClick={closeMenu}
+                                modalComponent={<CreateAddressModal user={user} />}
+                            />
                     </div>
                 </div>
                 <div className='address-cards-container'>
@@ -82,7 +83,7 @@ export default function Address() {
                             <span>{addy.city}, {addy.state} {addy.zipCode}</span>
                             <span>{addy.country}</span>
                             <div className='edit-delete-address'>
-                            <div className='modify-address-modal'>
+                                <div className='modify-address-modal'>
                                     <OpenModalMenuItem
                                         itemText="Edit"
                                         onItemClick={closeMenu}

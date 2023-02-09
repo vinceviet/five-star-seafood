@@ -45,6 +45,7 @@ def create_review(id):
 
     # return new_review.to_dict(), 201
     # return {'errors': [form.errors]}
+    print('-----------', form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
