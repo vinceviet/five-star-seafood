@@ -65,8 +65,8 @@ const NavBar = () => {
       </div>
       <div className='cart-user'>
         <div className='nav-cart'>
-          {cartItems.length > 0 && <span className='num-in-cart'>{totalItems}</span>}
           <NavLink to='/cart' exact={true} activeClassName='active' className='nav-link'>
+          {cartItems.length > 0 && <span className='num-in-cart'>{totalItems}</span>}
             <img className='cart-icon' src={cart} alt='cartIcon' />
           </NavLink>
         </div>

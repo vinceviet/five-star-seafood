@@ -73,8 +73,6 @@ export default function CheckoutPage() {
         e.preventDefault();
         if (user.address.find(addy => addy.address !== address)) {
             const newAddress = { address, city, state, country, zipCode, phone }
-            console.log('newAddress', newAddress)
-            console.log('userID', user)
             await dispatch(createAddress(user.id, newAddress)).catch(async (res) => {
                 const data = await res.json();
                 const validationErrors = [];
@@ -98,7 +96,7 @@ export default function CheckoutPage() {
                 <li className="checkout-address-divider" />
                 <div className='shipping-container'>
                     <div className='back-to-cart'>
-                        <NavLink to='/cart' exact={true} className='nav-link'>
+                        <NavLink id='back-to-cart' to='/cart' exact={true} className='nav-link'>
                             BACK TO CART
                         </NavLink>
                     </div>

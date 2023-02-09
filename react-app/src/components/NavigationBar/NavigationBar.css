@@ -2,7 +2,7 @@
     cursor: pointer;
 }
 
-.nav-bar-container{
+.nav-bar-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -17,7 +17,7 @@
     z-index: 10;
 }
 
-.product-list{
+.product-list {
     display: flex;
     align-items: center;
 }
@@ -35,11 +35,11 @@
     text-decoration: none;
 }
 
-.fish-icon{
+.fish-icon {
     width: 40px;
 }
 
-.search-icon-container{
+.search-icon-container {
     width: 123px;
 }
 
@@ -55,7 +55,7 @@
     width: 25px;
 }
 
-.product-list{
+.product-list {
     display: flex;
     gap: 15px;
 }
@@ -66,14 +66,14 @@
     gap: 15px;
 }
 
-.nav-cart{
+.nav-cart {
     position: relative;
 }
 
-.num-in-cart{
+.num-in-cart {
     position: absolute;
     left: 7px;
     font-size: 12px;
-    min-width:20px;
+    min-width: 20px;
     text-align: center;
 }
