@@ -112,7 +112,6 @@ def checkout_cart(id):
 def add_order(id):
     order_num = (f'FS{random.randint(10000, 100000)}')
     cart_items = CartItem.query.filter(CartItem.cart_id == id).all()
-    print('--------------------------CART', cart_items)
     for item in cart_items:
         order_item = Order(
             order_number=order_num,
@@ -128,7 +127,7 @@ def add_order(id):
             user_id=current_user.id
         )
         db.session.add(order_item)
+        
     new_order = Order.query.filter(Order.cart_id == id).all()
-    print('--------------------------ORDER', new_order)
     db.session.commit()
     return {'orders' : [orders.to_dict() for orders in new_order]}, 201
