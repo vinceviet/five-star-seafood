@@ -2,7 +2,7 @@ const LOAD_CART = 'cart/LOAD_CART';
 const ADD_ITEM = 'cart/ADD_ITEM';
 const MINUS_ONE = 'cart/MINUS_ONE';
 const REMOVE_ITEM = 'cart/REMOVE_ITEM';
-const CHECKOUT = 'cart/CHECKOUT'
+const CHECKOUT = 'cart/CHECKOUT';
 
 const loadCart = (cartItems) => ({
     type: LOAD_CART, cartItems
@@ -97,7 +97,6 @@ export const checkoutCart = (cart) => async (dispatch) => {
         return null;
     };
 };
-
 
 const initialState = {}
 

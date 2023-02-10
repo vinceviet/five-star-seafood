@@ -4,6 +4,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import { loadCartItems, checkoutCart } from "../../store/cart";
 import { createAddress } from "../../store/address";
 import { getUser } from "../../store/session";
+import { addToOrder } from "../../store/orders";
 import './CheckoutPage.css';
 
 export default function CheckoutPage() {
@@ -84,7 +85,7 @@ export default function CheckoutPage() {
             });
             await dispatch(getUser(user.id))
         }
-        dispatch(checkoutCart(cartId)).then(() => dispatch(loadCartItems()))
+        await dispatch(addToOrder(cartId)).then(() => dispatch(checkoutCart(cartId))).then(() => dispatch(loadCartItems()))
         alert('Your order has been received!')
         history.push('/profile');
     };
