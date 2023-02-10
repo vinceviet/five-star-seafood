@@ -15,7 +15,7 @@ export default function Profile() {
     const orderObject = {};
     orderNums.forEach(orderNum => {
         const order = orders.find(item => item.orderNumber === orderNum);
-        orderObject[orderNum] = order.dateTime.split(' ')[0];
+        orderObject['dateTime'] = order.dateTime.split(' ')[0];
         // orderObject[orderNum] = { totalPrice: order.reduce((total, item) => total + item.totalItemPrice, 0).toFixed(2)}
     });
 
@@ -55,7 +55,7 @@ export default function Profile() {
                                             <div className='order-cards'>
                                                 <div className='order-date-card'>
                                                     <span>{order}</span>
-                                                    {/* <span>{orderObject}</span> */}
+                                                    <span>{orderObject.dateTime}</span>
                                                 </div>
                                             </div>
                                             <li className="order-divider" />
