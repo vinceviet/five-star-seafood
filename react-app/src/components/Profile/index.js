@@ -54,7 +54,9 @@ export default function Profile() {
                                         <>
                                             <div className='order-cards'>
                                                 <div className='order-date-card'>
-                                                    <span>{order}</span>
+                                                    <NavLink to={`/orders/${order}`} state={{ order: order }}>
+                                                        {order}
+                                                    </NavLink>
                                                     {/* <span>{orderObject}</span> */}
                                                 </div>
                                             </div>

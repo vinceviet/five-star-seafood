@@ -16,7 +16,7 @@ def order_details(orderNum):
     return {'orders': order.to_dict() for order in orders}
 
 @orders_routes.route('/<string:orderNum>', methods=['DELETE'])
-def order_details(orderNum):
+def order_page_details(orderNum):
     orders = Order.query.filter(Order.order_number == orderNum).all()
     [db.session.delete(order) for order in orders]
     db.session.commit()
