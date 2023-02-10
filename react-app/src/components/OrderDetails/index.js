@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetails } from "../../store/orders";
 import './OrderDetails.css';
 
 export default function OrderDetails() {
     const dispatch = useDispatch();
     const {orderNum} = useParams();
-    console.log('ORDERDETS', orderNum)
+    const order = Object.values(useSelector((state) => state.orders));
+    console.log('ORDER', order)
 
     useEffect(() => {
         dispatch(getOrderDetails(orderNum))
