@@ -23,7 +23,7 @@ export const addToOrder = (cart) => async (dispatch) => {
 };
 
 export const getOrders = () => async (dispatch) => {
-    const res = await fetch('/api/cart/orders')
+    const res = await fetch('/api/orders')
     if (res.ok) {
         const orders = await res.json()
         dispatch(loadOrders(orders));
