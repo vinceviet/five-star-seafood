@@ -31,6 +31,7 @@ export const getOrders = () => async (dispatch) => {
 };
 
 export const getOrderDetails = (orderNum) => async (dispatch) => {
+    console.log('THUNK HITTING')
     const res = await fetch(`/api/orders/${orderNum}`)
     if (res.ok) {
         const orders = await res.json()

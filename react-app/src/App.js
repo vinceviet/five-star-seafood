@@ -13,6 +13,7 @@ import SplashPage from './components/SplashPage';
 import Profile from './components/Profile';
 import CheckoutPage from './components/CheckoutPage';
 import Address from './components/Address';
+import OrderDetails from './components/OrderDetails';
 import Footer from './components/Footer';
 
 function App() {
@@ -54,6 +55,9 @@ function App() {
         </Route>
         <ProtectedRoute path='/profile' exact={true} >
           <Profile />
+        </ProtectedRoute>
+        <ProtectedRoute path='/orders/:orderNum' exact={true} >
+          <OrderDetails />
         </ProtectedRoute>
         <ProtectedRoute path='/user/address' exact={true} >
           <Address />
