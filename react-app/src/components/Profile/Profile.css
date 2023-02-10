@@ -1,4 +1,4 @@
-.profile-container{
+.profile-container {
     display: flex;
     flex-direction: column;
     padding-top: 20px;
@@ -60,19 +60,19 @@
     list-style: none;
 }
 
-.profile-header{
+.profile-header {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 30px;
 }
 
-#my-account{
+#my-account {
     font-size: 30px;
     font-weight: bold;
 }
 
-.logout-button{
+.logout-button {
     color: white;
     background-color: rgb(79, 141, 163);
     border: 1px black solid;
@@ -88,7 +88,7 @@
     background-color: rgb(136, 193, 213);
 }
 
-.order-history-container{
+.order-history-container {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -98,14 +98,14 @@
 
 }
 
-.orders-header{
+.orders-header {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
     padding: 0 0 10px 0;
 }
 
-.order-date{
+.order-date {
     display: flex;
     gap: 100px;
 }
@@ -117,7 +117,7 @@
     list-style: none;
 }
 
-.orders-list{
+.orders-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -125,11 +125,19 @@
     font-size: 12px;
 }
 
-.order-cards{
+.order-cards {
     display: flex;
 }
 
-.order-date-card{
+.order-date-card {
     display: flex;
     gap: 88px;
+}
+
+.orders-nav-link {
+    color: black;
+}
+
+.orders-nav-link:hover {
+    color: rgb(136, 193, 213);
 }

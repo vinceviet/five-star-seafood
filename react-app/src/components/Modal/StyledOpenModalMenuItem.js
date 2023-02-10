@@ -16,7 +16,7 @@ function StyledOpenModalMenuItem({
     };
 
     return (
-        <button className='add-address-modal' onClick={onClick}>{itemText}</button>
+        <button className='add-address-modal cancel-order' onClick={onClick}>{itemText}</button>
     );
 }
 

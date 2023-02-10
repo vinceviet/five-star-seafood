@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetails } from "../../store/orders";
-import StyledOpenModalMenuItem from "../Modal/OpenModalMenuItem";
+import StyledOpenModalMenuItem from "../Modal/StyledOpenModalMenuItem";
 import DeleteOrderModal from "../DeleteOrderModal";
 import './OrderDetails.css';
 
@@ -77,9 +77,22 @@ export default function OrderDetails() {
                             </div>
                         </div>
                     ))}
+                <li className="order-divider" />
+                </div>
+                <div className='order-subtotal-container'>
+                    <div className='orders-shipping'>
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div className='order-total-price-container'>
+                        <span>Total</span>
+                        <div>
+                            <div>${Number(order.reduce((total, item) => total + item.totalItemPrice, 0)).toFixed(2)}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className='cancel-order'>
+            <div>
                 <StyledOpenModalMenuItem
                     itemText="CANCEL ORDER"
                     onItemClick={closeMenu}

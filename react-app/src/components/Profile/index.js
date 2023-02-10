@@ -9,7 +9,7 @@ export default function Profile() {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user)
     const orders = Object.values(useSelector((state) => state.orders))
-   const orderNums = Array.from(new Set(orders.map(item => item.orderNumber)));
+    const orderNums = Array.from(new Set(orders.map(item => item.orderNumber)));
 
     const orderObject = {};
     orderNums.forEach(orderNum => {
@@ -18,6 +18,7 @@ export default function Profile() {
         // orderObject[orderNum] = { totalPrice: order.reduce((total, item) => total + item.totalItemPrice, 0).toFixed(2)}
     });
 
+    console.log('orderObject', orderObject)
     let primaryAddress = user.address.find(address => address.primary === true)
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export default function Profile() {
                 </div>
                 <div className='profile-info-container'>
                     <div className='order-history-container'>
-                        {!orders && (
+                        {orders.length < 1 && (
                             <span>Order History Empty</span>
                         )}
                         {orders && (
@@ -52,7 +53,7 @@ export default function Profile() {
                                         <>
                                             <div className='order-cards'>
                                                 <div className='order-date-card'>
-                                                    <NavLink to={`/orders/${order}`}>
+                                                    <NavLink to={`/orders/${order}`} className='orders-nav-link'>
                                                         {order}
                                                     </NavLink>
                                                     {/* <span>{orderObject}</span> */}
