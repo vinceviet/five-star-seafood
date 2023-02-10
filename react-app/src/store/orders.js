@@ -22,12 +22,12 @@ export const addToOrder = (cart) => async (dispatch) => {
 const initialState = {}
 
 export default function orders(state = initialState, action) {
-    let newState = {...state}
+    // let newState = {...state}
     switch (action.type) {
         case ADD_ORDER:
             console.log('acccction', action)
-            newState['orders'] = action.orders.orders
-            return newState
+            // newState['orders'] = action.orders.orders
+            return {...state, ...action.orders.orders}
         default:
             return state;
     }
