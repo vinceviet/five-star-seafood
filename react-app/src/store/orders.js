@@ -1,7 +1,12 @@
 const ADD_ORDER = 'order/ADD_ORDER';
+const LOAD_ORDERS = 'order/LOAD_ORDERS'
 
 const addOrder = (orders) => ({
     type: ADD_ORDER, orders
+});
+
+const loadOrders = (orders) => ({
+    type: LOAD_ORDERS, orders
 });
 
 export const addToOrder = (cart) => async (dispatch) => {
@@ -17,12 +22,27 @@ export const addToOrder = (cart) => async (dispatch) => {
     };
 };
 
+export const getOrders = () => async (dispatch) => {
+    const res = await fetch('/api/cart/orders')
+    if (res.ok) {
+        const orders = await res.json()
+        dispatch(loadOrders(orders));
+    };
+}
+
 const initialState = {}
 
 export default function orders(state = initialState, action) {
     switch (action.type) {
         case ADD_ORDER:
             return {...state, ...action.orders.orders}
+        case LOAD_ORDERS:
+            let newState = {}
+            const ordersList = [...action.orders.orders];
+            ordersList.forEach(item => {
+                newState[item.id] = item
+            })
+            return newState
         default:
             return state;
     }

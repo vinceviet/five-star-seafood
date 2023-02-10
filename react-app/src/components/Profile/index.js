@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LogoutButton from "../auth/LogoutButton";
 import { NavLink } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrders } from "../../store/orders";
 import './Profile.css';
 
 export default function Profile() {
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user)
+    const orders = Object.values(useSelector((state) => state.orders))
+    const orderNums = Array.from(new Set(orders.map(item => item.orderNumber)));
+    console.log('ORDERS IN OBJECT', orders)
+
+    const orderObject = {};
+    orderNums.forEach(orderNum => {
+        const order = orders.find(item => item.orderNumber === orderNum);
+        orderObject['dateTime'] = order.dateTime.split(' ')[0];
+        // orderObject[orderNum] = { totalPrice: order.reduce((total, item) => total + item.totalItemPrice, 0).toFixed(2)}
+    });
+
+    console.log('ORDERS', orderObject)
     let primaryAddress = user.address.find(address => address.primary === true)
+
+    useEffect(() => {
+        dispatch(getOrders())
+    }, [dispatch])
 
     return (
         <>
@@ -18,7 +36,34 @@ export default function Profile() {
                 </div>
                 <div className='profile-info-container'>
                     <div className='order-history-container'>
-                        <span>Order History Coming Soon...</span>
+                        {!orders && (
+                            <span>Order History Empty</span>
+                        )}
+                        {orders && (
+                            <>
+                                <div className='orders-header'>
+                                    <div className='order-date'>
+                                        <span>ORDER</span>
+                                        <span>DATE</span>
+                                    </div>
+                                    <span>TOTAL</span>
+                                </div>
+                                <li className="order-divider" />
+                                <div className='orders-list'>
+                                    {orderNums.map(order => (
+                                        <>
+                                            <div className='order-cards'>
+                                                <div className='order-date-card'>
+                                                    <span>{order}</span>
+                                                    <span>{orderObject.dateTime}</span>
+                                                </div>
+                                            </div>
+                                            <li className="order-divider" />
+                                        </>
+                                    ))}
+                                </div>
+                            </>
+                        )}
                     </div>
                     <div className='address-info-container'>
                         <span>PRIMARY ADDRESS</span>
