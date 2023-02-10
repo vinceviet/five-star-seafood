@@ -131,8 +131,3 @@ def add_order(id):
     new_order = Order.query.filter(Order.cart_id == id).all()
     db.session.commit()
     return {'orders' : [orders.to_dict() for orders in new_order]}, 201
-
-@cart_routes.route('/orders')
-def load_orders():
-    orders = Order.query.all()
-    return {'orders': [order.to_dict() for order in orders]}
