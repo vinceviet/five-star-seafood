@@ -1,6 +1,7 @@
 const ADD_ORDER = 'order/ADD_ORDER';
 const LOAD_ORDERS = 'order/LOAD_ORDERS';
 const ORDER_DETAILS = 'order/ORDER_DETAILS';
+const DELETE_ORDER = 'order/DELETE_ORDER';
 
 const addOrder = (orders) => ({
     type: ADD_ORDER, orders
@@ -12,6 +13,10 @@ const loadOrders = (orders) => ({
 
 const loadOrderDetails = (orderNum) => ({
     type: ORDER_DETAILS, orderNum
+});
+
+const deleteOrder = (order) => ({
+    type: DELETE_ORDER, order
 });
 
 export const addToOrder = (cart) => async (dispatch) => {
@@ -43,6 +48,18 @@ export const getOrderDetails = (orderNum) => async (dispatch) => {
     };
 };
 
+export const cancelOrder = (orderNum) => async (dispatch) => {
+    const res = await fetch(`/api/orders/${orderNum}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+    });
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(deleteOrder(data));
+        return null;
+    };
+};
+
 
 
 const initialState = {}
@@ -59,11 +76,13 @@ export default function orders(state = initialState, action) {
             })
             return newState
         case ORDER_DETAILS:
-            const orderList = [action.orderNum.orders];
+            const orderList = [...action.orderNum.orders];
             orderList.forEach(item => {
                 newState[item.id] = item
             })
             return newState
+        case DELETE_ORDER:
+            return {...state}
         default:
             return state;
     }

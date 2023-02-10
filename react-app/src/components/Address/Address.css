@@ -78,3 +78,7 @@
 .modify-address-modal:hover{
     cursor: pointer;
 }
+
+#back-to-account:hover{
+    color:rgb(136, 193, 213);
+}

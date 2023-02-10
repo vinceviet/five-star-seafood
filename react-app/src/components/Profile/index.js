@@ -9,17 +9,15 @@ export default function Profile() {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user)
     const orders = Object.values(useSelector((state) => state.orders))
-    const orderNums = Array.from(new Set(orders.map(item => item.orderNumber)));
-    console.log('ORDERS IN OBJECT', orders)
+   const orderNums = Array.from(new Set(orders.map(item => item.orderNumber)));
 
     const orderObject = {};
     orderNums.forEach(orderNum => {
         const order = orders.find(item => item.orderNumber === orderNum);
-        orderObject[orderNum] = order.dateTime.split(' ')[0];
+        orderObject[orderNum] = order.dateTime?.split(' ')[0];
         // orderObject[orderNum] = { totalPrice: order.reduce((total, item) => total + item.totalItemPrice, 0).toFixed(2)}
     });
 
-    console.log('ORDERS', orderObject)
     let primaryAddress = user.address.find(address => address.primary === true)
 
     useEffect(() => {

@@ -35,7 +35,7 @@ export default function Address() {
         <>
             <div className='address-page-container'>
                 <div className='address-page-header'>
-                    <NavLink to='/profile' exact={true} className='nav-link'>
+                    <NavLink id='back-to-account' to='/profile' exact={true} className='nav-link'>
                         BACK TO ACCOUNT
                     </NavLink>
                     <span id='my-address'>MY ADDRESSES</span>

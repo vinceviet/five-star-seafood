@@ -13,11 +13,12 @@ def load_orders():
 @orders_routes.route('/<string:orderNum>')
 def order_details(orderNum):
     orders = Order.query.filter(Order.order_number == orderNum).all()
-    return {'orders': order.to_dict() for order in orders}
+
+    return {'orders': [order.to_dict() for order in orders]}
 
 @orders_routes.route('/<string:orderNum>', methods=['DELETE'])
-def order_page_details(orderNum):
+def delete_order(orderNum):
     orders = Order.query.filter(Order.order_number == orderNum).all()
     [db.session.delete(order) for order in orders]
     db.session.commit()
-    return orders.to_dict()
+    return {'message': 'order successfully cancelled'}
