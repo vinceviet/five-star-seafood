@@ -10,12 +10,14 @@ export default function Profile() {
     const user = useSelector((state) => state.session.user)
     const orders = Object.values(useSelector((state) => state.orders))
     const orderNums = Array.from(new Set(orders.map(item => item.orderNumber)));
+  
 
     const orderObject = {};
     orderNums.forEach(orderNum => {
-        const order = orders.find(item => item.orderNumber === orderNum);
-        orderObject[orderNum] = order.dateTime?.split(' ')[0];
-        // orderObject[orderNum] = { totalPrice: order.reduce((total, item) => total + item.totalItemPrice, 0).toFixed(2)}
+        orderObject.orderNum = orderNum;
+        const order = orders.filter(item => item.orderNumber === orderNum);
+        orderObject.dateTime = order[0].dateTime?.split(' ')[0];
+        orderObject.total = order.reduce((total, item) => total + item.totalItemPrice, 0).toFixed(2)
     });
 
     console.log('orderObject', orderObject)
@@ -56,7 +58,7 @@ export default function Profile() {
                                                     <NavLink to={`/orders/${order}`} className='orders-nav-link'>
                                                         {order}
                                                     </NavLink>
-                                                    {/* <span>{orderObject}</span> */}
+                                                    <span></span>
                                                 </div>
                                             </div>
                                             <li className="order-divider" />
