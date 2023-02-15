@@ -117,6 +117,13 @@
     list-style: none;
 }
 
+.order-date-divider {
+    background-color: rgb(194, 186, 186);
+    height: 1px;
+    width: 50%;
+    list-style: none;
+}
+
 .orders-list {
     display: flex;
     flex-direction: column;
