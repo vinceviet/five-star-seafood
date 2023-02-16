@@ -23,11 +23,6 @@ export default function ProdcutDetails() {
     const reviews = useSelector((state => state.reviews))
     const sessionUser = useSelector(state => state.session.user);
 
-    // const openMenu = () => {
-    //     if (showMenu) return;
-    //     setShowMenu(true);
-    // };
-
     useEffect(() => {
         if (!showMenu) return;
 

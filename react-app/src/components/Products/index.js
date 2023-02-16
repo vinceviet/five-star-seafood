@@ -1,9 +1,10 @@
-import React, { useEffect , useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../../store/products';
 import { addItemToCart } from '../../store/cart';
-// import CartModal from '../CartModal';
+import CartModal from '../CartModal';
+import OpenCartMainPageModal from '../Modal/OpenCartMainPageModal';
 import './Products.css';
 import seafood from '../../assets/seafood.png';
 import meat from '../../assets/meat.png';
@@ -21,6 +22,7 @@ export default function Products() {
     const products = Object.values(useSelector((state) => state.products));
     const ulRef = useRef();
     const [showMenu, setShowMenu] = useState(false);
+    const [isCartOpen, setIsCartOpen] = useState(true);
 
     useEffect(() => {
         if (!showMenu) return;
@@ -139,7 +141,14 @@ export default function Products() {
                                 </div>
                             </div>
                             <div className='product-page-buttons'>
-                                <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add to Cart</button>
+                                {/* <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add to Cart</button> */}
+                                <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>
+                                    <OpenCartMainPageModal
+                                        itemText='ADD TO CART'
+                                        onItemClick={() => setIsCartOpen(true)}
+                                        modalComponent={<CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />}
+                                    />
+                                </button>
                             </div>
                         </div>
                     )}
