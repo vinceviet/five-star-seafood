@@ -93,10 +93,13 @@
 .item-quantity-total {
     display: flex;
     gap: 230px;
+    position: relative;
 }
 
-.incart-quanity {
-    position: relative;
+.incart-quantity {
+    position: absolute;
+    right: 290px;
+    top: 18px;
 }
 
 .minus-plus {
@@ -113,20 +116,6 @@
     height: 40px;
     padding: 8px;
 }
-
-/* .minus-click{
-    position: absolute;
-}
-.plus-click{
-    position: absolute;
-    right: 10px;
-}
-.quantity-counter{
-    position: absolute;
-    left: 36px;
-    min-width: 20px;
-    text-align: center;
-} */
 
 .minus-plus>button {
     background-color: white;
@@ -159,6 +148,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* position: absolute;
+    right: 1px; */
 }
 
 .checkout-button{

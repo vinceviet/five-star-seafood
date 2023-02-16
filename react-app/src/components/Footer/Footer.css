@@ -16,6 +16,7 @@
     display: flex;
     color: white;
     align-items: center;
+    gap: 5px;
 }
 
 .git-links {
@@ -38,7 +39,8 @@
 
 .tech-container-1,
 .tech-container-2,
-.tech-container-3 {
+.tech-container-3,
+.tech-container-4 {
     display: flex;
     flex-direction: column;
     margin-left: 7px;

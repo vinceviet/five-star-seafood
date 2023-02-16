@@ -6,11 +6,7 @@ import './Cart.css';
 
 export default function Cart() {
     const dispatch = useDispatch();
-    // const [loaded, setLoaded] = useState(false);
     const cartItems = Object.values(useSelector((state) => state.cart));
-    // let cartId
-    // cartItems.forEach(item =>
-    //     cartId = item.cartId)
 
     useEffect(() => {
         dispatch(loadCartItems())

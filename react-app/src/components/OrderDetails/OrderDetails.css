@@ -85,6 +85,17 @@
     display: flex;
     gap: 70px;
     font-size: 12px;
+    position: relative
+}
+
+/* .order-qt-absolute{
+    position: absolute;
+    right: 5px;
+} */
+
+#quantity-absolute{
+    position: absolute;
+    right: 120px;
 }
 
 .cancel-order {

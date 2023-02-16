@@ -72,12 +72,14 @@ export default function OrderDetails() {
                                 </div>
                             </div>
                             <div className='order-qt-card'>
-                                <span>{item.productQuantity}</span>
-                                <span>${item.totalItemPrice}</span>
+                                {/* <div className='order-qt-absolute'> */}
+                                    <span id='quantity-absolute'>{item.productQuantity}</span>
+                                    <span id='price-absolute'>${Number(item.totalItemPrice).toFixed(2)}</span>
+                                {/* </div> */}
                             </div>
                         </div>
                     ))}
-                <li className="order-divider" />
+                    <li className="order-divider" />
                 </div>
                 <div className='order-subtotal-container'>
                     <div className='orders-shipping'>

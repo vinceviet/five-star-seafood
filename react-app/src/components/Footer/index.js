@@ -13,10 +13,8 @@ export default function Footer() {
                                 <span>Flask</span>
                                 <span>React</span>
                                 <span>Redux</span>
-                                <span>PostgreSQL</span>
                             </div>
                             <div className="tech-container-2">
-                                <span>SQLalchemy</span>
                                 <span>Alembic</span>
                                 <span>Python 3</span>
                                 <span>Html/CSS</span>
@@ -25,6 +23,10 @@ export default function Footer() {
                                 <span>Node.js</span>
                                 <span>JSX</span>
                                 <span>Javascript</span>
+                            </div>
+                            <div className="tech-container-4">
+                                <span>PostgreSQL</span>
+                                <span>SQLalchemy</span>
                                 <span>SQLite3</span>
                             </div>
                         </div>

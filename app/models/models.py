@@ -115,7 +115,7 @@ class Product(db.Model):
     avg_star_rating = db.Column(db.Float, default=0)
     category_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('categories.id')), nullable=False)
-
+    
     product_images = db.relationship(
         'ProductImage', back_populates='product', cascade='all, delete-orphan')
     category = db.relationship('Category', back_populates='products')

@@ -19,7 +19,6 @@ export default function Profile() {
         orderObject.dateTime = order[0].dateTime?.split(' ')[0];
     });
 
-    console.log('orderObject', orderObject)
     let primaryAddress = user.address.find(address => address.primary === true)
 
     useEffect(() => {
