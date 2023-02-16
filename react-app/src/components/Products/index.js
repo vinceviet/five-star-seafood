@@ -1,8 +1,9 @@
-import React, { useEffect , useState} from 'react';
+import React, { useEffect , useState, useRef} from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../../store/products';
 import { addItemToCart } from '../../store/cart';
+// import CartModal from '../CartModal';
 import './Products.css';
 import seafood from '../../assets/seafood.png';
 import meat from '../../assets/meat.png';
@@ -11,13 +12,31 @@ import dairy from '../../assets/dairy.png';
 import meals from '../../assets/meal.png';
 import bakery from '../../assets/bakery.png';
 import pantry from '../../assets/pantry.png';
-import star from '../../assets/star.png'
+import star from '../../assets/star.png';
 
 
 export default function Products() {
     const dispatch = useDispatch();
     const { category } = useParams();
     const products = Object.values(useSelector((state) => state.products));
+    const ulRef = useRef();
+    const [showMenu, setShowMenu] = useState(false);
+
+    useEffect(() => {
+        if (!showMenu) return;
+
+        const closeMenu = (e) => {
+            if (!ulRef.current.contains(e.target)) {
+                setShowMenu(false);
+            }
+        };
+
+        document.addEventListener('click', closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+
+    const closeMenu = () => setShowMenu(false);
 
     useEffect(() => {
         dispatch(getAllProducts(category));

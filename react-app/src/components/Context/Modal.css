@@ -22,3 +22,20 @@
     position: absolute;
     background-color: white;
 }
+
+.open-cart-modal-button{
+    display: flex;
+    width: 100%;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(55, 111, 132);
+    border: none;
+    font-size: 16px;
+    border-radius: 11px;
+    margin-top: 50px;
+    position: absolute;
+    bottom: 1px;
+    letter-spacing: 2px;
+}

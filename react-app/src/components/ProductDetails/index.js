@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProductDetails } from '../../store/products';
 import { addItemToCart } from '../../store/cart';
 import OpenModalMenuItem from '../Modal/OpenModalMenuItem';
+import OpenCartModal from '../Modal/OpenCartModal';
 import Reviews from '../Reviews';
 import CreateReviewModal from '../CreateReviewModal';
 import EditReviewModal from '../EditReviewModal';
@@ -16,6 +17,7 @@ export default function ProdcutDetails() {
     const dispatch = useDispatch();
     const { productId } = useParams();
     const [showMenu, setShowMenu] = useState(false);
+    const [isCartOpen, setIsCartOpen] = useState(true);
     const ulRef = useRef()
     const product = useSelector((state) => state.products[productId]);
     const reviews = useSelector((state => state.reviews))
@@ -57,13 +59,6 @@ export default function ProdcutDetails() {
         await dispatch(addItemToCart(product))
     };
 
-    const handleCartModal = async () => {
-        <OpenModalMenuItem
-            onItemClick={closeMenu}
-            modalComponent={<CartModal />}
-        />
-    }
-
     return (
         <div className='details-container'>
             <div className='details-info-container'>
@@ -80,7 +75,13 @@ export default function ProdcutDetails() {
                         <span>({product.numReviews})</span>
                     </div>
                     <span className='details-price'>${product.price}</span>
-                    <button className='details-add-to-cart' onClick={(e) => handleAddItem(e, product).then(() => handleCartModal())}>ADD TO CART</button>
+                    <button className='details-add-to-cart' onClick={(e) => handleAddItem(e, product).then(() => setIsCartOpen(true))}>
+                    <OpenCartModal
+                        itemText='ADD TO CART'
+                        onItemClick={() => setIsCartOpen(true)}
+                        modalComponent={<CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)}/>}
+                    />
+                    </button>
                 </div>
             </div>
             <div>
