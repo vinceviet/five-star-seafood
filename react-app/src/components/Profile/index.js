@@ -11,13 +11,17 @@ export default function Profile() {
     const orders = Object.values(useSelector((state) => state.orders))
     const orderNums = Array.from(new Set(orders.map(item => item.orderNumber)));
 
+    const handleDateTime = (o) => {
+        const order = orders.filter(item => item.orderNumber === o);
+        const dateTime = order[0].dateTime;
+        return dateTime;
+    }
 
-    const orderObject = {};
-    orderNums.forEach(orderNum => {
-        orderObject.orderNum = orderNum;
-        const order = orders.filter(item => item.orderNumber === orderNum);
-        orderObject.dateTime = order[0].dateTime?.split(' ')[0];
-    });
+    const handleTotalPrice = (o) => {
+        const order = orders.filter(item => item.orderNumber === o);
+        const totalPrice = order.reduce((total, item) => total + item.totalItemPrice, 0).toFixed(2);
+        return totalPrice;
+    }
 
     let primaryAddress = user.address.find(address => address.primary === true)
 
@@ -45,22 +49,30 @@ export default function Profile() {
                                         <span>ORDER</span>
                                         <span>DATE</span>
                                     </div>
+                                    <span>TOTAL</span>
                                 </div>
                                 <li className="order-date-divider" />
                                 <div className='orders-list'>
-                                    {orderNums.map(order => (
-                                        <>
-                                            <div className='order-cards'>
-                                                <div className='order-date-card'>
-                                                    <NavLink to={`/orders/${order}`} className='orders-nav-link'>
-                                                        {order}
-                                                    </NavLink>
-                                                    <span>{orderObject.dateTime}</span>
+                                    {orderNums
+                                        .sort((order1, order2) => {
+                                            const date1 = new Date(handleDateTime(order1))
+                                            const date2 = new Date(handleDateTime(order2))
+                                            return date2 - date1;
+                                        })
+                                        .map(order => (
+                                            <>
+                                                <div className='order-cards'>
+                                                    <div className='order-date-card'>
+                                                        <NavLink to={`/orders/${order}`} className='orders-nav-link'>
+                                                            {order}
+                                                        </NavLink>
+                                                        <span>{(handleDateTime(order)).split(' ')[0]}</span>
+                                                    </div>
+                                                    <span className='order-total-price'>${handleTotalPrice(order)}</span>
                                                 </div>
-                                            </div>
-                                            <li className="order-date-divider" />
-                                        </>
-                                    ))}
+                                                <li className="order-date-divider" />
+                                            </>
+                                        ))}
                                 </div>
                             </>
                         )}

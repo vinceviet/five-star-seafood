@@ -120,7 +120,7 @@
 .order-date-divider {
     background-color: rgb(194, 186, 186);
     height: 1px;
-    width: 50%;
+    width: 100%;
     list-style: none;
 }
 
@@ -143,6 +143,10 @@
 
 .orders-nav-link {
     color: black;
+}
+
+.order-total-price{
+    margin-left: auto;
 }
 
 .orders-nav-link:hover {
