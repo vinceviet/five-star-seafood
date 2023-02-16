@@ -121,7 +121,7 @@ def seed_products():
     oranges_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/CaraCara_400x.jpg?v=1614356089', product_id=orange.id)
     apples_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/fuji_400x.png?v=1632432185', product_id=apples.id)
     lemons_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/Lemon_a6ad003c-a7b4-4f9a-a976-cb316027fa0f_400x.jpg?v=1614356235', product_id=lemons.id)
-    blood_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/e85fef_713454f5b6f34cdfbe65bec3c805e444_mv2_400x.jpg?v=1604242973', product_id=blood.id)
+    blood_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/MoroBloodOrange_400x.jpg?v=1675569869', product_id=blood.id)
 
     straus_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FSS_web-19_400x.jpg?v=1612978983', product_id=straus.id)
     peach_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FS_Provisions-084_400x.jpg?v=1612978623', product_id=peach.id)
