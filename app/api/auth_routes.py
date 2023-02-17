@@ -54,10 +54,10 @@ def logout():
     """
     Logs a user out
     """
-    cart = Cart.query.filter(Cart.user_id == current_user.id).first()
-    if cart:
-        db.session.delete(cart)
-        db.session.commit()
+    # cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+    # if cart:
+    #     db.session.delete(cart)
+    #     db.session.commit()
     logout_user()
     return {'message': 'User logged out'}
 
