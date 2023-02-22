@@ -1,0 +1,9 @@
+.search-icon-container{
+    list-style: none;
+    border: 1px red solid;
+    
+}
+
+.search-icon-container:hover{
+    cursor: pointer;
+}

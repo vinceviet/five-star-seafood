@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import OpenModalMenuItem from '../Modal/OpenModalMenuItem';
+import SearchModal from '../SearchModal';
 import './NavigationBar.css';
-import search from '../../assets/search.png';
+import searchIcon from '../../assets/search.png';
 import cart from '../../assets/cart.png';
 import userIcon from '../../assets/user.png';
 import fish from '../../assets/fish.png';
@@ -10,16 +12,38 @@ import fish from '../../assets/fish.png';
 const NavBar = () => {
   const user = useSelector((state) => state.session.user);
   const cartItems = Object.values(useSelector((state) => state.cart));
+  const [showMenu, setShowMenu] = useState(false);
+  const ulRef = useRef()
 
   let totalItems = 0
   cartItems.forEach(item => {
     totalItems += Number(item.productQuantity)
-  })
+  });
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = (e) => {
+      if (!ulRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  const closeMenu = () => setShowMenu(false);
 
   return (
     <nav className='nav-bar-container'>
       <div className='search-icon-container'>
-        <img className='search-icon' src={search} alt='searchIcon' />
+        <OpenModalMenuItem
+          itemText={<img className='search-icon' src={searchIcon} alt='searchIcon' />}
+          onItemClick={closeMenu}
+          modalComponent={<SearchModal />}
+        />
       </div>
       <div className='product-list'>
         <div>
@@ -66,7 +90,7 @@ const NavBar = () => {
       <div className='cart-user'>
         <div className='nav-cart'>
           <NavLink to='/cart' exact={true} activeClassName='active' className='nav-link'>
-          {cartItems.length > 0 && <span className='num-in-cart'>{totalItems}</span>}
+            {cartItems.length > 0 && <span className='num-in-cart'>{totalItems}</span>}
             <img className='cart-icon' src={cart} alt='cartIcon' />
           </NavLink>
         </div>

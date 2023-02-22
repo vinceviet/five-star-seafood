@@ -1,5 +1,6 @@
 const LOAD_PRODUCTS = 'products/LOAD_PRODUCTS';
 const PRODUCT_DETAILS = 'product/PRODUCT_DETAILS';
+const PRODUCT_SEARCH = 'product/PRODUCT_SEARCH'
 
 const getProductsByCategory = (category) => ({
   type: LOAD_PRODUCTS, category
@@ -8,6 +9,10 @@ const getProductsByCategory = (category) => ({
 const productDetails = (product) => ({
   type: PRODUCT_DETAILS, product
 });
+
+const productSearch = (query) => ({
+  type: PRODUCT_SEARCH, query
+})
 
 
 export const getAllProducts = (category) => async (dispatch) => {
@@ -26,6 +31,15 @@ export const getProductDetails = (product) => async (dispatch) => {
   };
 };
 
+export const searchForProducts = (query) => async (dispatch) => {
+  const res = await fetch(`/api/products/search?q=${query}`)
+  if (res.ok) {
+    const data = await res.json()
+    console.log('data tunk', data)
+    dispatch(productSearch(data))
+  };
+};
+
 const initialState = {};
 
 export default function productsReducer(state = initialState, action) {
@@ -40,6 +54,14 @@ export default function productsReducer(state = initialState, action) {
       return newState
     case PRODUCT_DETAILS:
       newState[action.product.id] = action.product
+      return newState
+    case PRODUCT_SEARCH:
+      console.log('accction', action)
+      newState = {}
+      const searchList = [...action.products];
+      searchList.forEach((product) => {
+        newState[product.id] = product;
+      });
       return newState
     default:
       return state;
