@@ -54,7 +54,7 @@ export default function SearchModal() {
     return (
         <>
             <div className='search-container'>
-                <form>
+                <form onSubmit={(e) => e.preventDefault()}>
                     <div className='search-input-container'>
                         <label className='form-label' htmlFor='search'></label>
                         <input
