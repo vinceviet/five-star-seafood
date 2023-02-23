@@ -19,7 +19,7 @@ export default function searchReducer(state = initialState, action) {
   switch (action.type) {
     case PRODUCT_SEARCH:
       console.log('accction', action)
-      return {...state, ...action.query}
+      return {...action.query}
     default:
       return state;
   }

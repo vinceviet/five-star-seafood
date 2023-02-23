@@ -12,23 +12,25 @@ export default function SearchModal() {
     const [query, setQuery] = useState('')
     const [loading, setloading] = useState(false)
     const [results, setResults] = useState([])
+    const res = useSelector((state) => state.search.products)
+
+    console.log('res', res)
 
     useEffect(() => {
         if (!query) return setResults([]);
         setloading(true);
         dispatch(searchForProducts(query.toString()))
-            .then(data => {
-                console.log('USEEFFFCT data', data)
-                setResults(data.products);
-                setloading(false);
-            })
+            // .then(data => {
+            //     console.log('USEEFFFCT data', data)
+            //     setResults(data.products);
+            //     setloading(false);
+            // })
     }, [query])
 
     const handleAddItem = (e, item) => {
         e.preventDefault();
         dispatch(addOneToCart(item)).then(() => dispatch(loadCartItems()))
     }
-
 
     if (!query) {
         return (
@@ -39,7 +41,7 @@ export default function SearchModal() {
                         <input
                             name='search'
                             type='text'
-                            placeholder='Search'
+                            placeholder='Search...'
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             className='search-input-field'
@@ -53,12 +55,12 @@ export default function SearchModal() {
         <>
             <div className='search-container'>
                 <form>
-                    <div className='form-input-container'>
+                    <div className='search-input-container'>
                         <label className='form-label' htmlFor='search'></label>
                         <input
                             name='search'
                             type='text'
-                            placeholder='Search'
+                            placeholder='Search...'
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             className='search-input-field'
@@ -67,11 +69,8 @@ export default function SearchModal() {
                 </form>
             </div>
             <div className='results-container'>
-                {!results.length < 1 && (
+                {!results.length < 1 && !loading && (
                     <span>No products matching this search</span>
-                )}
-                {loading && (
-                    <span>YUP</span>
                 )}
             </div>
         </>

@@ -31,15 +31,15 @@ export default function CartModal({ isOpen, onClose }) {
         dispatch(minusOneToCart(item)).then(() => dispatch(loadCartItems()))
     }
 
-    const handleRemoveItem = (e, item) => {
-        e.preventDefault();
-        dispatch(removeFromCart(item)).then(() => dispatch(loadCartItems()))
-    }
+    // const handleRemoveItem = (e, item) => {
+    //     e.preventDefault();
+    //     dispatch(removeFromCart(item)).then(() => dispatch(loadCartItems()))
+    // }
 
     if (!isOpen) return null;
 
     return (
-        <div className='modal-cart-container'>
+        <div className={isOpen ? 'modal-cart-container' : 'modal-cart-container hidden'}>
             <div className='modal-cart-header-container'>
                 <h1 id='modal-cart-header'>CART</h1>
             </div>

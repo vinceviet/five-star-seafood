@@ -1,9 +1,30 @@
-.search-icon-container{
+.search-icon-container {
     list-style: none;
     max-width: 22px;
 
 }
 
-.search-icon-container:hover{
+.search-icon-container:hover {
     cursor: pointer;
+}
+
+.search-container {
+    position: fixed;
+    top: 50px;
+    left: 60px;
+}
+
+/* .search-input-cotainer {
+    height: 50px;
+} */
+
+.search-input-field {
+    height: 35px;
+    width: 250px;
+    letter-spacing: 2px;
+    font-size: 16px;
+}
+
+.results-container {
+    position: fixed;
 }

@@ -19,6 +19,7 @@ def get_product_details(id):
 @product_routes.route('/search/<string:query>')
 def search_product(query):
     products = Product.query.filter(or_(Product.name.like(f'%{query}'), Category.name.like(f'%{query}'))).all()
+    print('API------------------------------------', products)
     if products:
         return {'products': [product.to_dict() for product in products]}
     return {'message': 'No products match this search'}
