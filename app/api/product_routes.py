@@ -1,5 +1,6 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify
 from app.models import Product, Category
+from sqlalchemy import or_
 
 product_routes = Blueprint('products', __name__)
 
@@ -15,10 +16,9 @@ def get_product_details(id):
     product = Product.query.get(id)
     return product.to_dict()
 
-@product_routes.route('/search')
-def search_product():
-    query = request.args.get('q')
-    products = Product.query.filter(Product.like(query)).all()
+@product_routes.route('/search/<string:query>')
+def search_product(query):
+    products = Product.query.filter(or_(Product.name.like(f'%{query}'), Category.name.like(f'%{query}'))).all()
     if products:
         return {'products': [product.to_dict() for product in products]}
     return {'message': 'No products match this search'}

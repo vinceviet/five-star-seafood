@@ -1,7 +1,7 @@
 .search-icon-container{
     list-style: none;
-    border: 1px red solid;
-    
+    max-width: 22px;
+
 }
 
 .search-icon-container:hover{

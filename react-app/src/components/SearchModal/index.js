@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { searchForProducts } from '../../store/products';
+import { searchForProducts } from '../../store/search';
 import { loadCartItems, addOneToCart } from '../../store/cart';
 import { useModal } from '../Context/Modal';
 import './SearchModal.css';
@@ -10,12 +10,19 @@ export default function SearchModal() {
     const dispatch = useDispatch();
     const { closeModal } = useModal()
     const [query, setQuery] = useState('')
+    const [loading, setloading] = useState(false)
     const [results, setResults] = useState([])
 
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        await dispatch(searchForProducts(query));
-    };
+    useEffect(() => {
+        if (!query) return setResults([]);
+        setloading(true);
+        dispatch(searchForProducts(query.toString()))
+            .then(data => {
+                console.log('USEEFFFCT data', data)
+                setResults(data.products);
+                setloading(false);
+            })
+    }, [query])
 
     const handleAddItem = (e, item) => {
         e.preventDefault();
@@ -25,8 +32,49 @@ export default function SearchModal() {
 
     if (!query) {
         return (
-            <span>SEARCH ...</span>
+            <div className='search-container'>
+                <form>
+                    <div className='form-input-container'>
+                        <label className='form-label' htmlFor='search'></label>
+                        <input
+                            name='search'
+                            type='text'
+                            placeholder='Search'
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            className='search-input-field'
+                        />
+                    </div>
+                </form>
+            </div>
         )
     }
+    return (
+        <>
+            <div className='search-container'>
+                <form>
+                    <div className='form-input-container'>
+                        <label className='form-label' htmlFor='search'></label>
+                        <input
+                            name='search'
+                            type='text'
+                            placeholder='Search'
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            className='search-input-field'
+                        />
+                    </div>
+                </form>
+            </div>
+            <div className='results-container'>
+                {!results.length < 1 && (
+                    <span>No products matching this search</span>
+                )}
+                {loading && (
+                    <span>YUP</span>
+                )}
+            </div>
+        </>
+    )
 
 }
