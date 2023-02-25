@@ -23,7 +23,6 @@ def search_product(query):
     lst_ids = [id.id for id in cat_ids]
     cat_products = Product.query.filter(Product.category_id.in_(lst_ids)).all()
     search_results = products + cat_products
-    print('API------------------------------------', cat_products)
     if search_results:
         return {'products': [product.to_dict() for product in search_results]}
     return {'message': 'No products match this search'}

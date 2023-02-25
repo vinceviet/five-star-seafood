@@ -27,4 +27,55 @@
 
 .results-container {
     position: fixed;
+    top: 85px;
+    left: 61px;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+    width: 90vw;
+    z-index: 9998;
+    overflow: auto;
+}
+
+.results-cards {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+.search-name {
+    text-decoration: none;
+    color: black;
+    letter-spacing: 1px;
+}
+
+.search-name:hover {
+    color: rgb(57, 129, 155);
+}
+
+.search-img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.search-add-to-cart {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 0 0;
+    align-items: center;
+}
+
+.search-add-button {
+    width: 150px;
+    height: 30px;
+    color: white;
+    background-color: rgb(40, 96, 117);
+    border: none;
+    font-size: 15px;
+}
+
+.search-add-button:hover{
+    background-color:rgb(136, 193, 213);
 }
