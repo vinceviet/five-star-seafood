@@ -36,7 +36,7 @@ export default function CartModal({ isOpen, onClose }) {
             </div>
             {cartItems.map((item) =>
                 <>
-                    <div className='modal-cart-cards'>
+                    <div className='modal-cart-cards' key={item.id}>
                         <div className='modal-img-info'>
                             <NavLink to={`/products/${item.productId}`} exact={true} className='nav-link'>
                                 <img className='modal-cart-img' src={item.itemUrl} alt='itemurl' />

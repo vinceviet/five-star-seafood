@@ -49,7 +49,7 @@ export default function Cart() {
                 </div>
             </div>
             {cartItems.map((item) =>
-                <div className='cart-cards'>
+                <div className='cart-cards' key={item.id}>
                     <div className='img-info'>
                         <NavLink to={`/products/${item.productId}`} exact={true} className='nav-link'>
                             <img className='cart-img' src={item.itemUrl} alt='itemurl' />

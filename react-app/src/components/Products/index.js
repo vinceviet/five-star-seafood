@@ -122,7 +122,7 @@ export default function Products() {
                 )}
                 <div className='product-cards-container'>
                     {products.map((product) =>
-                        <div className='product-card'>
+                        <div className='product-card' key={product.id}>
                             <NavLink to={`/products/${product.id}`} exact={true} className='nav-link'>
                                 <img className='product-img' src={product.productImages[0].imageUrl} alt='img' />
                             </NavLink>

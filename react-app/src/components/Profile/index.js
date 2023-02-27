@@ -61,7 +61,7 @@ export default function Profile() {
                                         })
                                         .map(order => (
                                             <>
-                                                <div className='order-cards'>
+                                                <div className='order-cards' key={order.id}>
                                                     <div className='order-date-card'>
                                                         <NavLink to={`/orders/${order}`} className='orders-nav-link'>
                                                             {order}

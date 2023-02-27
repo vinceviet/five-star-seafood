@@ -211,7 +211,7 @@ export default function CheckoutPage() {
             </div>
             <div className='checkout-cart-container'>
                 {cartItems.map((item) =>
-                    <div className='checkout-cart-items'>
+                    <div className='checkout-cart-items' key={item.id}>
                         <img className='cart-page-img' src={item.itemUrl} alt='itemurl' />
                         <span className='checkout-quantity'>{item.productQuantity}</span>
                         <span className='item-info'>{item.name} {item.description}</span>
