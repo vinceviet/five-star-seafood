@@ -126,7 +126,7 @@ export default function CheckoutPage() {
                                                 <option>{primaryAddress.address}, {primaryAddress.city}, {primaryAddress.state}, {primaryAddress.country}, {primaryAddress.zipCode}</option>
                                             )}
                                             {addressList.map(addy => (
-                                                <option>{addy.address}, {addy.city}, {addy.state}, {addy.country}, {addy.zipCode}</option>
+                                                <option key={addy.id}>{addy.address}, {addy.city}, {addy.state}, {addy.country}, {addy.zipCode}</option>
                                             ))}
                                         </select>
                                     </div>
