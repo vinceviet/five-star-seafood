@@ -13,6 +13,11 @@
     overflow-y: auto;
 }
 
+.review-errors{
+    padding-left: 27px;
+}
+
+
 .address-form-container {
     padding: 24px;
     width: 500px;

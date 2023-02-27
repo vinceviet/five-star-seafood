@@ -34,6 +34,7 @@ export const createReview = (productId, review) => async dispatch => {
         dispatch(add(review))
         return review;
     };
+    return res
 };
 
 export const editReview = (productId, review) => async dispatch => {
@@ -47,6 +48,7 @@ export const editReview = (productId, review) => async dispatch => {
         dispatch(add(review))
         return review;
     };
+    return res
 };
 
 export const deleteReview = (reviewId) => async dispatch => {

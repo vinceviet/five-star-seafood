@@ -20,17 +20,25 @@ export default function EditReviewModal({ productId, reviews, user }) {
         e.preventDefault();
         const newReview = { review, stars }
 
-        await dispatch(editReview(productId, newReview)).then(closeModal)
-        await dispatch(getProductDetails(productId))
-            .catch(async (res) => {
-                const data = await res.json();
-                const validationErrors = [];
-                if (data && data.errors) setErrors(data.errors);
-                if (data && data.message) {
-                    validationErrors.push(data.message);
-                    setErrors(validationErrors);
-                };
-            });
+        const data = await dispatch(editReview(productId, newReview))
+        if (data.id) await dispatch(getProductDetails(productId)).then(closeModal)
+        else {
+            let res = await data.json();
+            let resArr = Object.values(res)
+            setErrors(resArr)
+        }
+
+        // await dispatch(editReview(productId, newReview)).then(closeModal)
+        // await dispatch(getProductDetails(productId))
+        //     .catch(async (res) => {
+        //         const data = await res.json();
+        //         const validationErrors = [];
+        //         if (data && data.errors) setErrors(data.errors);
+        //         if (data && data.message) {
+        //             validationErrors.push(data.message);
+        //             setErrors(validationErrors);
+        //         };
+        //     });
 
     };
 
@@ -42,9 +50,9 @@ export default function EditReviewModal({ productId, reviews, user }) {
             </header>
             <li className="header-divider"></li>
             <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
+                <div className='review-errors'>
+                    {errors.map((error, idx) => <div key={idx}>{error}</div>)}
+                </div>
                 <div className='form-input-container'>
                     <label className='form-label'>Review</label>
                     <input

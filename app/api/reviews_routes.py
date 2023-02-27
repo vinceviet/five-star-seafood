@@ -25,7 +25,8 @@ def create_review(id):
 
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    if not form.review.data.strip():
+        return {'errors' : 'Please leave a valid review'}, 400
     if form.validate_on_submit():
         new_review = Review(
             user_id=current_user.id,
@@ -43,9 +44,8 @@ def create_review(id):
         db.session.commit()
         return new_review.to_dict(), 201
 
-    # return new_review.to_dict(), 201
-    # return {'errors': [form.errors]}
-    return {'errors': validation_errors_to_error_messages(form.errors)}
+    return {'errors': [form.errors]}, 400
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 @reviews_routes.route('/product/<int:id>/reviews', methods=['PUT'])
@@ -62,6 +62,9 @@ def update_review(id):
 
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    
+    if not form.review.data.strip():
+        return {'errors' : 'Please leave a valid review'}, 400
 
     if form.validate_on_submit():
         current_review = Review.query.get([review.id for review in review])

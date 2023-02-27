@@ -27,7 +27,7 @@ const Reviews = ({ product }) => {
             <div className="reviews-cards-container">
                 {reviews.map(review => {
                     return (
-                        <div className="review-card">
+                        <div className="review-card" key={review.id}>
                             <div id='user-name'>{review.user.firstName} {review.user.lastName[0]}.</div>
                             <div id="date">{review.dateTime}</div>
                             <div>{Array(review.stars).fill().map((_, i) => (
