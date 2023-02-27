@@ -1,19 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useHistory } from 'react-router-dom'
-import { loadCartItems, addOneToCart, minusOneToCart, removeFromCart } from "../../store/cart";
+import { NavLink } from 'react-router-dom'
+import { loadCartItems, addOneToCart, minusOneToCart } from "../../store/cart";
 import { useModal } from '../Context/Modal';
 import './CartModal.css';
 import '../Context/ModalForms.css';
 
 export default function CartModal({ isOpen, onClose }) {
     const dispatch = useDispatch();
-    // const history = useHistory();
     const { closeModal } = useModal();
     const cartItems = Object.values(useSelector((state) => state.cart));
-    let cartId
-    cartItems.forEach(item =>
-        cartId = item.cartId)
 
     useEffect(() => {
         dispatch(loadCartItems())
@@ -31,15 +27,10 @@ export default function CartModal({ isOpen, onClose }) {
         dispatch(minusOneToCart(item)).then(() => dispatch(loadCartItems()))
     }
 
-    // const handleRemoveItem = (e, item) => {
-    //     e.preventDefault();
-    //     dispatch(removeFromCart(item)).then(() => dispatch(loadCartItems()))
-    // }
-
     if (!isOpen) return null;
 
     return (
-        <div className={isOpen ? 'modal-cart-container' : 'modal-cart-container hidden'}>
+        <div className={isOpen ? 'modal-cart-container' : 'hidden'}>
             <div className='modal-cart-header-container'>
                 <h1 id='modal-cart-header'>CART</h1>
             </div>

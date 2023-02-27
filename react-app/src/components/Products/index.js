@@ -38,7 +38,7 @@ export default function Products() {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
-    const closeMenu = () => setShowMenu(false);
+    // const closeMenu = () => setShowMenu(false);
 
     useEffect(() => {
         dispatch(getAllProducts(category));
@@ -141,7 +141,6 @@ export default function Products() {
                                 </div>
                             </div>
                             <div className='product-page-buttons'>
-                                {/* <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>Add to Cart</button> */}
                                 <button className='add-to-cart' onClick={(e) => handleAddItem(e, product)}>
                                     <OpenCartMainPageModal
                                         itemText='ADD TO CART'

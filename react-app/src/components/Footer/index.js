@@ -32,7 +32,7 @@ export default function Footer() {
                         </div>
                     </div>
                     <div className="github-container">
-                        <span className="git-links-title">Creator Links: </span>
+                        <span className="git-links-title">&copy; Vincent Viet</span>
                         <a href='https://github.com/vinceviet' target='_blank' rel='noopener' className="git-links">Github</a>
                         <a href='https://www.linkedin.com/in/vincent-viet-72349272/' target='_blank' rel='noopener' className="git-links">LinkedIn</a>
                     </div>

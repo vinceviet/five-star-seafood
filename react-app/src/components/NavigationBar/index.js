@@ -13,12 +13,14 @@ const NavBar = () => {
   const user = useSelector((state) => state.session.user);
   const cartItems = Object.values(useSelector((state) => state.cart));
   const [showMenu, setShowMenu] = useState(false);
+  // const [cartNum, setCartNum] = useState(0)
   const ulRef = useRef()
 
   let totalItems = 0
   cartItems.forEach(item => {
     totalItems += Number(item.productQuantity)
   });
+
 
   useEffect(() => {
     if (!showMenu) return;

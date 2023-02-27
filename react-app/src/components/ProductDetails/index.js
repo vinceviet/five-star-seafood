@@ -41,7 +41,7 @@ export default function ProdcutDetails() {
 
     useEffect(() => {
         dispatch(getProductDetails(productId))
-    }, [dispatch])
+    }, [productId])
 
     if (!product) return null;
     if (!reviews) return null;

@@ -1,7 +1,6 @@
 .search-icon-container {
     list-style: none;
     max-width: 22px;
-
 }
 
 .search-icon-container:hover {
@@ -13,10 +12,6 @@
     top: 50px;
     left: 60px;
 }
-
-/* .search-input-cotainer {
-    height: 50px;
-} */
 
 .search-input-field {
     height: 35px;
@@ -34,15 +29,16 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 10px;
-    width: 90vw;
-    z-index: 9998;
-    overflow: auto;
+    width: 85vw;
+    z-index: 9999;
+    overflow-y: scroll;
 }
 
 .results-cards {
     display: flex;
     flex-direction: column;
     width: 250px;
+    gap: 1px;
 }
 
 .search-name {
@@ -55,15 +51,21 @@
     color: rgb(57, 129, 155);
 }
 
+.search-info {
+    display: flex;
+    justify-content: space-between;
+}
+
 .search-img {
     width: 100%;
+    height: 160px;
     object-fit: cover;
 }
 
 .search-add-to-cart {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0 0 0;
+    padding: 5px 0 0 0;
     align-items: center;
 }
 

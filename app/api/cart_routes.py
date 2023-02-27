@@ -106,7 +106,8 @@ def checkout_cart(id):
     cart_items = CartItem.query.filter(CartItem.cart_id == id).all()
     [db.session.delete(item) for item in cart_items]
     db.session.commit()
-    return cart_items.to_dict()
+    # return cart_items.to_dict()
+    return {'message': 'successfull checkout'}
 
 @cart_routes.route('/checkout/<int:id>', methods=['POST'])
 def add_order(id):

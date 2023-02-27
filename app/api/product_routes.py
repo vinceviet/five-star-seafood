@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from app.models import Product, Category
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 
 product_routes = Blueprint('products', __name__)
 
@@ -18,7 +18,7 @@ def get_product_details(id):
 
 @product_routes.route('/search/<string:query>')
 def search_product(query):
-    products = Product.query.filter(Product.name.like(f'%{query}')).all()
+    products = Product.query.filter(Product.name.ilike(f'%{query}%')).all()
     cat_ids = Category.query.filter(or_(Category.name.like(f'%{query}'), Category.sub_category.like(f'%{query}'))).all()
     lst_ids = [id.id for id in cat_ids]
     cat_products = Product.query.filter(Product.category_id.in_(lst_ids)).all()

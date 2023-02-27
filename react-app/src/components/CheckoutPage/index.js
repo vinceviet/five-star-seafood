@@ -72,7 +72,7 @@ export default function CheckoutPage() {
 
     const handleCheckout = async (e) => {
         e.preventDefault();
-        if (user.address.find(addy => addy.address !== address)) {
+        if (user.address.find(addy => addy.address === address) === undefined) {
             const newAddress = { address, city, state, country, zipCode, phone }
             await dispatch(createAddress(user.id, newAddress)).catch(async (res) => {
                 const data = await res.json();
