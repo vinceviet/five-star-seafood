@@ -15,8 +15,6 @@ export default function Address() {
     let primaryAddress = user.address.find(address => address.primary === true)
     let addressList = user.address.filter(addy => addy.primary === false)
 
-    // const googleAPI = AIzaSyBgTcl9hN8MBbkqzC_aIhtgyPYfy8vJa1s;
-
     useEffect(() => {
         if (!showMenu) return;
 

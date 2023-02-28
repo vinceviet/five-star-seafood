@@ -35,7 +35,7 @@ def add_address(id):
 
     if form.validate_on_submit():
         new_address = UserAddress(
-            user_id=user.id,
+            user_id=user.id, 
             phone=form.data['phone'],
             address=form.data['address'],
             city=form.data['city'],
