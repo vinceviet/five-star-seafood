@@ -17,6 +17,7 @@ export default function CreateAddressModal({ user }) {
     const [primary, setPrimary] = useState('')
     const { closeModal } = useModal();
 
+    const api_key = process.env.REACT_APP_GOOGLE_API_KEY;
 
     const updateAddress = (e) => {
         setAddress(e.target.value);
