@@ -54,6 +54,7 @@ export default function Address() {
                             <li className="address-divider" />
                             <span>{user.firstName} {user.lastName}</span>
                             <span>{primaryAddress.address}</span>
+                            <span>{primaryAddress.secondaryAddress}</span>
                             <span>{primaryAddress.city}, {primaryAddress.state} {primaryAddress.zipCode}</span>
                             <span>{primaryAddress.country}</span>
                             <div className='edit-delete-address'>
@@ -80,6 +81,7 @@ export default function Address() {
                             <li className="address-divider" />
                             <span>{user.firstName} {user.lastName}</span>
                             <span>{addy.address}</span>
+                            <span>{addy.secondaryAddress}</span>
                             <span>{addy.city}, {addy.state} {addy.zipCode}</span>
                             <span>{addy.country}</span>
                             <div className='edit-delete-address'>

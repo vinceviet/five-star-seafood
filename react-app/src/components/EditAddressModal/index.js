@@ -10,6 +10,7 @@ export default function EditAddressModal({ user , addy}) {
 
     const [errors, setErrors] = useState([]);
     const [address, setAddress] = useState(addy.address)
+    const [secondaryAddress, setSecondaryAddress] = useState(addy.secondaryAddress)
     const [city, setCity] = useState(addy.city)
     const [state, setState] = useState(addy.state);
     const [country, setCountry] = useState('USA');
@@ -22,6 +23,10 @@ export default function EditAddressModal({ user , addy}) {
 
     const updateAddress = (e) => {
         setAddress(e.target.value);
+    };
+
+    const updateSecondaryAddress = (e) => {
+        setSecondaryAddress(e.target.value);
     };
 
     const updateCity = (e) => {
@@ -49,7 +54,7 @@ export default function EditAddressModal({ user , addy}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const updateAddress = { ...addy, address, city, state, country, zipCode, phone, primary }
+        const updateAddress = { ...addy, address, secondaryAddress, city, state, country, zipCode, phone, primary }
 
         await dispatch(editAddress(updateAddress)).then(closeModal)
         await dispatch(getUser(user.id))
@@ -88,6 +93,17 @@ export default function EditAddressModal({ user , addy}) {
                         onChange={updateAddress}
                         value={address}
                         required={true}
+                        className='form-input-fields'
+                    ></input>
+                </div>
+                <div className='form-input-container'>
+                    <label className='form-label'>Secondary Address</label>
+                    <input
+                        type='text'
+                        name='secondaryAddress'
+                        placeholder='Secondary Address'
+                        onChange={updateSecondaryAddress}
+                        value={secondaryAddress}
                         className='form-input-fields'
                     ></input>
                 </div>
