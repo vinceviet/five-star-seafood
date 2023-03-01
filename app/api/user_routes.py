@@ -35,9 +35,10 @@ def add_address(id):
 
     if form.validate_on_submit():
         new_address = UserAddress(
-            user_id=user.id, 
+            user_id=user.id,
             phone=form.data['phone'],
             address=form.data['address'],
+            secondary_address=form.data['secondaryAddress'],
             city=form.data['city'],
             state=form.data['state'],
             country=form.data['country'],
@@ -71,6 +72,7 @@ def update_address(id):
     if form.validate_on_submit():
         address.phone=form.data['phone']
         address.address=form.data['address']
+        address.secondary_address=form.data['secondaryAddress']
         address.city=form.data['city']
         address.state=form.data['state']
         address.country=form.data['country']

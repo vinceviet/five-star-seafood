@@ -9,7 +9,7 @@ export default function CreateAddressModal({ user }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [address, setAddress] = useState('')
-    // const [secondaryAddress, setSecondaryAddress] = useState('')
+    const [secondaryAddress, setSecondaryAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('CA');
     const [country, setCountry] = useState('USA');
@@ -24,9 +24,9 @@ export default function CreateAddressModal({ user }) {
         setAddress(e.target.value);
     };
 
-    // const updateSecondaryAddress = (e) => {
-    //     setSecondaryAddress(e.target.value);
-    // };
+    const updateSecondaryAddress = (e) => {
+        setSecondaryAddress(e.target.value);
+    };
 
     const updateCity = (e) => {
         setCity(e.target.value);
@@ -53,7 +53,7 @@ export default function CreateAddressModal({ user }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newAddress = { address, city, state, country, zipCode, phone, primary }
+        const newAddress = { address, secondaryAddress, city, state, country, zipCode, phone, primary }
 
         await dispatch(createAddress(user.id, newAddress)).then(closeModal)
         await dispatch(getUser(user.id))
@@ -78,7 +78,7 @@ export default function CreateAddressModal({ user }) {
             </header>
             <li className="header-divider"></li>
             <form className='address-modal-container' onSubmit={handleSubmit}>
-                <div>
+                <div className='review-errors'>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
@@ -92,6 +92,17 @@ export default function CreateAddressModal({ user }) {
                         onChange={updateAddress}
                         value={address}
                         required={true}
+                        className='form-input-fields'
+                    ></input>
+                </div>
+                <div className='form-input-container'>
+                    <label className='form-label'>Secondary Address</label>
+                    <input
+                        type='text'
+                        name='secondaryAddress'
+                        placeholder='Secondary Address'
+                        onChange={updateSecondaryAddress}
+                        value={secondaryAddress}
                         className='form-input-fields'
                     ></input>
                 </div>

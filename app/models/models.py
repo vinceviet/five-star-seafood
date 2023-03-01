@@ -76,7 +76,7 @@ class UserAddress(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.String(15), nullable=False)
     address = db.Column(db.String(40), nullable=False, unique=True)
-    # secondary_address = db.Column(db.String(40))
+    secondary_address = db.Column(db.String(40))
     city = db.Column(db.String(40), nullable=False)
     state = db.Column(db.String(40), default='California', nullable=False)
     country = db.Column(db.String(40), default='United States', nullable=False)
@@ -92,7 +92,7 @@ class UserAddress(db.Model):
             'id': self.id,
             'phone': self.phone,
             'address': self.address,
-            # 'secondaryAddress': self.secondary_address,
+            'secondaryAddress': self.secondary_address,
             'city': self.city,
             'state': self.state,
             'country': self.country,
