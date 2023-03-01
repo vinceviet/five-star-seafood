@@ -52,7 +52,6 @@ def add_address(id):
                 current_primary.primary = False
                 db.session.add(current_primary)
                 db.session.commit()
-
         db.session.add(new_address)
         db.session.commit()
 
@@ -68,7 +67,6 @@ def update_address(id):
 
     form = AddressForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
     if form.validate_on_submit():
         address.phone=form.data['phone']
         address.address=form.data['address']
@@ -88,7 +86,6 @@ def update_address(id):
 
         db.session.add(address)
         db.session.commit()
-
         return address.to_dict()
 
     return {'errors': [form.errors]}

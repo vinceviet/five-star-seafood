@@ -18,6 +18,7 @@ export default function CheckoutPage() {
     const [errors, setErrors] = useState([]);
     const [savedAddress, setSavedAddress] = useState('');
     const [address, setAddress] = useState(primaryAddress ? primaryAddress.address : '');
+    const [secondaryAddress, setSecondaryAddress] = useState(primaryAddress ? primaryAddress.secondaryAddress : '')
     const [city, setCity] = useState(primaryAddress ? primaryAddress.city : '');
     const [state, setState] = useState(primaryAddress ? primaryAddress.state : '');
     const [country, setCountry] = useState(primaryAddress ? primaryAddress.country : '');
@@ -49,6 +50,10 @@ export default function CheckoutPage() {
 
     const updateAddress = (e) => {
         setAddress(e.target.value);
+    };
+
+    const updateSecondaryAddress = (e) => {
+        setSecondaryAddress(e.target.value);
     };
 
     const updateCity = (e) => {
@@ -148,6 +153,17 @@ export default function CheckoutPage() {
                                         value={address}
                                         className='form-input-fields'
                                         required
+                                    ></input>
+                                </div>
+                                <div className='form-input-container'>
+                                    <label className='form-label'>Secondary Address</label>
+                                    <input
+                                        type='text'
+                                        name='secondaryAddress'
+                                        placeholder='Secondary Address'
+                                        onChange={updateSecondaryAddress}
+                                        value={secondaryAddress}
+                                        className='form-input-fields'
                                     ></input>
                                 </div>
                                 <div className='form-input-container'>

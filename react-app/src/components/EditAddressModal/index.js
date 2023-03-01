@@ -10,7 +10,7 @@ export default function EditAddressModal({ user , addy}) {
 
     const [errors, setErrors] = useState([]);
     const [address, setAddress] = useState(addy.address)
-    const [secondaryAddress, setSecondaryAddress] = useState(addy.secondaryAddress)
+    const [secondaryAddress, setSecondaryAddress] = useState(addy.secondaryAddress ? addy.secondaryAddress : '')
     const [city, setCity] = useState(addy.city)
     const [state, setState] = useState(addy.state);
     const [country, setCountry] = useState('USA');
@@ -55,7 +55,6 @@ export default function EditAddressModal({ user , addy}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updateAddress = { ...addy, address, secondaryAddress, city, state, country, zipCode, phone, primary }
-
         await dispatch(editAddress(updateAddress)).then(closeModal)
         await dispatch(getUser(user.id))
             .catch(async (res) => {

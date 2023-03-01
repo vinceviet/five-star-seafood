@@ -88,6 +88,9 @@ export default function Profile() {
                         {primaryAddress && <div className='primary-address-info'>
                             <span>{user.firstName} {user.lastName}</span>
                             <span>{primaryAddress.address}</span>
+                            {primaryAddress.secondaryAddress && (
+                                <span>{primaryAddress.secondaryAddress}</span>
+                            )}
                             <span>{primaryAddress.city}, {primaryAddress.state} {primaryAddress.zipCode}</span>
                             <span>{primaryAddress.country}</span>
                         </div>}

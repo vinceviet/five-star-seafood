@@ -6,7 +6,7 @@ from app.models import UserAddress
 
 class AddressForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired(message='Please enter a vaild address.')])
-    secondary_address = StringField('Secondary Address')
+    secondaryAddress = StringField('Secondary Address')
     city = StringField('City', validators=[DataRequired(message='Please enter a vaild city.')])
     state = SelectField('State', choices=[('CA','California'), ('NV','Nevada'), ('AZ','Arizona'), ('OR','Oregon')])
     country = SelectField('Country', choices=[('USA','United States')])
