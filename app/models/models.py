@@ -76,6 +76,7 @@ class UserAddress(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.String(15), nullable=False)
     address = db.Column(db.String(40), nullable=False, unique=True)
+    # secondary_address = db.Column(db.String(40))
     city = db.Column(db.String(40), nullable=False)
     state = db.Column(db.String(40), default='California', nullable=False)
     country = db.Column(db.String(40), default='United States', nullable=False)
@@ -91,6 +92,7 @@ class UserAddress(db.Model):
             'id': self.id,
             'phone': self.phone,
             'address': self.address,
+            # 'secondaryAddress': self.secondary_address,
             'city': self.city,
             'state': self.state,
             'country': self.country,
@@ -115,7 +117,7 @@ class Product(db.Model):
     avg_star_rating = db.Column(db.Float, default=0)
     category_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('categories.id')), nullable=False)
-    
+
     product_images = db.relationship(
         'ProductImage', back_populates='product', cascade='all, delete-orphan')
     category = db.relationship('Category', back_populates='products')

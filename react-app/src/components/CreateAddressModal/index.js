@@ -9,6 +9,7 @@ export default function CreateAddressModal({ user }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [address, setAddress] = useState('')
+    // const [secondaryAddress, setSecondaryAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('CA');
     const [country, setCountry] = useState('USA');
@@ -22,6 +23,10 @@ export default function CreateAddressModal({ user }) {
     const updateAddress = (e) => {
         setAddress(e.target.value);
     };
+
+    // const updateSecondaryAddress = (e) => {
+    //     setSecondaryAddress(e.target.value);
+    // };
 
     const updateCity = (e) => {
         setCity(e.target.value);
