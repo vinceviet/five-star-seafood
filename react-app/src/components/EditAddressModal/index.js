@@ -81,7 +81,7 @@ export default function EditAddressModal({ user , addy}) {
             <form className='address-modal-container' onSubmit={handleSubmit}>
                 <div className='review-errors'>
                     {errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
+                        <div key={ind}>{error.split(':')[1]}</div>
                     ))}
                 </div>
                 <div className='form-input-container'>

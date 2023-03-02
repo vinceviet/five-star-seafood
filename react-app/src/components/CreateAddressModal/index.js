@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../Context/Modal";
 import { createAddress } from "../../store/address";
@@ -242,7 +242,7 @@ export default function CreateAddressModal({ user }) {
             <form className='address-modal-container' onSubmit={handleSubmit}>
                 <div className='review-errors'>
                     {errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
+                        <div key={ind}>{error.split(':')[1]}</div>
                     ))}
                 </div>
                 <div className='form-input-container'>
