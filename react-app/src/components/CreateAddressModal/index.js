@@ -16,6 +16,7 @@ export default function CreateAddressModal({ user }) {
     const [zipCode, setZipCode] = useState('');
     const [phone, setPhone] = useState('');
     const [primary, setPrimary] = useState('')
+    const [googleResponse, setGoogleResponse] = useState(false);
     const { closeModal } = useModal();
 
     const api_key = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -51,24 +52,185 @@ export default function CreateAddressModal({ user }) {
         setPrimary(!primary);
     };
 
+    const handleGoogleResponse = (addressResponse) => {
+        if (addressResponse.result.verdict.hasReplacedComponents) {
+            addressResponse.result.address.addressComponents.forEach(
+                (component) => {
+                    if (component.replaced === true) {
+                        if (component.componentType === "locality") {
+                            setCity(component.componentName.text);
+                        } else if (component.componentType === "postal_code") {
+                            setZipCode(component.componentName.text);
+                        } else if (component.componentType === "subpremise") {
+                            setSecondaryAddress(component.componentName.text);
+                        }
+                    }
+                }
+            );
+        }
+        if (addressResponse.result.verdict.hasInferredComponents) {
+            addressResponse.result.address.addressComponents.forEach(
+                (component) => {
+                    if (component.inferred === true) {
+                        if (component.componentType === "locality") {
+                            setCity(component.componentName.text);
+                        } else if (component.componentType === "postal_code") {
+                            setZipCode(component.componentName.text);
+                        } else if (component.componentType === "subpremise") {
+                            setSecondaryAddress(component.componentName.text);
+                        }
+                    }
+                }
+            );
+        }
+
+        if (
+            addressResponse.result.verdict.hasUnconfirmedComponents ||
+            addressResponse.result.address.missingComponentTypes ||
+            addressResponse.result.verdict.validationGranularity === "OTHER" ||
+            addressResponse.result.address.unresolvedTokens
+        ) {
+            const unconfirmedComponents =
+                addressResponse.result.address.unconfirmedComponentTypes;
+            let unconfirmedErrors = [];
+            if (unconfirmedComponents) {
+                unconfirmedComponents?.forEach((component) => {
+                    if (component === "route") {
+                    unconfirmedErrors.push("Street: Please provide a valid street name.");
+                    } else if (component === "locality") {
+                        unconfirmedErrors.push("City: Please provide a valid city.");
+                    } else if (component === "postal_code") {
+                        unconfirmedErrors.push("Zip Code: Please provide a valid Zip Code.");
+                    } else if (component === "street_number") {
+                        unconfirmedErrors.push("Street Number: Please provide a valid Street Number.");
+                    } else if (component === "subpremise") {
+                        unconfirmedErrors.push("Apt/Suite/Unit: Please provide a valid apt/suite/unit number.");
+                    } else if (
+                        component === "administrative_area_level_3" ||
+                        component === "administrative_area_level_1" ||
+                        component === "administratrive_area_level_2"
+                    ) {
+                        unconfirmedErrors.push("State: Please provide a valid state.");
+                    }
+                });
+            }
+
+            const missingComponents =
+                addressResponse.result.address.missingComponentTypes;
+            let missingErrors = [];
+            if (missingComponents) {
+                missingComponents?.forEach((component) => {
+                    if (component === "route") {
+                        missingErrors.push(
+                            "Street: Please provide a valid street name."
+                        );
+                    } else if (component === "locality") {
+                        missingErrors.push(
+                            "City: Please provide a valid city."
+                        );
+                    } else if (component === "postal_code") {
+                        missingErrors.push(
+                            "Zip Code: Please provide a valid Zip Code."
+                        );
+                    } else if (component === "street_number") {
+                        missingErrors.push(
+                            "Street Number: Please provide a valid Street Number."
+                        );
+                    } else if (component === "subpremise") {
+                        missingErrors.push(
+                            "Apt/Suite/Unit: Please provide a valid apt/suite/unit number."
+                        );
+                    } else if (
+                        component === "administrative_area_level_3" ||
+                        component === "administrative_area_level_1" ||
+                        component === "administratrive_area_level_2"
+                    ) {
+                        missingErrors.push(
+                            "State: Please provide a valid Owner State."
+                        );
+                    }
+                });
+            }
+
+            if (addressResponse.result.address.unresolvedTokens) {
+                setErrors(["Invalid Input: Please provide a valid address."]);
+            } else if (unconfirmedErrors[0] && missingErrors[0]) {
+                setErrors([...unconfirmedErrors, ...missingErrors]);
+            } else if (unconfirmedErrors[0]) {
+                setErrors([...unconfirmedErrors]);
+            } else if (missingErrors[0]) {
+                setErrors([...missingErrors]);
+            }
+        }
+    };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const newAddress = { address, secondaryAddress, city, state, country, zipCode, phone, primary }
+
+    //     await dispatch(createAddress(user.id, newAddress)).then(closeModal)
+    //     await dispatch(getUser(user.id))
+    //         .catch(async (res) => {
+    //             const data = await res.json();
+    //             const validationErrors = [];
+    //             if (data && data.errors) setErrors(data.errors);
+    //             if (data && data.message) {
+    //                 validationErrors.push(data.message);
+    //                 setErrors(validationErrors);
+    //             };
+    //         });
+
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newAddress = { address, secondaryAddress, city, state, country, zipCode, phone, primary }
+        setErrors([]);
+        setGoogleResponse(false);
+        const response = await fetch(
+            `https://addressvalidation.googleapis.com/v1:validateAddress?key=${api_key}`,
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    address: {
+                        revision: 0,
+                        addressLines: [
+                            address,
+                            secondaryAddress,
+                            `${city}, ${state} ${zipCode}`,
+                        ],
+                    },
+                    previousResponseId: "",
+                    enableUspsCass: true,
+                }),
+            }
+        );
+        if (response.ok) {
+            const addressResponse = await response.json();
 
-        await dispatch(createAddress(user.id, newAddress)).then(closeModal)
-        await dispatch(getUser(user.id))
-            .catch(async (res) => {
-                const data = await res.json();
-                const validationErrors = [];
-                if (data && data.errors) setErrors(data.errors);
-                if (data && data.message) {
-                    validationErrors.push(data.message);
-                    setErrors(validationErrors);
-                };
-            });
+            // setLat(addressResponse?.result?.geocode?.location?.latitude);
+            // setLng(addressResponse?.result?.geocode?.location?.longitude);
+
+            await handleGoogleResponse(addressResponse);
+            setGoogleResponse(true);
+        } else {
+            setErrors(["Invalid Address: Please provide a valid address."]);
+        }
 
     };
 
+    const createNewAddress = async () => {
+        const newAddress = { address, secondaryAddress, city, state, country, zipCode, phone, primary }
+        const data = await dispatch(createAddress(user.id, newAddress));
+        if (data.errors) setErrors(data.errors);
+        else await dispatch(getUser(user.id)).then(closeModal)
+
+    };
+
+    useEffect(() => {
+        if (googleResponse) {
+            if (!errors[0]) createNewAddress();
+        }
+    }, [googleResponse, errors]);
 
     return (
         <div className="address-form-container">
