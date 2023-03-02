@@ -130,11 +130,11 @@ export default function CreateAddressModal({ user }) {
                         );
                     } else if (component === "postal_code") {
                         missingErrors.push(
-                            "Zip Code: Please provide a valid Zip Code."
+                            "Zip Code: Please provide a valid zip code."
                         );
                     } else if (component === "street_number") {
                         missingErrors.push(
-                            "Street Number: Please provide a valid Street Number."
+                            "Street Number: Please provide a valid street number."
                         );
                     } else if (component === "subpremise") {
                         missingErrors.push(
@@ -145,9 +145,7 @@ export default function CreateAddressModal({ user }) {
                         component === "administrative_area_level_1" ||
                         component === "administratrive_area_level_2"
                     ) {
-                        missingErrors.push(
-                            "State: Please provide a valid Owner State."
-                        );
+
                     }
                 });
             }
@@ -207,9 +205,6 @@ export default function CreateAddressModal({ user }) {
         if (response.ok) {
             const addressResponse = await response.json();
 
-            // setLat(addressResponse?.result?.geocode?.location?.latitude);
-            // setLng(addressResponse?.result?.geocode?.location?.longitude);
-
             await handleGoogleResponse(addressResponse);
             setGoogleResponse(true);
         } else {
@@ -221,9 +216,9 @@ export default function CreateAddressModal({ user }) {
     const createNewAddress = async () => {
         const newAddress = { address, secondaryAddress, city, state, country, zipCode, phone, primary }
         const data = await dispatch(createAddress(user.id, newAddress));
+        console.log('errors', data)
         if (data.errors) setErrors(data.errors);
         else await dispatch(getUser(user.id)).then(closeModal)
-
     };
 
     useEffect(() => {
@@ -231,6 +226,7 @@ export default function CreateAddressModal({ user }) {
             if (!errors[0]) createNewAddress();
         }
     }, [googleResponse, errors]);
+
 
     return (
         <div className="address-form-container">

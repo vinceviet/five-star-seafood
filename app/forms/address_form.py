@@ -10,6 +10,6 @@ class AddressForm(FlaskForm):
     city = StringField('City', validators=[DataRequired(message='Please enter a vaild city.')])
     state = SelectField('State', choices=[('CA','California'), ('NV','Nevada'), ('AZ','Arizona'), ('OR','Oregon')])
     country = SelectField('Country', choices=[('USA','United States')])
-    zipCode = IntegerField('Zip Code', validators=[DataRequired(message='Please enter a vaild zip code.')])
+    zipCode = StringField('Zip Code', validators=[DataRequired(message='Please enter a vaild zip code.')])
     phone = StringField('Phone', validators=[DataRequired(message='Please enter a vaild phone number.')])
     primary = BooleanField('Primary Address', default=False)

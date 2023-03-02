@@ -80,7 +80,7 @@ class UserAddress(db.Model):
     city = db.Column(db.String(40), nullable=False)
     state = db.Column(db.String(40), default='California', nullable=False)
     country = db.Column(db.String(40), default='United States', nullable=False)
-    zip_code = db.Column(db.Integer, nullable=False)
+    zip_code = db.Column(db.String, nullable=False)
     primary = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)

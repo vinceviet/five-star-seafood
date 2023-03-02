@@ -10,7 +10,7 @@
     padding: 24px;
     width: 500px;
     height: 400px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .review-errors{
@@ -22,7 +22,7 @@
     padding: 24px;
     width: 500px;
     height: 600px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .container {
@@ -30,7 +30,7 @@
     padding: 24px;
     width: 568px;
     height: 620px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .header {
