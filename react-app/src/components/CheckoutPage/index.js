@@ -18,6 +18,7 @@ export default function CheckoutPage() {
     const [errors, setErrors] = useState([]);
     const [savedAddress, setSavedAddress] = useState('');
     const [address, setAddress] = useState(primaryAddress ? primaryAddress.address : '');
+    const [secondaryAddress, setSecondaryAddress] = useState(primaryAddress ? primaryAddress.secondaryAddress : '')
     const [city, setCity] = useState(primaryAddress ? primaryAddress.city : '');
     const [state, setState] = useState(primaryAddress ? primaryAddress.state : '');
     const [country, setCountry] = useState(primaryAddress ? primaryAddress.country : '');
@@ -41,12 +42,17 @@ export default function CheckoutPage() {
         if (selectedAddress.length === 5) {
             setAddress(selectedAddress[0]);
             setCity(selectedAddress[1]);
-            setZipCode(selectedAddress[4]);
+            setZipCode(selectedAddress[3]);
+            setPhone(secondaryAddress[3]);
         }
     };
 
     const updateAddress = (e) => {
         setAddress(e.target.value);
+    };
+
+    const updateSecondaryAddress = (e) => {
+        setSecondaryAddress(e.target.value);
     };
 
     const updateCity = (e) => {
@@ -71,7 +77,7 @@ export default function CheckoutPage() {
     const handleCheckout = async (e) => {
         e.preventDefault();
         if (user.address.find(addy => addy.address === address) === undefined) {
-            const newAddress = { address, city, state, country, zipCode, phone }
+            const newAddress = { address, secondaryAddress, city, state, country, zipCode, phone }
             await dispatch(createAddress(user.id, newAddress)).catch(async (res) => {
                 const data = await res.json();
                 const validationErrors = [];
@@ -122,10 +128,10 @@ export default function CheckoutPage() {
                                         <label htmlFor='address-list'>Saved Addresses</label>
                                         <select id='address-list' value={savedAddress} onChange={handleSavedAddress}>
                                             {primaryAddress && (
-                                                <option>{primaryAddress.address}, {primaryAddress.city}, {primaryAddress.state}, {primaryAddress.country}, {primaryAddress.zipCode}</option>
+                                                <option>{primaryAddress.address}, {primaryAddress.city}, {primaryAddress.zipCode}, {primaryAddress.phone}</option>
                                             )}
                                             {addressList.map(addy => (
-                                                <option key={addy.id}>{addy.address}, {addy.city}, {addy.state}, {addy.country}, {addy.zipCode}</option>
+                                                <option key={addy.id}>{addy.address}, {addy.city}, {addy.zipCode}, {addy.phone}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -145,6 +151,18 @@ export default function CheckoutPage() {
                                         placeholder='Address'
                                         onChange={updateAddress}
                                         value={address}
+                                        className='form-input-fields'
+                                        required
+                                    ></input>
+                                </div>
+                                <div className='form-input-container'>
+                                    <label className='form-label'>Secondary Address</label>
+                                    <input
+                                        type='text'
+                                        name='secondaryAddress'
+                                        placeholder='Apt/Suite/Unit Number'
+                                        onChange={updateSecondaryAddress}
+                                        value={secondaryAddress}
                                         className='form-input-fields'
                                         required
                                     ></input>

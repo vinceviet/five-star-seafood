@@ -101,7 +101,7 @@ export default function EditAddressModal({ user , addy}) {
                     <input
                         type='text'
                         name='secondaryAddress'
-                        placeholder='Secondary Address'
+                        placeholder='Apt/Suite/Unit Number'
                         onChange={updateSecondaryAddress}
                         value={secondaryAddress}
                         className='form-input-fields'
