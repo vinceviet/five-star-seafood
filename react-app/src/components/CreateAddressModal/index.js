@@ -105,12 +105,6 @@ export default function CreateAddressModal({ user }) {
                         unconfirmedErrors.push("Street Number: Please provide a valid Street Number.");
                     } else if (component === "subpremise") {
                         unconfirmedErrors.push("Apt/Suite/Unit: Please provide a valid apt/suite/unit number.");
-                    } else if (
-                        component === "administrative_area_level_3" ||
-                        component === "administrative_area_level_1" ||
-                        component === "administratrive_area_level_2"
-                    ) {
-                        unconfirmedErrors.push("State: Please provide a valid state.");
                     }
                 });
             }
@@ -140,12 +134,6 @@ export default function CreateAddressModal({ user }) {
                         missingErrors.push(
                             "Apt/Suite/Unit: Please provide a valid apt/suite/unit number."
                         );
-                    } else if (
-                        component === "administrative_area_level_3" ||
-                        component === "administrative_area_level_1" ||
-                        component === "administratrive_area_level_2"
-                    ) {
-
                     }
                 });
             }
@@ -280,9 +268,9 @@ export default function CreateAddressModal({ user }) {
                     <label className='form-label'>State</label>
                     <select className='form-input-fields' value={state} onChange={updateState}>
                         <option value='CA'>California</option>
-                        <option value='NV'>Nevada</option>
+                        {/* <option value='NV'>Nevada</option>
                         <option value='AZ'>Arizona</option>
-                        <option value='OR'>Oregon</option>
+                        <option value='OR'>Oregon</option> */}
                     </select>
                 </div>
                 <div className='form-input-container'>

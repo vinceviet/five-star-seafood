@@ -36,13 +36,11 @@ export default function CheckoutPage() {
 
     const handleSavedAddress = (e) => {
         setSavedAddress(e.target.value);
-
+        console.log('address', e.target.value)
         const selectedAddress = e.target.value.split(', ');
         if (selectedAddress.length === 5) {
             setAddress(selectedAddress[0]);
             setCity(selectedAddress[1]);
-            setState(selectedAddress[2]);
-            setCountry(selectedAddress[3]);
             setZipCode(selectedAddress[4]);
         }
     };
@@ -94,6 +92,7 @@ export default function CheckoutPage() {
         <div className='checkout-container'>
             <div className='checkout-address-container'>
                 <span className='checkout-address-header'>Five Star Seafood and Provisions</span>
+                <span>Notice: To ensure freshness we currently only deliver inside of California, United States</span>
                 <li className="checkout-address-divider" />
                 <div className='shipping-container'>
                     <div className='back-to-cart'>
@@ -166,9 +165,9 @@ export default function CheckoutPage() {
                                     <label className='form-label'>State</label>
                                     <select className='form-input-fields' value={state} onChange={updateState}>
                                         <option value='California'>California</option>
-                                        <option value='Nevada'>Nevada</option>
+                                        {/* <option value='Nevada'>Nevada</option>
                                         <option value='Arizona'>Arizona</option>
-                                        <option value='Oregon'>Oregon</option>
+                                        <option value='Oregon'>Oregon</option> */}
                                     </select>
                                 </div>
                                 <div className='form-input-container'>

@@ -123,9 +123,9 @@ export default function EditAddressModal({ user , addy}) {
                     <label className='form-label'>State</label>
                     <select className='form-input-fields' value={state} onChange={updateState}>
                         <option value='CA'>California</option>
-                        <option value='NV'>Nevada</option>
+                        {/* <option value='NV'>Nevada</option>
                         <option value='AZ'>Arizona</option>
-                        <option value='OR'>Oregon</option>
+                        <option value='OR'>Oregon</option> */}
                     </select>
                 </div>
                 <div className='form-input-container'>
