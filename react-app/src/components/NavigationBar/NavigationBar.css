@@ -35,6 +35,14 @@
     text-decoration: none;
 }
 
+.nav-link:hover {
+    border-bottom: 3px solid rgb(136, 193, 213);
+}
+
+.search-icon:hover {
+    border-bottom: 3px solid rgb(136, 193, 213);
+}
+
 .fish-icon {
     width: 40px;
 }
