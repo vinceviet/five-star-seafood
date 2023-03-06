@@ -31,6 +31,18 @@ My site is a clone of the [Four Star Seafood](https://www.fourstarseafood.com/) 
 From the landing page you can browse products by category and even add them to your cart before logging in or making an account. To checkout you will need to have an account.
 <img width="1200" alt="image" src="./assets/landing_page.png">
 
+### Easy to navigate lists of food products
+<img width="720" alt="image" src="./assets/food.png">
+
+### Convenient cart modal to modify items in the cart
+<img width="720" alt="image" src="./assets/cart-modal.png">
+
+### Dynamic checkout page, allows fast and easy modifications
+<img width="720" alt="image" src="./assets/checkout.png">
+
+## Future Features:
+As a delivery service I plan to allow users to choose a shipping date for their order. The user will also be able to cancel their order as long as it is 24 hours before their shipping date.
+
 ## Running the app locally:
 
 1. Clone this repository

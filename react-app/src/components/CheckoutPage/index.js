@@ -164,7 +164,6 @@ export default function CheckoutPage() {
                                         onChange={updateSecondaryAddress}
                                         value={secondaryAddress}
                                         className='form-input-fields'
-                                        required
                                     ></input>
                                 </div>
                                 <div className='form-input-container'>
