@@ -56,3 +56,11 @@
     right: 0;
     left: 0;
 }
+
+.open-cart-modal-button:hover {
+    background-color: rgb(136, 193, 213);
+}
+
+.add-cart-top:hover {
+    background-color: rgb(136, 193, 213);
+}

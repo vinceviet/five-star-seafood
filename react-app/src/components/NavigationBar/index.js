@@ -49,71 +49,71 @@ const NavBar = () => {
       </div>
       <div className='product-list'>
         <div>
-          <NavLink to='/' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/' exact={true} activeClassName='active' className='nav-link nav'>
             <img className='fish-icon' src={fish} alt='fish' />
           </NavLink>
         </div>
         <div>
-          <NavLink to='/products/pages/seafood' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/products/pages/seafood' exact={true} activeClassName='active' className='nav-link nav'>
             Seafood
           </NavLink>
         </div>
         <div>
-          <NavLink to='/products/pages/meat' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/products/pages/meat' exact={true} activeClassName='active' className='nav-link nav'>
             Meat
           </NavLink>
         </div>
         <div>
-          <NavLink to='/products/pages/produce' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/products/pages/produce' exact={true} activeClassName='active' className='nav-link nav'>
             Produce
           </NavLink>
         </div>
         <div>
-          <NavLink to='/products/pages/dairy' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/products/pages/dairy' exact={true} activeClassName='active' className='nav-link nav'>
             Dairy
           </NavLink>
         </div>
         <div>
-          <NavLink to='/products/pages/meals' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/products/pages/meals' exact={true} activeClassName='active' className='nav-link nav'>
             Meals & Kits
           </NavLink>
         </div>
         <div>
-          <NavLink to='/products/pages/bakery' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/products/pages/bakery' exact={true} activeClassName='active' className='nav-link nav'>
             Bakery
           </NavLink>
         </div>
         <div>
-          <NavLink to='/products/pages/pantry' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/products/pages/pantry' exact={true} activeClassName='active' className='nav-link nav'>
             Pantry
           </NavLink>
         </div>
       </div>
       <div className='cart-user'>
         <div className='nav-cart'>
-          <NavLink to='/cart' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/cart' exact={true} activeClassName='active' className='nav-link nav'>
             {cartItems.length > 0 && <span className='num-in-cart'>{totalItems}</span>}
             <img className='cart-icon' src={cart} alt='cartIcon' />
           </NavLink>
         </div>
         {!user && (
-          <NavLink to='/login' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/login' exact={true} activeClassName='active' className='nav-link nav'>
             <img className='user-icon' src={userIcon} alt='userIcon' />
           </NavLink>
         )}
         {user && (
-          <NavLink to='/profile' exact={true} activeClassName='active' className='nav-link'>
+          <NavLink to='/profile' exact={true} activeClassName='active' className='nav-link nav'>
             <img className='user-icon' src={userIcon} alt='userIcon' />
           </NavLink>
         )}
         <div>
           {!user && (
-            <NavLink to='/login' exact={true} activeClassName='active' className='nav-link'>
+            <NavLink to='/login' exact={true} activeClassName='active' className='nav-link nav'>
               Login
             </NavLink>
           )}
           {user && (
-            <NavLink to='/profile' exact={true} activeClassName='active' className='nav-link'>
+            <NavLink to='/profile' exact={true} activeClassName='active' className='nav-link nav'>
               {user.firstName}
             </NavLink>
           )}
