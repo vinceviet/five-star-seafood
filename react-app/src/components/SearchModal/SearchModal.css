@@ -39,6 +39,10 @@
     flex-direction: column;
     width: 250px;
     gap: 1px;
+    border: 2px solid rgb(136, 193, 213);
+    padding: 5px;
+    border-radius: 12px;
+    align-items: stretch;
 }
 
 .search-name {
@@ -60,22 +64,26 @@
     width: 100%;
     height: 160px;
     object-fit: cover;
+    border-radius: 12px;
 }
 
 .search-add-to-cart {
     display: flex;
-    justify-content: space-between;
     padding: 5px 0 0 0;
-    align-items: center;
+    align-items: flex-end;
+    flex-grow: 1;
+
 }
 
 .search-add-button {
-    width: 150px;
+    /* width: 150px; */
+    width: 100%;
     height: 30px;
     color: white;
     background-color: rgb(40, 96, 117);
     border: none;
     font-size: 15px;
+    border-radius: 12px;
 }
 
 .search-add-button:hover{
