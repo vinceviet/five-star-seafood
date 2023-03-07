@@ -11,7 +11,7 @@
     padding-top: 100px;
 }
 
-.form-header-container{
+.form-header-container:not(back){
     text-align: center;
 }
 
@@ -84,4 +84,8 @@ input:focus {
 .to-signup{
     display: flex;
     gap: 10px;
+}
+
+.sign:hover {
+    color:rgb(136, 193, 213)
 }
