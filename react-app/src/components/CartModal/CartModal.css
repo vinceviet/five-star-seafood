@@ -152,3 +152,10 @@
 .modal-cart-close:hover{
     color:rgb(136, 193, 213);
 }
+
+#modal-minus:hover{
+    color: rgb(136, 193, 213);;
+}
+#modal-plus:hover{
+    color: rgb(136, 193, 213);;
+}

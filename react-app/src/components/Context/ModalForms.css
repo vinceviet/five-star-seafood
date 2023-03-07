@@ -67,6 +67,10 @@
     background-color: rgb(55, 111, 132);
 }
 
+.field-buttons:hover{
+    background-color: rgb(136, 193, 213);
+}
+
 .form-input-bool-container-modal{
     padding: 5px 0 0 25px;
 }

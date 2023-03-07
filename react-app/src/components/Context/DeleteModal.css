@@ -36,3 +36,11 @@
     cursor: pointer;
     background-color: rgb(251, 2, 2);
 }
+
+#cancel-button:hover{
+    background-color: rgb(136, 193, 213);;
+}
+
+#delete-button:hover{
+    background-color: rgb(80, 2, 2);
+}

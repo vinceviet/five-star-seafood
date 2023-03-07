@@ -33,7 +33,7 @@ export default function Cart() {
         return (
             <div className='empty-cart'>
                 <div>YOUR CART IS EMPTY</div>
-                <NavLink to='/' exact={true} className='empty-cart-nav-link'>SHOP OUR PRODUCTS</NavLink>
+                <NavLink to='/products/pages/seafood' exact={true} className='empty-cart-nav-link'>SHOP OUR PRODUCTS</NavLink>
             </div>
         )
     }

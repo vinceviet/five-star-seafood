@@ -18,6 +18,11 @@
     padding: 15px 25px 15px 25px;
 }
 
+.empty-cart-nav-link:hover {
+    background-color: rgb(136, 193, 213);
+}
+
+
 .cart-container {
     display: flex;
     flex-wrap: wrap;
