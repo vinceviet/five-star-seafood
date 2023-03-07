@@ -89,3 +89,7 @@ input:focus {
 .sign:hover {
     color:rgb(136, 193, 213)
 }
+
+.errors {
+    color: rgb(255, 0, 0);
+}

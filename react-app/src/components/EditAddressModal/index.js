@@ -79,7 +79,7 @@ export default function EditAddressModal({ user , addy}) {
             </header>
             <li className="header-divider"></li>
             <form className='address-modal-container' onSubmit={handleSubmit}>
-                <div className='review-errors'>
+                <div className='review-errors errors'>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error.split(':')[1]}</div>
                     ))}

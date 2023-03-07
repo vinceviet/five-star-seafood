@@ -47,7 +47,7 @@ const LoginForm = () => {
           <span>Please enter your e-mail and password:</span>
         </div>
         <form onSubmit={onLogin}>
-          <div>
+          <div className='errors'>
             {errors.length >= 1 && 'Invalid credentials'}
             {/* {errors.map((error, ind) => (
               <div key={ind}>{error}</div>

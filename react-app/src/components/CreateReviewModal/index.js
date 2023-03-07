@@ -43,7 +43,7 @@ export default function CreateReviewModal({ productId }) {
             </header>
             <li className="header-divider"></li>
             <form onSubmit={handleSubmit}>
-                <div className='review-errors'>
+                <div className='review-errors errors'>
                     {errors.map((error, idx) => <div key={idx}>{error}</div>)}
                 </div>
                 <div className='form-input-container'>
