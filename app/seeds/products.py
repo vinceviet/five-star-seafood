@@ -57,7 +57,7 @@ def seed_products():
     lemons = Product(name='Eureka Lemons', description='(Organic) - 2lb', origin="Brokaw Ranch", price=10, category_id=fruit.id)
     blood = Product(name='Moro Blood Oranges', description='- 2lb', origin="Brokaw Ranch", price=8.25, category_id=fruit.id)
 
-    straus = Product(name='Straus European Whole Milk Yogurt', description='(Organic) - Quart', origin="Straus Creamery", price=6.50, category_id=milk.id)
+    straus = Product(name='Straus Whole Milk Yogurt', description='- Quart', origin="Straus Creamery", price=6.50, category_id=milk.id)
     peach = Product(name='Peach Apricot Yogurt', description='- 5.6oz', origin="La Fermiere", price=4, category_id=milk.id)
     bean = Product(name='Vanilla Bean Yogurt', description='- 5.6oz', origin="La Fermiere", price=4, category_id=milk.id)
     strawberry = Product(name='Strawberry Pomegranate Yogurt', description='- 5.6oz', origin="La Fermiere", price=4, category_id=milk.id)
@@ -67,6 +67,9 @@ def seed_products():
     cioppino = Product(name='Cioppino Kit for Two', description='', origin="Five Star Seafood", price=80, category_id=boxes.id)
     citrus = Product(name='California Citrus Box', description='', origin="Five Star Seafood", price=49.95, category_id=boxes.id)
     sashimi = Product(name='Grand Sushi/Sashimi Kit', description='', origin="Five Star Seafood", price=125, category_id=boxes.id)
+    cheese_kit = Product(name='Cheese/Charcuterie Kit', description='', origin="Five Star Provisions", price=150, category_id=boxes.id)
+    crudo = Product(name='Kampachi Crudo Kit', description='', origin="Five Star Kitchen", price=58, category_id=boxes.id)
+    paella = Product(name='Paella Kit', description='', origin="Five Star Kitchen", price=85, category_id=boxes.id)
 
     pecan = Product(name='Bourbon Pecan Pie', description='(Frozen)', origin="Three Babes Bakeshop", price=49.90, category_id=pies.id)
     pumpkin = Product(name='Classic Pumpkin Pie', description='(Frozen)', origin="Three Babes Bakeshop", price=49.90, category_id=pies.id)
@@ -78,7 +81,7 @@ def seed_products():
     dashi = Product(name='Dashi Kombu', description='- 2lb', origin="Five Star Provisions", price=42, category_id=asian.id)
     wasabi = Product(name='Wasabi Root', description='- ea', origin="Half Moon Bay Wasabi Company", price=42, category_id=asian.id)
     miso = Product(name='Aedan Kyoto Sweet Miso', description='- 8oz', origin="Aeden Fermented Foods", price=14, category_id=asian.id)
-    fish_sauce = Product(name='Iwashi Whiskey Barrel Aged Fish Sauce', description='- 750ml', origin="Haku", price=33.50, category_id=asian.id)
+    fish_sauce = Product(name='Iwashi Aged Fish Sauce', description='- 750ml', origin="Haku", price=33.50, category_id=asian.id)
     yuzu = Product(name='Yuzu Juice', description='- 750ml', origin="Yakami Orchards", price=42, category_id=asian.id)
     yuzu_kosho = Product(name='Yuzu Kosho', description='- Red(2oz)', origin="Five Star Seafood", price=7.50, category_id=asian.id)
 
@@ -87,7 +90,7 @@ def seed_products():
     poultry_products = [root, fogline, quail, squab, turkey, hen]
     fruit_products = [blueberries, kiwi, orange, apples, lemons, blood]
     milk_products = [straus, peach, bean, strawberry, rasberry, mango]
-    box_products = [cioppino, citrus, sashimi]
+    box_products = [cioppino, citrus, sashimi, cheese_kit, crudo, paella]
     pie_products = [pecan, pumpkin, applep, choco, crumble, vegan]
     asian_products = [dashi, wasabi, miso, fish_sauce, yuzu, yuzu_kosho]
 
@@ -133,6 +136,9 @@ def seed_products():
     cioppino_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FS_Cioppino-2_600x.jpg?v=1606173473', product_id=cioppino.id)
     citrus_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/CitrusBox_2a13fa25-cb75-42a0-ac5c-1bd0a09a62ec_400x.jpg?v=1614356049', product_id=citrus.id)
     sashimi_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/newsushikit_a094a99d-5554-4396-9440-0b5c03ed62a9_400x.jpg?v=1653776959', product_id=sashimi.id)
+    cheese_kit_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/e85fef_a22f0e67886f4058a7beed4909767bf5_mv2_600x.jpg?v=1605052124', product_id=cheese_kit.id)
+    crudo_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/IMG_9919_600x.jpg?v=1675037909', product_id=crudo.id)
+    paella_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/PaellaKit-01_600x.jpg?v=1675889347', product_id=paella.id)
 
     pecan_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/Bourbon-Pecan-ThreeBabes_400x.jpg?v=1667820805', product_id=pecan.id)
     pumpkin_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/pumpkin-pie-threebabes_400x.jpg?v=1667821027', product_id=pumpkin.id)
@@ -152,7 +158,7 @@ def seed_products():
     poultry_images = [root_img, fogline_img, quail_img, squab_img, turkey_img, hen_img]
     fruit_images = [blueberries_img, kiwi_img, oranges_img, apples_img, lemons_img, blood_img]
     milk_images = [straus_img, peach_img, bean_img, strawberry_img, rasberry_img, mango_img]
-    box_images = [cioppino_img, citrus_img, sashimi_img]
+    box_images = [cioppino_img, citrus_img, sashimi_img, cheese_kit_img, crudo_img, paella_img]
     pie_images = [pecan_img, pumpkin_img, applep_img,choco_img, crumble_img, vegan_img]
     asian_images = [dashi_img, wasabi_img, miso_img, fish_sauce_img, yuzu_img, yuzu_kosho_img]
 

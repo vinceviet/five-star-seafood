@@ -30,7 +30,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     max-width: 950px;
     margin: auto;
     row-gap: 30px;
@@ -54,6 +54,7 @@
     align-items: stretch;
     flex-basis: calc(33.33% - 30px);
     width: calc(100% - 66.66%);
+    flex-grow: 1;
     height: 100%;
 }
 
@@ -129,4 +130,3 @@
     background-color: transparent;
     border: none;
 }
-
