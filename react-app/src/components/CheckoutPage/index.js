@@ -39,11 +39,11 @@ export default function CheckoutPage() {
         setSavedAddress(e.target.value);
         console.log('address', e.target.value)
         const selectedAddress = e.target.value.split(', ');
-        if (selectedAddress.length === 5) {
+        if (selectedAddress.length === 4) {
             setAddress(selectedAddress[0]);
             setCity(selectedAddress[1]);
-            setZipCode(selectedAddress[3]);
-            setPhone(secondaryAddress[3]);
+            setZipCode(selectedAddress[2]);
+            setPhone(selectedAddress[3]);
         }
     };
 

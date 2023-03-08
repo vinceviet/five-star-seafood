@@ -12,7 +12,7 @@ export default function EditAddressModal({ user , addy}) {
     const [address, setAddress] = useState(addy.address)
     const [secondaryAddress, setSecondaryAddress] = useState(addy.secondaryAddress ? addy.secondaryAddress : '')
     const [city, setCity] = useState(addy.city)
-    const [state, setState] = useState(addy.state);
+    const [state, setState] = useState('CA');
     const [country, setCountry] = useState('USA');
     const [zipCode, setZipCode] = useState(addy.zipCode);
     const [phone, setPhone] = useState(addy.phone);
