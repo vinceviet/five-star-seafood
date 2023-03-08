@@ -204,7 +204,6 @@ export default function CreateAddressModal({ user }) {
     const createNewAddress = async () => {
         const newAddress = { address, secondaryAddress, city, state, country, zipCode, phone, primary }
         const data = await dispatch(createAddress(user.id, newAddress));
-        console.log('errors', data)
         if (data.errors) setErrors(data.errors);
         else await dispatch(getUser(user.id)).then(closeModal)
     };

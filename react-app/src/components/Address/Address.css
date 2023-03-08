@@ -83,3 +83,14 @@
 #back-to-account:hover{
     color:rgb(136, 193, 213);
 }
+
+.notice-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+#notice{
+    font-size: 12px;
+    letter-spacing: 3px;
+}

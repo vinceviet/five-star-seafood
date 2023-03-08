@@ -39,12 +39,16 @@ export default function Address() {
                         BACK TO ACCOUNT
                     </NavLink>
                     <span id='my-address'>MY ADDRESSES</span>
+                    <div className='notice-container'>
+                        <span id='notice'>Notice: To ensure freshness we currently only deliver inside of CA, </span>
+                        <span id='notice'>only CA addresses can be saved at this time</span>
+                    </div>
                     <div>
-                            <StyledOpenModalMenuItem
-                                itemText="ADD A NEW ADDRESS"
-                                onItemClick={closeMenu}
-                                modalComponent={<CreateAddressModal user={user} />}
-                            />
+                        <StyledOpenModalMenuItem
+                            itemText="ADD A NEW ADDRESS"
+                            onItemClick={closeMenu}
+                            modalComponent={<CreateAddressModal user={user} />}
+                        />
                     </div>
                 </div>
                 <div className='address-cards-container'>
