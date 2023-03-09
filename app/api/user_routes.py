@@ -79,6 +79,8 @@ def update_address(id):
         address.zip_code=form.data['zipCode']
         address.primary=form.data['primary']
 
+        
+
         if address.primary==True:
             current_primary = UserAddress.query.filter(and_(UserAddress.id != address.id, UserAddress.user_id == current_user.id, UserAddress.primary == True)).first()
             if current_primary:

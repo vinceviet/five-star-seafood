@@ -37,7 +37,6 @@ export default function CheckoutPage() {
 
     const handleSavedAddress = (e) => {
         setSavedAddress(e.target.value);
-        console.log('address', e.target.value)
         const selectedAddress = e.target.value.split(', ');
         if (selectedAddress.length === 4) {
             setAddress(selectedAddress[0]);

@@ -63,7 +63,7 @@ export default function SearchModal() {
                     <span className='no-match'>No products matching this search</span>
                 )}
                 {res && res.slice(0, 8).map(item =>
-                    <div className='results-cards'>
+                    <div className='results-cards' key={item.id}>
                         <NavLink to={`/products/${item.id}`} exact={true} onClick={closeModal}>
                             <img className='search-img' src={item.productImages[0].imageUrl} alt='search-item' />
                         </NavLink>
