@@ -204,8 +204,10 @@ export default function EditAddressModal({ user , addy}) {
         const updateAddress = { ...addy, address, secondaryAddress, city, state, country, zipCode, phone, primary }
 
         const data = await dispatch(editAddress(updateAddress))
-        console.log('errors', data)
-        if(data.errors){
+        if(!data.ok){
+            console.log('data', data)
+        }
+        else if(data.errors){
             let validationErrs = [];
             data.errors.forEach(err => {
                 let errVal = Object.values(err)

@@ -1,17 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SelectField
-from wtforms.validators import DataRequired, Length, ValidationError
-from app.models import UserAddress
+from wtforms.validators import DataRequired, Length
 
-def address_exists(form, field):
-    address = form.data['address'].title()
-    address = UserAddress.query.filter(UserAddress.address == address).first()
 
-    if address:
-        raise ValidationError('Address already exists in the database.')
-
-class AddressForm(FlaskForm):
-    address = StringField('Address', validators=[DataRequired(message='Please enter a vaild address.'), address_exists])
+class UpdateAddressForm(FlaskForm):
+    address = StringField('Address', validators=[DataRequired(message='Please enter a vaild address.')])
     secondaryAddress = StringField('Secondary Address')
     city = StringField('City', validators=[DataRequired(message='Please enter a vaild city.')])
     state = SelectField('State', choices=[('CA','California')])

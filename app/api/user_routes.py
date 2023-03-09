@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, User, UserAddress
-from app.forms import AddressForm
+from app.forms import AddressForm, UpdateAddressForm
 from sqlalchemy import and_
 
 user_routes = Blueprint('users', __name__)
@@ -37,9 +37,9 @@ def add_address(id):
         new_address = UserAddress(
             user_id=user.id,
             phone=form.data['phone'],
-            address=form.data['address'],
+            address=form.data['address'].title(),
             secondary_address=form.data['secondaryAddress'],
-            city=form.data['city'],
+            city=form.data['city'].title(),
             state=form.data['state'],
             country=form.data['country'],
             zip_code=form.data['zipCode'],
@@ -57,6 +57,7 @@ def add_address(id):
         db.session.commit()
 
         return new_address.to_dict()
+
     return {'errors': [form.errors]}
 
 @user_routes.route('/address/<int:id>', methods=['PUT'])
@@ -66,20 +67,22 @@ def update_address(id):
     if not address:
         return {'errors': ['address does not exist']}, 404
 
-    form = AddressForm()
+    form = UpdateAddressForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         address.phone=form.data['phone']
-        address.address=form.data['address']
+        address.address=form.data['address'].title()
         address.secondary_address=form.data['secondaryAddress']
-        address.city=form.data['city']
+        address.city=form.data['city'].title()
         address.state=form.data['state']
         address.country=form.data['country']
         address.zip_code=form.data['zipCode']
         address.primary=form.data['primary']
 
-        
+        conflicting_address = UserAddress.query.filter(UserAddress.id != address.id, UserAddress.address == address.address).first()
+        if(conflicting_address):
+            return {'errors' : ['Address already exists in the database']}, 400
 
         if address.primary==True:
             current_primary = UserAddress.query.filter(and_(UserAddress.id != address.id, UserAddress.user_id == current_user.id, UserAddress.primary == True)).first()

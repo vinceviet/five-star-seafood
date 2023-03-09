@@ -30,11 +30,13 @@ export const editAddress = (address) => async dispatch => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(address)
     });
+    console.log('thubkn', res)
     if (res.ok) {
         const data = await res.json();
         dispatch(add(data))
         return data;
     };
+    return res;
 };
 
 export const deleteAddress = (address) => async dispatch => {
