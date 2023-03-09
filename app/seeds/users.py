@@ -20,8 +20,8 @@ def seed_users():
     [db.session.add(user) for user in users]
 
     db.session.commit()
-    
-    demo_addy = UserAddress(phone='408-777-8106', address='123 Fake Street', city='Demo City', state='California', country='United States', zip_code=95014, primary=True, user_id=demo.id)
+
+    demo_addy = UserAddress(phone='4087778106', address='366 36th Ave', city='San Francisco', state='California', country='United States', zip_code=94121, primary=True, user_id=demo.id)
     db.session.add(demo_addy)
 
     db.session.commit()
