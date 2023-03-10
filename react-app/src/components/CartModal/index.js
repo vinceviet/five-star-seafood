@@ -30,7 +30,7 @@ export default function CartModal({ isOpen, onClose }) {
     if (!isOpen) return null;
 
     return (
-        <div className={isOpen ? 'modal-cart-container' : 'hidden'}>
+        <div className={'modal-cart-container'}>
             <div className='modal-cart-header-container'>
                 <h1 id='modal-cart-header'>CART</h1>
             </div>

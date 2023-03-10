@@ -205,7 +205,8 @@ export default function EditAddressModal({ user , addy}) {
 
         const data = await dispatch(editAddress(updateAddress))
         if(!data.ok){
-            console.log('data', data)
+            let res = await data.json();
+            setErrors(res.errors)
         }
         else if(data.errors){
             let validationErrs = [];

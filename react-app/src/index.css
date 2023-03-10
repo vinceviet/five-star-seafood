@@ -1,14 +1,12 @@
-body{
+body {
     margin: 0;
-    font-family: Nunito Sans,sans-serif;
+    font-family: Nunito Sans, sans-serif;
 }
 
 button:hover {
     cursor: pointer;
 }
 
-.main-container{
-    /* display: flex;
-    flex-direction: column; */
+.main-container {
     min-height: 100vh;
 }

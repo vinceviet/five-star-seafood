@@ -69,6 +69,9 @@ def update_address(id):
 
     form = UpdateAddressForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    conflicting_address = UserAddress.query.filter(and_(UserAddress.address == form.data['address'].title(), UserAddress.id != address.id)).first()
+    if conflicting_address:
+        return {'errors' : ['Address already exists in the database']}, 409
 
     if form.validate_on_submit():
         address.phone=form.data['phone']
@@ -80,9 +83,6 @@ def update_address(id):
         address.zip_code=form.data['zipCode']
         address.primary=form.data['primary']
 
-        conflicting_address = UserAddress.query.filter(UserAddress.id != address.id, UserAddress.address == address.address).first()
-        if(conflicting_address):
-            return {'errors' : ['Address already exists in the database']}, 400
 
         if address.primary==True:
             current_primary = UserAddress.query.filter(and_(UserAddress.id != address.id, UserAddress.user_id == current_user.id, UserAddress.primary == True)).first()
