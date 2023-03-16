@@ -103,7 +103,7 @@ def remove_from_cart(id):
 
 @cart_routes.route('/checkout/<int:id>', methods=['DELETE'])
 def checkout_cart(id):
-    cart_items = CartItem.query.filter(CartItem.cart_id == id).all()
+    cart_items = CartItem.query.filter(CartItem.cart_id == id).all()    
     [db.session.delete(item) for item in cart_items]
     db.session.commit()
     # return cart_items.to_dict()

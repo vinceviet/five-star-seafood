@@ -91,3 +91,7 @@
     cursor: pointer;
     border-radius: 22px;
 }
+
+.detail-page-buttons:hover{
+    background-color:  rgb(136, 193, 213);;
+}
