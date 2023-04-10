@@ -8,7 +8,8 @@ import './Profile.css';
 export default function Profile() {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user)
-    const orders = Object.values(useSelector((state) => state.orders))
+    const allOrders = Object.values(useSelector((state) => state.orders))
+    const orders = allOrders.filter(order => order.userId === user.id)
     const orderNums = Array.from(new Set(orders.map(item => item.orderNumber)));
 
     const handleDateTime = (o) => {
