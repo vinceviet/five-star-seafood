@@ -1,7 +1,5 @@
 from app.models import db, Product, Category,ProductImage, environment, SCHEMA
 
-
-
 def seed_products():
 
     finfish = Category(name='seafood', sub_category='finfish')
