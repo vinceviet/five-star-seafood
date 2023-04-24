@@ -108,7 +108,7 @@ def seed_products():
     big_glory_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/Big_Glory_Bay_King_Salmon_Portions_1000x.jpg?v=1672859838', product_id=big_glory.id)
     sea_bass_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/DSC_0659_600x.jpg?v=1605091700', product_id=sea_bass.id)
     halibut_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/AlaskanHalibut_c6f5b5b9-c3b3-42e0-8b2c-2fc9c68cd9af_600x.jpg?v=1670881116', product_id=halibut.id)
-    kampachi_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/e85fef_3cde1206fb21456dbe57d016bf3466b1_mv2_600x.jpg?v=1605092551', product_id=kampachi.id)
+    kampachi_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/KampachiSide_400x.jpg?v=1680043909', product_id=kampachi.id)
     turbot_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/WholeSpanishTurbot_d3366bbe-1e46-447d-8082-56990f243f70_600x.jpg?v=1605093160', product_id=turbot.id)
     stripe_bass_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/e85fef_d004cc1482d74074927f3d62371b9f3c_mv2_600x.jpg?v=1605093038', product_id=stripe_bass.id)
 
