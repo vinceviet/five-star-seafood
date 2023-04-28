@@ -8,8 +8,12 @@ def seed_reviews():
     review4 = Review(user_id = 1, product_id = 4, review = 'yummy', stars = 5, date_time = '4/5/23')
     review5 = Review(user_id = 1, product_id = 5, review = 'yummy', stars = 5, date_time = '4/5/23')
     review6 = Review(user_id = 1, product_id = 6, review = 'yummy', stars = 5, date_time = '4/5/23')
+    review7 = Review(user_id = 1, product_id = 7, review = 'yummy', stars = 5, date_time = '4/5/23')
+    review8 = Review(user_id = 1, product_id = 8, review = 'yummy', stars = 5, date_time = '4/5/23')
+    review9 = Review(user_id = 1, product_id = 9, review = 'yummy', stars = 5, date_time = '4/5/23')
+    review10 = Review(user_id = 1, product_id = 10, review = 'yummy', stars = 5, date_time = '4/5/23')
 
-    reviews = [review1, review2, review3, review4, review5, review6]
+    reviews = [review1, review2, review3, review4, review5, review6, review7, review8, review9, review10]
 
     [db.session.add(review) for review in reviews]
 
