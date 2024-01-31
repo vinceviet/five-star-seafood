@@ -134,7 +134,7 @@ def seed_products():
     cioppino_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/FS_Cioppino-2_600x.jpg?v=1606173473', product_id=cioppino.id)
     citrus_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/CitrusBox_2a13fa25-cb75-42a0-ac5c-1bd0a09a62ec_400x.jpg?v=1614356049', product_id=citrus.id)
     sashimi_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/newsushikit_a094a99d-5554-4396-9440-0b5c03ed62a9_400x.jpg?v=1653776959', product_id=sashimi.id)
-    cheese_kit_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/e85fef_a22f0e67886f4058a7beed4909767bf5_mv2_600x.jpg?v=1605052124', product_id=cheese_kit.id)
+    cheese_kit_img = ProductImage(image_url='https://www.fourstarseafood.com/cdn/shop/files/DSC_5902_1_400x.jpg?v=1691707093', product_id=cheese_kit.id)
     crudo_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/IMG_9919_600x.jpg?v=1675037909', product_id=crudo.id)
     paella_img = ProductImage(image_url='https://cdn.shopify.com/s/files/1/0430/7065/2581/products/PaellaKit-01_600x.jpg?v=1675889347', product_id=paella.id)
 
